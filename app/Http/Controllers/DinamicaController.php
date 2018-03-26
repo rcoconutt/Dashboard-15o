@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Dinamica;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class DinamicaController extends Controller
@@ -16,7 +17,14 @@ class DinamicaController extends Controller
      */
     public function index()
     {
-        return view('dinamicas.index');
+        switch (Auth::user()->rol) {
+            case 1:
+                return view('dinamicas.index_gerente');
+            case 2:
+                return view('dinamicas.index_supervisor');
+            default:
+                return view('dinamicas.index_embajador');
+        }
     }
 
     /**
@@ -102,6 +110,23 @@ class DinamicaController extends Controller
             ], 200);
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage()], 500);
+        }
+    }
+
+    public function action(Request $request) {
+        try {
+            $action = $request->get('actions');
+            if ($action == 1 || $action == 2) {
+                // Aprobar o rechazar
+                Dinamica::whereIn('ID_DINAMICA', $request->get('dinamica_id'))->update(['ACTIVO' => $action]);
+            } else {
+                // Eliminar
+                Dinamica::whereIn('ID_DINAMICA', $request->get('dinamica_id'))->delete();
+            }
+
+            return redirect()->back()->with('message', 'Dinámicas actualizas');
+        } catch (\Exception $ex) {
+            return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
         }
     }
 

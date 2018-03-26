@@ -11,4 +11,5 @@ Route::get('/home', function () {
 })->name('home')->middleware('auth');
 
 Route::resource('dinamicas', 'DinamicaController')->middleware('auth');
+Route::post('/dinamicas/action', 'DinamicaController@action')->middleware('auth');
 Route::resource('users', 'UsersController')->middleware('auth');

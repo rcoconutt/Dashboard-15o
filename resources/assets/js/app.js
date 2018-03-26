@@ -11,6 +11,9 @@ window.Vue = require('vue');
 import Autocomplete from 'vuejs-auto-complete'
 
 Vue.component('dinamicas', require('./components/Dinamicas'));
+Vue.component('dinamicas-gerente', require('./components/DinamicasGerente'));
+Vue.component('dinamicas-supervisor', require('./components/DinamicasSupervisor'));
+Vue.component('dinamicas-embajador', require('./components/DinamicasEmbajador'));
 Vue.component('create-dinamica', require('./components/CreateDinamica'));
 Vue.component('users', require('./components/Users'));
 Vue.component(Autocomplete);

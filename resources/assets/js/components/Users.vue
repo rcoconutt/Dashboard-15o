@@ -14,6 +14,7 @@
                             <th>Apellido</th>
                             <th>Teléfono</th>
                             <th>Email</th>
+                            <th>Rol</th>
                         </tr>
                     </thead>
                 </table>
@@ -39,6 +40,21 @@
                         { data: 'last_name' },
                         { data: 'phone' },
                         { data: 'email' },
+                        { data: 'rol', render: function ( data, type, row, meta ) {
+                                if (data == 1) {
+                                    return "Gerente";
+                                }
+
+                                if (data == 2) {
+                                    return "Supervisor";
+                                }
+
+                                if (data == 3) {
+                                    return "Embajador";
+                                }
+
+                                return "";
+                        }},
                     ],
                     language: {
                         search: "Buscar:",

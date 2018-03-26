@@ -10,5 +10,5 @@ Route::get('/home', function () {
     return redirect('dinamicas');
 })->name('home')->middleware('auth');
 
-
 Route::resource('dinamicas', 'DinamicaController')->middleware('auth');
+Route::resource('users', 'UsersController')->middleware('auth');

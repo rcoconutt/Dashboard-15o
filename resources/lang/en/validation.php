@@ -121,6 +121,7 @@ return [
         'name' => 'Nombre',
         'venue' => 'Centro de consumo',
         'zona' => 'Zona o municipio',
+        'brand' => 'Marca'
     ],
 
 ];

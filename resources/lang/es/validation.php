@@ -150,5 +150,8 @@ return [
         'time' => 'hora',
         'subject' => 'asunto',
         'message' => 'mensaje',
+        'venue' => 'centro de consumo',
+        'zona' => 'zona o municipio',
+        'brand' => 'marca'
     ],
 ];

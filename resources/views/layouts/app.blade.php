@@ -51,6 +51,10 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 1)
+                                        <a class="dropdown-item" href="{{ route('users.index') }}">Usuarios</a>
+                                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -62,6 +66,7 @@
                                     </form>
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>

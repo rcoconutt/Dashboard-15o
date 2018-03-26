@@ -3,17 +3,17 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="col-md-2 col-sm-8 offset-md-10 ">
-                    <a class="btn btn-block btn-success" href="/dinamicas/create">Crear dinámica</a>
+                    <a class="btn btn-block btn-success" href="/users/create">Crear usuario</a>
                 </div>
 
                 <hr>
-                <table id="dinamicas" cellspacing="0" class="table table-bordered table-hover">
+                <table id="users" cellspacing="0" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>Dinamica</th>
-                            <th>Descripción</th>
-                            <th>Premio</th>
-                            <th>Fecha de termino</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
                         </tr>
                     </thead>
                 </table>
@@ -24,21 +24,21 @@
 
 <script>
     export default {
-        name: "dinamicas",
-        props: ['user'],
+        name: "users",
+        props: ['brand'],
         methods: {
-            getDinamicas: function () {
-                $('#dinamicas').DataTable({
+            getUsers: function () {
+                $('#users').DataTable({
                     ajax: {
-                        url: '/api/dinamicas',
-                        dataSrc: 'dinamicas',
+                        url: '/api/users/' + this.brand,
+                        dataSrc: 'users',
                     },
                     scrollY: "300px",
                     columns: [
-                        { data: 'DINAMICA' },
-                        { data: 'DESCRIPCION' },
-                        { data: 'PREMIO'},
-                        { data: 'FECHA_FIN' },
+                        { data: 'name' },
+                        { data: 'last_name' },
+                        { data: 'phone' },
+                        { data: 'email' },
                     ],
                     language: {
                         search: "Buscar:",
@@ -48,8 +48,8 @@
                             next:       "Siguiente",
                             last:       "Último"
                         },
-                        info: "Mostrando _START_ a _END_ de _TOTAL_ dinamicas",
-                        lengthMenu:    "Mostrar _MENU_ dinamicas",
+                        info: "Mostrando _START_ a _END_ de _TOTAL_ usuarios",
+                        lengthMenu:    "Mostrar _MENU_ usuarios",
                         loading: "Cargando"
                     }
                 });
@@ -57,8 +57,7 @@
         },
         mounted () {
             $().ready(() => {
-                this.getDinamicas();
-                console.log(this.user)
+                this.getUsers()
             });
         }
     }

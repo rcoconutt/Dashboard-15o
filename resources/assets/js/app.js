@@ -12,6 +12,7 @@ import Autocomplete from 'vuejs-auto-complete'
 
 Vue.component('dinamicas', require('./components/Dinamicas'));
 Vue.component('create-dinamica', require('./components/CreateDinamica'));
+Vue.component('users', require('./components/Users'));
 Vue.component(Autocomplete);
 
 const app = new Vue({

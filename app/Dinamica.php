@@ -15,7 +15,7 @@ class Dinamica extends Model
         'FECHA_INICIO', 'FECHA_FIN', 'ACTIVO',
 
         // New data
-        'municipio_id', 'marca_id'
+        'municipio_id', 'marca_id', 'user_id'
     ];
 
     public $timestamps = false;

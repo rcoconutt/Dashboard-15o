@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Dinamica;
+use App\Notificacion;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,6 +78,9 @@ class DinamicaController extends Controller
                 return response()->json(['success' => false, 'message' => $errors->first()], 401);
             }
 
+            $brand_id = $request->get('brand_id');
+            $user_id = $request->get('user_id');
+            $autor = User::whereId($user_id)->first();
             $cantidad = -1;
             $descripción = $request->get('reglas');
             $marca = -1;
@@ -91,7 +96,7 @@ class DinamicaController extends Controller
 
             $dinamica = Dinamica::create([
                 'ID_ZONA' => 0,
-                'ID_BRAND' => 0,
+                'ID_BRAND' => $brand_id,
                 'OBJETIVO' => $cantidad,
                 'DINAMICA' => $request->get('name'),
                 'DESCRIPCION' => $descripción,
@@ -100,8 +105,17 @@ class DinamicaController extends Controller
                 'FECHA_FIN' => Carbon::parse($request->get('end')),
                 'ACTIVO' => 0,
                 'municipio_id' => $request->get('zona'),
-                'marca_id' => $marca
+                'marca_id' => $marca,
+                'user_id' => $user_id
             ]);
+
+            $users = User::where('brand_id', $brand_id)->where('id', '!=', $user_id)->get();
+            foreach ($users as $user) {
+                Notificacion::create([
+                    'user_id' => $user->id,
+                    'message' => $autor->name . " " . $autor->last_name . " ha creado una nueva dinámica: " . $request->get('name')
+                ]);
+            }
 
             return response()->json([
                 'success' => true,
@@ -109,7 +123,7 @@ class DinamicaController extends Controller
                 'dinamica' => $dinamica
             ], 200);
         } catch (\Exception $ex) {
-            return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage()], 500);
+            return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage() . $ex->getFile() . $ex->getLine()], 500);
         }
     }
 

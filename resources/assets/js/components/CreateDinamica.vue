@@ -13,6 +13,8 @@
                 <div class="alert alert-danger" v-if="error">
                     {{ error }}
                 </div>
+                <input type="hidden" v-model="user.brand_id"/>
+                <input type="hidden" v-model="user.id"/>
                 <div class="form-group">
                     <label for="name">Nombre de la dinámica: </label>
                     <input class="form-control" name="name" id="name" v-model="name" placeholder="Vive latino - Beers"/>
@@ -54,19 +56,6 @@
                             @selected="addZonaGroup"
                     >
                     </autocomplete>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <label for="start">Fecha de inicio: </label>
-                            <input class="form-control" name="start" v-model="start" id="start" placeholder="Fecha de inicio" type="text"/>
-                        </div>
-
-                        <div class="col-md-6 col-sm-12">
-                            <label for="end">Fecha de fin: </label>
-                            <input class="form-control" name="end" v-model="end" id="end" placeholder="Fecha de fin" type="text"/>
-                        </div>
-                    </div>
                 </div>
                 <div class="form-group">
                     <input type="radio" id="one" value="1" v-model="kind">
@@ -115,6 +104,19 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <label for="start">Fecha de inicio: </label>
+                            <input class="form-control" name="start" v-model="start" id="start" placeholder="Fecha de inicio" type="text"/>
+                        </div>
+
+                        <div class="col-md-6 col-sm-12">
+                            <label for="end">Fecha de fin: </label>
+                            <input class="form-control" name="end" v-model="end" id="end" placeholder="Fecha de fin" type="text"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-md-4 col-sm-12 offset-md-8">
                         <button class="btn btn-block btn-primary" >Enviar</button>
                     </div>
@@ -127,11 +129,13 @@
 <script>
     import Autocomplete from 'vuejs-auto-complete'
     import swal from 'sweetalert'
+    import moment from 'moment'
     import Pikaday from 'pikaday'
 
     export default {
         name: "create-dinamica",
         components: { Autocomplete },
+        props: ['user'],
         data () {
             return {
                 venue: null,
@@ -145,7 +149,7 @@
                 cantidad: null,
                 start: null,
                 end: null,
-                error: null
+                error: null,
             }
         },
         methods: {
@@ -172,7 +176,11 @@
                         reglas: this.reglas,
                         cantidad: this.cantidad,
                         descripcion: this.descripcion,
-                        marca: this.marca
+                        marca: this.marca,
+                        user_id: this.user.id,
+                        brand_id: this.user.brand_id,
+                        start: $("#start").val(),
+                        end: $("#end").val()
                     }
                 }).then((response) => {
                     swal({
@@ -199,8 +207,9 @@
                     weekdays      : ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
                     weekdaysShort : ['Dom','Lun','Mar','Mie','Jue','Vie','Sab']
                 },
-                onSelect: function() {
-                    this.start = this.getMoment().format('MM-DD-YYYY');
+                onSelect: function(date) {
+                    this.start = moment(date).format('DD-MM-YYYY');
+                    $("#start").val(moment(date).format('DD-MM-YYYY'));
                 }
             });
             let endPicker = new Pikaday({
@@ -212,8 +221,9 @@
                     weekdays      : ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
                     weekdaysShort : ['Dom','Lun','Mar','Mie','Jue','Vie','Sab']
                 },
-                onSelect: function() {
-                    this.end = this.getMoment().format('MM-DD-YYYY')
+                onSelect: function(date) {
+                    this.end = moment(date).format('DD-MM-YYYY');
+                    $("#end").val(moment(date).format('DD-MM-YYYY'));
                 }
             });
         }

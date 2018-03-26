@@ -1,0 +1,25 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import "~datatables.net-bs4/css/dataTables.bootstrap4";
+@import "~pikaday/css/pikaday";
+
+.background-15o {
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-15O {
+  background-color: #17304f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.color-15o {
+  color: #e69817;
+}

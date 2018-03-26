@@ -16,6 +16,7 @@ Vue.component('dinamicas-supervisor', require('./components/DinamicasSupervisor'
 Vue.component('dinamicas-embajador', require('./components/DinamicasEmbajador'));
 Vue.component('create-dinamica', require('./components/CreateDinamica'));
 Vue.component('users', require('./components/Users'));
+Vue.component('notificaciones', require('./components/Notificaciones'));
 Vue.component(Autocomplete);
 
 const app = new Vue({

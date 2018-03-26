@@ -31851,6 +31851,7 @@ Vue.component('dinamicas-supervisor', __webpack_require__(182));
 Vue.component('dinamicas-embajador', __webpack_require__(187));
 Vue.component('create-dinamica', __webpack_require__(192));
 Vue.component('users', __webpack_require__(197));
+Vue.component('notificaciones', __webpack_require__(206));
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_vuejs_auto_complete___default.a);
 
 var app = new Vue({
@@ -82865,6 +82866,279 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(207)
+}
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(209)
+/* template */
+var __vue_template__ = __webpack_require__(210)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-0b593541"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Notificaciones.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0b593541", Component.options)
+  } else {
+    hotAPI.reload("data-v-0b593541", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(208);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("9373336a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b593541\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Notificaciones.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0b593541\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Notificaciones.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 208 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.notificacion[data-v-0b593541] {\n    max-width: 300px;\n    width: 290px;\n    margin-left: 15px;\n    margin-bottom: 7px;\n}\n.notidicacion-link[data-v-0b593541] {\n    text-decoration: none !important\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 209 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "notificaciones",
+    props: ['user'],
+    data: function data() {
+        return {
+            total: 0,
+            notificaciones: []
+        };
+    },
+
+    methods: {
+        getNotifications: function getNotifications() {
+            var _this = this;
+
+            axios.get('/api/notificaciones/' + this.user.id + '/0').then(function (response) {
+                response.data.notificaciones.forEach(function (notificacion) {
+                    notificacion.diff = Math.ceil(__WEBPACK_IMPORTED_MODULE_0_moment___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_0_moment___default()(notificacion.created_at))).asHours());
+                    _this.notificaciones.push(notificacion);
+                });
+
+                _this.total = response.data.notificaciones.length;
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.getNotifications();
+    }
+});
+
+/***/ }),
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("li", { staticClass: "nav-item dropdown" }, [
+    _c(
+      "a",
+      {
+        staticClass: "nav-link ",
+        staticStyle: { color: "#fff" },
+        attrs: {
+          href: "#",
+          id: "badgeNotificaciones",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _vm._v("\n        Notificaciones\n        "),
+        _c("span", { staticClass: "badge badge-light" }, [
+          _vm._v(_vm._s(_vm.total))
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "dropdown-menu",
+        attrs: {
+          id: "notificaciones",
+          "aria-labelledby": "supportedContentDropdown"
+        }
+      },
+      [
+        _vm.notificaciones.length === 0
+          ? _c(
+              "div",
+              {
+                staticClass: "notidicacion-link",
+                staticStyle: { margin: "12px" },
+                attrs: { href: "#" }
+              },
+              [
+                _c("strong", { staticClass: "text-muted" }, [
+                  _vm._v("Sin Notificaciones")
+                ])
+              ]
+            )
+          : _c(
+              "div",
+              [
+                _c("strong", { staticStyle: { "margin-left": "12px" } }, [
+                  _vm._v("Notificaciones")
+                ]),
+                _vm._v(":\n            "),
+                _c("hr"),
+                _vm._v(" "),
+                _vm._l(_vm.notificaciones, function(notificacion) {
+                  return _c("div", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "notidicacion-link text-secondary",
+                        attrs: { href: "#" }
+                      },
+                      [
+                        _c("div", { staticClass: "notificacion" }, [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(notificacion.message) +
+                              "\n\n                        "
+                          ),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("div", { staticStyle: { "font-size": "10px" } }, [
+                            _vm._v(
+                              "hace " + _vm._s(notificacion.diff) + " horas"
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("hr")
+                        ])
+                      ]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0b593541", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

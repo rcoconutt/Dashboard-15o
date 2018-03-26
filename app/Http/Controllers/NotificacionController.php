@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Notificacion;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notification;
 
 class NotificacionController extends Controller
 {
@@ -21,9 +20,9 @@ class NotificacionController extends Controller
     public function api($user_id, $status = null) {
         try {
             if ($status == null) {
-                $notifications = Notification::where('user_id', $user_id)->get();
+                $notifications = Notificacion::where('user_id', $user_id)->get();
             } else {
-                $notifications = Notification::where(['user_id' => $user_id, 'status' => $status])->get();
+                $notifications = Notificacion::where(['user_id' => $user_id, 'status' => $status])->get();
             }
 
             return response()->json([

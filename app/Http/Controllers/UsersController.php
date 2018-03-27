@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Traits\NotificacionTrait;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+    use NotificacionTrait;
     /**
      * Display a listing of the resource.
      *
@@ -76,23 +78,30 @@ class UsersController extends Controller
                 return redirect()->back()->withErrors($errors);
             }
 
+            $brans_name = "";
             if (Auth::user()->rol == 0) {
                 if ($request->get('new_brand')) {
                     $brand = Brand::create(['BRAND' => $request->get('new_brand')]);
+                    $brans_name = $brand->BRAND;
                     $brand_id = $brand->ID_BRAND;
                 } else {
                     $brand = Brand::where('ID_BRAND', $request->get('brand_id'))->first();
                     if ($brand) {
                         $brand_id = $brand->ID_BRAND;
+                        $brans_name = $brand->BRAND;
                     } else {
                         $brand_id = Auth::user()->brand_id;
+                        $brand = Brand::where('ID_BRAND', $brand_id )->first();
+                        $brans_name = $brand->BRAND;
                     }
                 }
             } else {
                 $brand_id = Auth::user()->brand_id;
+                $brand = Brand::where('ID_BRAND', $brand_id )->first();
+                $brans_name = $brand->BRAND;
             }
 
-            User::create([
+            $user = User::create([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'password' => Hash::make($request->get('password')),
@@ -101,6 +110,29 @@ class UsersController extends Controller
                 'rol' => $request->get('rol'),
                 'brand_id' => $brand_id
             ]);
+
+            switch ($request->get('rol')) {
+                case 1:
+                    $rol = "Gerente";
+                    break;
+                case 2:
+                    $rol = "Supervisor";
+                    break;
+                case 3:
+                    $rol = "Embajador";
+                    break;
+                default:
+                    $rol = "";
+            }
+
+            $message = "<br> Tu cuenta de 1.5Onzas se ha creado correctamente:<br><br>" .
+                "<strong>Panel: </strong><a href='" . route('login') . "'>" . route('login') . "</a><br>" .
+                "<strong>Usuario: </strong>" . $request->get('email') . "<br>" .
+                "<strong>Contraseña: </strong>" . $request->get('password') . "<br>" .
+                "<strong>Marca: </strong>" . $brans_name . "<br>" .
+                "<strong>Acceso: </strong>" . $rol;
+
+            $this->email($user, $message, "Bienvenido a 1.5Onzas");
 
             return redirect()->back()->with('message', 'Usuario creado correctamente');
         } catch (\Exception $ex) {

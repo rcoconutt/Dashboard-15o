@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dinamica;
 use App\Notificacion;
+use App\Traits\NotificacionTrait;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class DinamicaController extends Controller
 {
+    use NotificacionTrait;
     /**
      * Display a listing of the resource.
      *
@@ -117,12 +119,15 @@ class DinamicaController extends Controller
                 'user_id' => $user_id
             ]);
 
-            $users = User::where('brand_id', $brand_id)->where('id', '!=', $user_id)->get();
+            $users = User::where('brand_id', $brand_id)->orWhere('rol', 0)->where('id', '!=', $user_id)->get();
             foreach ($users as $user) {
+                $message = $autor->name . " " . $autor->last_name . " ha creado una nueva dinámica: " . $request->get('name');
                 Notificacion::create([
                     'user_id' => $user->id,
-                    'message' => $autor->name . " " . $autor->last_name . " ha creado una nueva dinámica: " . $request->get('name')
+                    'message' => $message
                 ]);
+
+                $this->email($user, $message, "Nueva dinámica creada");
             }
 
             return response()->json([

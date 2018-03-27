@@ -17,6 +17,19 @@ class NotificacionController extends Controller
         //
     }
 
+    public function read($notificacion_id) {
+        try {
+            Notificacion::whereId($notificacion_id)->update(['status' => 1]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'success'
+            ], 200);
+        } catch (\Exception $ex) {
+            return response()->json(['success' => false, 'message' => "Error, código 500". $ex->getMessage()], 500);
+        }
+    }
+
     public function api($user_id, $status = null) {
         try {
             if ($status == null) {
@@ -24,12 +37,12 @@ class NotificacionController extends Controller
             } else {
                 $notifications = Notificacion::where(['user_id' => $user_id, 'status' => $status])->get();
             }
-
             return response()->json([
                 'success' => true,
                 'message' => 'success',
                 'notificaciones' => $notifications
             ], 200);
+
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => "Error, código 500". $ex->getMessage()], 500);
         }

@@ -14,7 +14,7 @@
                 <strong style="margin-left: 12px">Notificaciones</strong>:
                 <hr>
                 <div v-for="notificacion in notificaciones">
-                    <a href="#" class="notidicacion-link text-secondary">
+                    <a href="#" @click="read( notificacion.id )" class="notidicacion-link text-secondary">
                         <div class="notificacion">
                             {{ notificacion.message }}
 
@@ -44,12 +44,19 @@
             getNotifications: function () {
                 axios.get('/api/notificaciones/' + this.user.id + '/0')
                     .then((response) => {
+                        this.notificaciones = []
                         response.data.notificaciones.forEach((notificacion) => {
                             notificacion.diff = Math.ceil(moment.duration(moment().diff(moment(notificacion.created_at))).asHours());
                             this.notificaciones.push(notificacion);
                         });
 
                         this.total = response.data.notificaciones.length;
+                    })
+            },
+            read: function (id) {
+                axios.get('/api/notificaciones/' + id + '/read')
+                    .then((response) => {
+                        this.getNotifications()
                     })
             }
         },

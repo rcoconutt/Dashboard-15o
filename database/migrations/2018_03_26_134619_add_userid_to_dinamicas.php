@@ -25,6 +25,8 @@ class AddUseridToDinamicas extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('CAT_DINAMICA', function (Blueprint $table) {
+            $table->dropColumn('user_id');
+        });
     }
 }

@@ -50,7 +50,7 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 1)
+                                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 1 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
                                         <a class="dropdown-item" href="{{ route('users.index') }}">Usuarios</a>
                                     @endif
                                     <a class="dropdown-item" href="{{ route('dinamicas.index') }}">Dinamicas</a>

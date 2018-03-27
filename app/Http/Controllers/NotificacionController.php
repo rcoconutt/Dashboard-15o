@@ -31,7 +31,7 @@ class NotificacionController extends Controller
                 'notificaciones' => $notifications
             ], 200);
         } catch (\Exception $ex) {
-            return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
+            return response()->json(['success' => false, 'message' => "Error, código 500". $ex->getMessage()], 500);
         }
     }
 

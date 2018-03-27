@@ -12,11 +12,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \App\User::create([
-            'name' => 'Daniel',
-            'last_name' => 'Melendez',
-            'email' => 'dan@1puntocinco.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('1puntocinco.com'),
-            'phone' => '5555023936',
+            'name' => 'Ricardo',
+            'last_name' => 'Osorio',
+            'email' => 'ricardo@coconutt.io',
+            'password' => \Illuminate\Support\Facades\Hash::make('coconutt.io'),
+            'phone' => '55555555',
             'rol' => 0,
             'brand_id' => 0
         ]);

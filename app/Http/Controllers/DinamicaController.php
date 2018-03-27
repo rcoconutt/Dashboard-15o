@@ -20,6 +20,8 @@ class DinamicaController extends Controller
     public function index()
     {
         switch (Auth::user()->rol) {
+            case 0:
+                return view('dinamicas.index_gerente');
             case 1:
                 return view('dinamicas.index_gerente');
             case 2:

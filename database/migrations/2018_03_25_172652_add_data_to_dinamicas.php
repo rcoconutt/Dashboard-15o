@@ -26,6 +26,9 @@ class AddDataToDinamicas extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('CAT_DINAMICA', function (Blueprint $table) {
+            $table->dropColumn('municipio_id');
+            $table->dropColumn('marca_id');
+        });
     }
 }

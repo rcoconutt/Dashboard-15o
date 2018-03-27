@@ -25,7 +25,7 @@ class UsersController extends Controller
     {
         try {
             if ($brand_id == null) {
-                $users = User::all();
+                $users = User::with('brand')->get();
             } else {
                 $users = User::where('brand_id', $brand_id)->get();
             }
@@ -47,7 +47,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        if (Auth::user()->rol == 0) {
+            return view('users.create_admin');
+        }
+        return view('users.create_gerente');
     }
 
     /**
@@ -101,7 +104,7 @@ class UsersController extends Controller
 
             return redirect()->back()->with('message', 'Usuario creado correctamente');
         } catch (\Exception $ex) {
-            return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage()], 500);
+            return redirect()->back()->withErrors(['message' => $ex->getMessage()]);
         }
     }
 

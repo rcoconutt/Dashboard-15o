@@ -91,7 +91,7 @@ class DinamicaController extends Controller
             $autor = User::whereId($user_id)->first();
             $cantidad = -1;
             $descripción = $request->get('reglas');
-            $marca = -1;
+            $marca = 0;
             if ($request->get('kind') == 1) {
                 $cantidad = $request->get('cantidad');
                 $descripción = $request->get('descripcion');

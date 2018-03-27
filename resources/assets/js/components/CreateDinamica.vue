@@ -17,11 +17,11 @@
                 <input type="hidden" v-model="user.id"/>
                 <div class="form-group">
                     <label for="name">Nombre de la dinámica: </label>
-                    <input class="form-control" name="name" id="name" v-model="name" placeholder="Vive latino - Beers"/>
+                    <input class="form-control" name="name" id="name" v-model="name" placeholder=""/>
                 </div>
                 <div class="form-group">
                     <label for="premio">Premio de la dinámica: </label>
-                    <input class="form-control" name="premio" id="premio" v-model="premio" placeholder="2 Entradas para el Vive latino"/>
+                    <input class="form-control" name="premio" id="premio" v-model="premio" placeholder=""/>
                 </div>
                 <div class="form-group">
                     <label for="venue">Centro de consumo: </label>
@@ -33,7 +33,7 @@
                             results-property="venues"
                             results-display="CENTRO"
                             results-value="ID_CENTRO"
-                            placeholder="Centro de distribución"
+                            placeholder=""
                             input-class="form-control"
                             class="form-control"
                             @selected="addDistributionGroup"
@@ -50,7 +50,7 @@
                             results-property="municipios"
                             results-display="MUNICIPIO"
                             results-value="ID_MUNICIPIO"
-                            placeholder="Zona"
+                            placeholder=""
                             input-class="form-control"
                             class="form-control"
                             @selected="addZonaGroup"
@@ -65,14 +65,14 @@
                     <label for="two">Por puntos</label>
                     <div v-if="kind === '0'">
                         <label for="reglas">Reglas: </label>
-                        <textarea class="form-control" rows="5" id="reglas" name="reglas" v-model="reglas" placeholder="El mesero que más botellas de heineken venda semanalmente ganara unas bocinas bluetooth. Cortes semanales lo acumulado en la semana"></textarea>
+                        <textarea class="form-control" rows="5" id="reglas" name="reglas" v-model="reglas" placeholder=""></textarea>
                     </div>
                     <div v-if="kind === '1'">
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <label for="reglas">Reglas: </label>
                                 <div class="input-group mb-2">
-                                    <input class="form-control" name="cantidad" v-model="cantidad" id="cantidad" placeholder="3" type="number"/>
+                                    <input class="form-control" name="cantidad" v-model="cantidad" id="cantidad" placeholder="" type="number"/>
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">copas</div>
                                     </div>
@@ -89,7 +89,7 @@
                                         results-property="marcas"
                                         results-display="MARCA"
                                         results-value="ID_MARCA"
-                                        placeholder="Marca"
+                                        placeholder=""
                                         input-class="form-control"
                                         class="form-control"
                                         @selected="addMarcaGroup"
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-md-12 col-sm-12">
                                 <label for="descripcion">Descripción: </label>
-                                <textarea class="form-control" rows="3" id="descripcion" name="reglas" v-model="descripcion" placeholder="Por cada 100 botellas de Indio que registres como vendidas tendrás un acceso sencillo al festival vive latino. "></textarea>
+                                <textarea class="form-control" rows="3" id="descripcion" name="reglas" v-model="descripcion" placeholder=""></textarea>
                             </div>
                         </div>
                     </div>

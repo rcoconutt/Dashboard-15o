@@ -11,6 +11,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        \App\User::create([
+            'name' => 'Daniel',
+            'last_name' => 'Melendez',
+            'email' => 'dan@1puntocinco.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('1puntocinco.com'),
+            'phone' => '5555023936',
+            'rol' => 0,
+            'brand_id' => 0
+        ]);
+
+        \App\User::create([
+            'name' => 'Daniel',
+            'last_name' => 'Melendez',
+            'email' => 'dan@1puntocinco.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('1puntocinco.com'),
+            'phone' => '5555023936',
+            'rol' => 0,
+            'brand_id' => 0
+        ]);
     }
 }

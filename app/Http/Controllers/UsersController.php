@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,14 +73,30 @@ class UsersController extends Controller
                 return redirect()->back()->withErrors($errors);
             }
 
-            $user = User::create([
+            if (Auth::user()->rol == 0) {
+                if ($request->get('new_brand')) {
+                    $brand = Brand::create(['BRAND' => $request->get('new_brand')]);
+                    $brand_id = $brand->ID_BRAND;
+                } else {
+                    $brand = Brand::where('ID_BRAND', $request->get('brand_id'))->first();
+                    if ($brand) {
+                        $brand_id = $brand->ID_BRAND;
+                    } else {
+                        $brand_id = Auth::user()->brand_id;
+                    }
+                }
+            } else {
+                $brand_id = Auth::user()->brand_id;
+            }
+
+            User::create([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'password' => Hash::make($request->get('password')),
                 'last_name' => $request->get('last_name'),
                 'phone' => $request->get('phone'),
                 'rol' => $request->get('rol'),
-                'brand_id' => Auth::user()->brand_id
+                'brand_id' => $brand_id
             ]);
 
             return redirect()->back()->with('message', 'Usuario creado correctamente');

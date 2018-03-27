@@ -5,6 +5,7 @@ Route::get('/', function () {
 })->middleware('auth');
 
 Auth::routes();
+//Route::get('/login', 'Auth\LoginController@login')->middleware(['web', 'guest']);
 
 Route::get('/home', function () {
     return redirect('dinamicas');

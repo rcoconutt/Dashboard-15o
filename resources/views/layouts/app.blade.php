@@ -41,8 +41,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">Crear cuenta</a></li>
+                            <li><a class="nav-link" href="{{ route('login') }}">Ingresar</a></li>
                         @else
                             <notificaciones :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></notificaciones>
                             <li class="nav-item dropdown">

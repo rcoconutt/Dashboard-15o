@@ -9,3 +9,4 @@ Route::get('users/{brand_id?}', 'UsersController@api');
 Route::get('brands', 'BrandsController@api');
 
 Route::get('notificaciones/{user_id}/{status?}', 'NotificacionController@api');
+Route::get('ranking/{marca_id}', 'PuntosController@topByMarca');

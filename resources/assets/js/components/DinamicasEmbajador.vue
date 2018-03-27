@@ -32,7 +32,7 @@
             getDinamicas: function () {
                 $('#dinamicas').DataTable({
                     ajax: {
-                        url: '/api/dinamicas',
+                        url: '/api/dinamicas/' + this.user.brand_id,
                         dataSrc: 'dinamicas',
                     },
                     scrollY: "300px",

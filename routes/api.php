@@ -1,6 +1,6 @@
 <?php
 
-Route::get('dinamicas', 'DinamicaController@api');
+Route::get('dinamicas/{brand_id?}', 'DinamicaController@api');
 Route::post('dinamicas', 'DinamicaController@store');
 Route::get('venues/search/{q}', 'VenuesController@search');
 Route::get('municipios/search/{q}', 'MunicipiosController@search');

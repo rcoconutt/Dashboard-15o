@@ -48,7 +48,7 @@
     import swal from 'sweetalert'
 
     export default {
-        name: "dinamicas-gerente",
+        name: "dinamicas-admin",
         props: ['user'],
         data () {
             return {
@@ -60,7 +60,7 @@
             getDinamicas: function () {
                 $('#dinamicas').DataTable({
                     ajax: {
-                        url: '/api/dinamicas/' + this.user.brand_id,
+                        url: '/api/dinamicas',
                         dataSrc: 'dinamicas',
                     },
                     scrollY: "300px",

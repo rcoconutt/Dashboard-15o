@@ -21,7 +21,7 @@ class DinamicaController extends Controller
     {
         switch (Auth::user()->rol) {
             case 0:
-                return view('dinamicas.index_gerente');
+                return view('dinamicas.index_admin');
             case 1:
                 return view('dinamicas.index_gerente');
             case 2:
@@ -36,13 +36,19 @@ class DinamicaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function api()
+    public function api($brand_id = null)
     {
         try {
+            if ($brand_id == null) {
+                $dinamicas = Dinamica::all();
+            } else {
+                $dinamicas = Dinamica::where('ID_BRAND', $brand_id)->get();
+            }
+
             return response()->json([
                 'success' => true,
                 'message' => 'success',
-                'dinamicas' => Dinamica::all()
+                'dinamicas' => $dinamicas
             ], 200);
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => "Error, código 500"], 500);

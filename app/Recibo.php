@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Recibo extends Model
 {
     protected $table = 'CAT_RECIBO';
-    protected $fillable = [
-        'ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'RECIBO', 'NUMERO', 'FECHA',
-    ];
-
     protected $primaryKey = 'ID_RECIBO';
+    public $timestamps = false;
+    protected $fillable = [
+        'ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'RECIBO', 'NUMERO', 'FECHA', 'status'
+    ];
 
     public function desgloce() {
         return $this->hasMany(Desgloce::class, 'ID_RECIBO', 'ID_RECIBO');
@@ -22,5 +22,9 @@ class Recibo extends Model
             'ID_USUARIO', 'ID_TIPO_LOGIN', 'ID_PUESTO', 'ID_CENTRO', 'NOMBRE', 'USERNAME', 'CORREO', 'TELEFONO',
             'FECHA_ALTA', 'FECHA_BAJA', 'ACTIVO',
         ]);
+    }
+
+    public function centro() {
+        return $this->hasOne(Centro::class, 'ID_CENTRO', 'ID_CENTRO');
     }
 }

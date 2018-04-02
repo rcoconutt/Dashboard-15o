@@ -21,6 +21,8 @@
     },
     "dependencies": {
         "datatables.net-bs4": "^1.10.16",
+        "jquery-zoom": "^1.7.20",
+        "mdbootstrap": "^4.5.0",
         "moment": "^2.21.0",
         "pikaday": "^1.7.0",
         "sweetalert": "^2.1.0",

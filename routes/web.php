@@ -14,3 +14,7 @@ Route::get('/home', function () {
 Route::resource('dinamicas', 'DinamicaController')->middleware('auth');
 Route::post('/dinamicas/action', 'DinamicaController@action')->middleware('auth');
 Route::resource('users', 'UsersController')->middleware('auth');
+
+Route::get('/admin', 'UsersController@adminView')->name('admin');
+Route::get('/admin/recibo/{recibo_id}', 'RecibosController@show');
+Route::post('/admin/recibo/{recibo_id}', 'RecibosController@update');

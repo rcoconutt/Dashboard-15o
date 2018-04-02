@@ -4007,6 +4007,12 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
+jquery-zoom@^1.7.20:
+  version "1.7.20"
+  resolved "https://registry.yarnpkg.com/jquery-zoom/-/jquery-zoom-1.7.20.tgz#25b9f9dc50804b48c21f1796949a5f6ac17fbba7"
+  dependencies:
+    jquery ">=1.7"
+
 jquery@>=1.7, jquery@^3.2:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
@@ -4479,6 +4485,10 @@ md5@^2.2.1:
     charenc "~0.0.1"
     crypt "~0.0.1"
     is-buffer "~1.1.1"
+
+mdbootstrap@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/mdbootstrap/-/mdbootstrap-4.5.0.tgz#6fa9485e1b137fca59f8ea3e17d55b20123024b3"
 
 mdn-data@^1.0.0:
   version "1.1.0"

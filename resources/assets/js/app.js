@@ -19,6 +19,7 @@ Vue.component('create-dinamica', require('./components/CreateDinamica'));
 Vue.component('users', require('./components/Users'));
 Vue.component('notificaciones', require('./components/Notificaciones'));
 Vue.component('users-admin', require('./components/UsersAdmin'));
+Vue.component('admin', require('./components/admin'));
 Vue.component(Autocomplete);
 
 const app = new Vue({

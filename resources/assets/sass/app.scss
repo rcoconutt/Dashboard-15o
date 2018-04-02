@@ -23,3 +23,10 @@
 .color-15o {
   color: #e69817;
 }
+
+.transition {
+  -webkit-transform: scale(2);
+  -moz-transform: scale(2);
+  -o-transform: scale(2);
+  transform: scale(2);
+}

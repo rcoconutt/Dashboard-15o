@@ -58,7 +58,6 @@
         mounted () {
             $().ready(() => {
                 this.getDinamicas();
-                console.log(this.user)
             });
         }
     }

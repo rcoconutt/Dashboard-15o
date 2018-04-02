@@ -140,6 +140,10 @@ class UsersController extends Controller
         }
     }
 
+    public function adminView() {
+        return view('admin.index');
+    }
+
     /**
      * Display the specified resource.
      *

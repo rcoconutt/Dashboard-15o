@@ -30,5 +30,15 @@ class DatabaseSeeder extends Seeder
             'rol' => 0,
             'brand_id' => 0
         ]);
+
+        \App\User::create([
+            'name' => 'Alex',
+            'last_name' => 'Santana',
+            'email' => 'alex@1puntocinco.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('1puntocinco.com'),
+            'phone' => '5555000000',
+            'rol' => 0,
+            'brand_id' => 0
+        ]);
     }
 }

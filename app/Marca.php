@@ -12,4 +12,8 @@ class Marca extends Model
     protected $fillable = [
         'ID_MARCA', 'ID_PAIS', 'ID_DESTILADO', 'MARCA', 'FECHA_ALTA', 'FECHA_BAJA', 'ACTIVO',
     ];
+
+    public function destilado() {
+        return $this->hasOne(Destilado::class, 'ID_DESTILADO', 'ID_DESTILADO');
+    }
 }

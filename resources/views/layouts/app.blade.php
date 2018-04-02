@@ -46,7 +46,9 @@
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">Ingresar</a></li>
                         @else
-                            <notificaciones :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></notificaciones>
+                            @if(\Illuminate\Support\Facades\Auth::user()->rol != 4)
+                                <notificaciones :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></notificaciones>
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -56,7 +58,14 @@
                                     @if(\Illuminate\Support\Facades\Auth::user()->rol == 1 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
                                         <a class="dropdown-item" href="{{ route('users.index') }}">Usuarios</a>
                                     @endif
-                                    <a class="dropdown-item" href="{{ route('dinamicas.index') }}">Dinamicas</a>
+
+                                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 4 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
+                                        <a class="dropdown-item" href="{{ route('admin') }}">Tickets</a>
+                                    @endif
+
+                                    @if(\Illuminate\Support\Facades\Auth::user()->rol != 4)
+                                        <a class="dropdown-item" href="{{ route('dinamicas.index') }}">Dinamicas</a>
+                                    @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

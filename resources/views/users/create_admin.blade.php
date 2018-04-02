@@ -104,11 +104,24 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right">
+                                <label for="rol" class="col-md-4 col-form-label text-md-right">Permisos</label>
+                                <div class="col-md-6">
+                                    <select name="rol" id="rol" class="form-control">
+                                        <option selected disabled>Selecciona una opción</option>
+                                        <option value="1">Gerente</option>
+                                        <option value="2">Supervisor</option>
+                                        <option value="3">Embajador</option>
+                                        <option value="4">Administrador Tickets</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row" style="display: none;" id="brandKind">
+                                <label class="col-md-3 col-form-label text-md-right">
                                     <input type="radio" name="brand_kind" value="0">
                                     Crear brand
                                 </label>
-                                <label class="col-md-4 col-form-label text-md-right">
+                                <label class="col-md-3 col-form-label text-md-right">
                                     <input type="radio" name="brand_kind" value="1">
                                     Seleccionar brand
                                 </label>
@@ -131,18 +144,6 @@
                                         @foreach(\App\Brand::all() as $brand)
                                             <option value="{{ $brand->ID_BRAND }}">{{ $brand->BRAND }}</option>
                                         @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="rol" class="col-md-4 col-form-label text-md-right">Permisos</label>
-                                <div class="col-md-6">
-                                    <select name="rol" id="rol" class="form-control">
-                                        <option selected disabled>Selecciona una opción</option>
-                                        <option value="1">Gerente</option>
-                                        <option value="2">Supervisor</option>
-                                        <option value="3">Embajador</option>
                                     </select>
                                 </div>
                             </div>
@@ -173,6 +174,14 @@
                 else if (this.value == '1') {
                     $("#new").hide();
                     $("#use").show();
+                }
+            });
+
+            $('#rol').change(function () {
+                if (this.value === '4' || this.value === 4) {
+                    $("#brandKind").hide();
+                } else {
+                    $("#brandKind").show();
                 }
             });
         });

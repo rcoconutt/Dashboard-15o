@@ -34,13 +34,13 @@
                                 return moment(data).format('DD-MM-YYYY');
                             }},
                         { data: 'status', render:function (data, type, row, meta) {
-                                if (data === '0' || data === 0) { return 'Pendiente'; }
-                                if (data === '1' || data === 1) { return 'Aprobado'; }
-                                if (data === '2' || data === 2) { return 'Rechazado'; }
+                                if (data === '0' || data === 0) { return '<i class="fas fa-bookmark text-info"></i> Pendiente'; }
+                                if (data === '1' || data === 1) { return '<i class="fas fa-check-circle text-success"></i> Aprobado'; }
+                                if (data === '2' || data === 2) { return '<i class="fas fa-ban text-danger"></i> Rechazado'; }
                                 return '';
                             }},
                         { data: 'ID_RECIBO', render: function( data, type, row, meta) {
-                                return '<a href="/admin/recibo/' + data + '">Revisar</a>'
+                                return '<a class="text-primary" href="/admin/recibo/' + data + '">Revisar</a>'
                             }},
                     ],
                     language: {

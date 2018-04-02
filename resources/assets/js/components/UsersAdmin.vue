@@ -1,11 +1,10 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
+            <div class="col-md-4 col-sm-8 offset-md-6">
+                <a class="btn btn-block btn-success" href="/users/create">Crear usuario</a>
+            </div>
             <div class="col-md-12">
-                <div class="col-md-2 col-sm-8 offset-md-10 ">
-                    <a class="btn btn-block btn-success" href="/users/create">Crear usuario</a>
-                </div>
-
                 <hr>
                 <table id="users" cellspacing="0" class="table table-bordered table-hover">
                     <thead>
@@ -56,6 +55,10 @@
 
                             if (data == 3) {
                                 return "Embajador";
+                            }
+
+                            if (data == 4) {
+                                return "Administrador Tickets";
                             }
 
                             return "";

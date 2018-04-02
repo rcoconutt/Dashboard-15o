@@ -83064,7 +83064,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -83075,7 +83075,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -83125,6 +83124,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             return "Embajador";
                         }
 
+                        if (data == 4) {
+                            return "Administrador Tickets";
+                        }
+
                         return "";
                     } }],
                 language: {
@@ -83168,18 +83171,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-4 col-sm-8 offset-md-6" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-block btn-success",
+              attrs: { href: "/users/create" }
+            },
+            [_vm._v("Crear usuario")]
+          )
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "col-md-2 col-sm-8 offset-md-10 " }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-block btn-success",
-                attrs: { href: "/users/create" }
-              },
-              [_vm._v("Crear usuario")]
-            )
-          ]),
-          _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
           _c(
@@ -83587,7 +83590,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -83598,7 +83601,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -83653,6 +83655,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             return "Embajador";
                         }
 
+                        if (data == 4) {
+                            return "Administrador Tickets";
+                        }
+
                         return "";
                     } }, { data: 'brand.BRAND' }],
                 language: {
@@ -83696,18 +83702,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-4 col-sm-8 offset-md-6" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-block btn-success",
+              attrs: { href: "/users/create" }
+            },
+            [_vm._v("Crear usuario")]
+          )
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "col-md-2 col-sm-8 offset-md-10 " }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-block btn-success",
-                attrs: { href: "/users/create" }
-              },
-              [_vm._v("Crear usuario")]
-            )
-          ]),
-          _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
           _c(
@@ -83880,17 +83886,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         return __WEBPACK_IMPORTED_MODULE_0_moment___default()(data).format('DD-MM-YYYY');
                     } }, { data: 'status', render: function render(data, type, row, meta) {
                         if (data === '0' || data === 0) {
-                            return 'Pendiente';
+                            return '<i class="fas fa-bookmark text-info"></i> Pendiente';
                         }
                         if (data === '1' || data === 1) {
-                            return 'Aprobado';
+                            return '<i class="fas fa-check-circle text-success"></i> Aprobado';
                         }
                         if (data === '2' || data === 2) {
-                            return 'Rechazado';
+                            return '<i class="fas fa-ban text-danger"></i> Rechazado';
                         }
                         return '';
                     } }, { data: 'ID_RECIBO', render: function render(data, type, row, meta) {
-                        return '<a href="/admin/recibo/' + data + '">Revisar</a>';
+                        return '<a class="text-primary" href="/admin/recibo/' + data + '">Revisar</a>';
                     } }],
                 language: {
                     search: "Buscar:",

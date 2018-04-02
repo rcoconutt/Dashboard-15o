@@ -78,21 +78,25 @@ class UsersController extends Controller
                 return redirect()->back()->withErrors($errors);
             }
 
-            $brans_name = "";
             if (Auth::user()->rol == 0) {
-                if ($request->get('new_brand')) {
-                    $brand = Brand::create(['BRAND' => $request->get('new_brand')]);
-                    $brans_name = $brand->BRAND;
-                    $brand_id = $brand->ID_BRAND;
+                if ($request->get('rol') == 4 || $request->get('rol') == 0) {
+                    $brans_name = "N/A";
+                    $brand_id = 0;
                 } else {
-                    $brand = Brand::where('ID_BRAND', $request->get('brand_id'))->first();
-                    if ($brand) {
+                    if ($request->get('new_brand')) {
+                        $brand = Brand::create(['BRAND' => $request->get('new_brand')]);
+                        $brans_name = $brand->BRAND;
                         $brand_id = $brand->ID_BRAND;
-                        $brans_name = $brand->BRAND;
                     } else {
-                        $brand_id = Auth::user()->brand_id;
-                        $brand = Brand::where('ID_BRAND', $brand_id )->first();
-                        $brans_name = $brand->BRAND;
+                        $brand = Brand::where('ID_BRAND', $request->get('brand_id'))->first();
+                        if ($brand) {
+                            $brand_id = $brand->ID_BRAND;
+                            $brans_name = $brand->BRAND;
+                        } else {
+                            $brand_id = Auth::user()->brand_id;
+                            $brand = Brand::where('ID_BRAND', $brand_id)->first();
+                            $brans_name = $brand->BRAND;
+                        }
                     }
                 }
             } else {
@@ -120,6 +124,12 @@ class UsersController extends Controller
                     break;
                 case 3:
                     $rol = "Embajador";
+                    break;
+                case 4:
+                    $rol = "Administrador - Tickets";
+                    break;
+                case 3:
+                    $rol = "Administrador";
                     break;
                 default:
                     $rol = "";

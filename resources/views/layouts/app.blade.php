@@ -21,7 +21,8 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mdb.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.dataTables.min.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -90,6 +91,7 @@
         </main>
     </div>
 
+    <script defer src="{{ asset('/js/dataTables.responsive.min.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

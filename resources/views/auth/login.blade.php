@@ -9,13 +9,12 @@
 
                     <!--Header-->
                     <div class="form-header">
-                        <p class="h4 text-center mb-4"></i> Iniciar sesión</p>
+                        <p class="h4 text-center mb-4"> Iniciar sesión</p>
                     </div>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="md-form">
-
                             <input type="text" id="username" class="form-control" name="email" value="{{ old('email') }}" required>
                             <label for="username"><i class="fa fa-envelope blue-text"></i> {{ __('Email') }}</label>
                         </div>
@@ -31,7 +30,7 @@
                         </div>
 
                         <div class="text-center mt-4">
-                            <button class="btn btn-outline-info" type="submit">Send<i class="fa fa-paper-plane-o ml-2"></i></button>
+                            <button class="btn btn-outline-info" type="submit">Iniciar sesión<i class="fas fa-lock ml-2"></i></button>
                         </div>
                     </form>
                 </div>

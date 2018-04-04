@@ -83415,7 +83415,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+        var _this3 = this;
+
         this.getNotifications();
+
+        setInterval(function () {
+            _this3.getNotifications();
+        }, 60000);
     }
 });
 
@@ -83441,8 +83447,6 @@ var render = function() {
       },
       [
         _c("span", { staticClass: "badge red" }, [_vm._v(_vm._s(_vm.total))]),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-bell" }),
         _vm._v("\n        Notificaciones\n    ")
       ]
     ),

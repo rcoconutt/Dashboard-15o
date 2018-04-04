@@ -2,7 +2,7 @@
     <li class="nav-item dropdown notifications-nav">
         <a class="nav-link dropdown-toggle waves-effect" id="badgeNotificaciones" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
-            <span class="badge red">{{ total }}</span> <i class="fa fa-bell"></i>
+            <span class="badge red">{{ total }}</span>
             Notificaciones
         </a>
         <div class="dropdown-menu dropdown-info" id="notificaciones" aria-labelledby="supportedContentDropdown">
@@ -62,6 +62,8 @@
         },
         mounted () {
             this.getNotifications()
+
+            setInterval(() => { this.getNotifications() }, 60000);
         }
     }
 </script>

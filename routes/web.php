@@ -16,6 +16,8 @@ Route::middleware(['auth', 'not-admin'])->group(function () {
     Route::resource('users', 'UsersController');
 });
 
+Route::get('/kpi', 'KpiController@index');
+
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', 'UsersController@adminView')->name('admin');
     Route::get('/admin/recibo/{recibo_id}', 'RecibosController@show');

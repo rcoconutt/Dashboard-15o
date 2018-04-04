@@ -17,7 +17,7 @@
                         </div>
 
                         <div class="col-md-4 col-sm-12">
-                            <a class="btn btn-block btn-success" href="/dinamicas/create">Crear dinámica</a>
+                            <a class="btn btn-block btn-mdb-color" href="/dinamicas/create">Crear dinámica</a>
                         </div>
                     </div>
 

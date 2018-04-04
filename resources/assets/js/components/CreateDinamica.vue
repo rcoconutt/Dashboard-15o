@@ -1,11 +1,12 @@
 <template>
+    <div class="container">
     <div class="card">
         <div class="card-header row">
-            <div class="col-md-6 col-sm-12">
-                <a href="/dinamicas">Volver</a>
+            <div class="col-md-6 col-sm-12 text-center">
+                <a class="btn btn-sm btn-link btn-block waves-effect" href="/dinamicas">Volver</a>
             </div>
-            <div class="col-md-6 col-sm-12">
-                Crear nueva dinámica
+            <div class="col-md-6 col-sm-12 text-center">
+                <strong>Crear nueva dinámica</strong>
             </div>
         </div>
         <div class="card-body">
@@ -15,13 +16,13 @@
                 </div>
                 <input type="hidden" v-model="user.brand_id"/>
                 <input type="hidden" v-model="user.id"/>
-                <div class="form-group">
+                <div class="md-form">
+                    <input type="text" class="form-control" name="name" id="name" v-model="name" placeholder="" required/>
                     <label for="name">Nombre de la dinámica: </label>
-                    <input class="form-control" name="name" id="name" v-model="name" placeholder=""/>
                 </div>
-                <div class="form-group">
+                <div class="md-form">
+                    <input type="text" class="form-control" name="premio" id="premio" v-model="premio" placeholder="" required/>
                     <label for="premio">Premio de la dinámica: </label>
-                    <input class="form-control" name="premio" id="premio" v-model="premio" placeholder=""/>
                 </div>
                 <div class="form-group">
                     <label for="venue">Centro de consumo: </label>
@@ -117,12 +118,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-4 col-sm-12 offset-md-8">
-                        <button class="btn btn-block btn-primary" >Enviar</button>
+                    <div class="col-md-4 col-sm-12 offset-md-6">
+                        <button class="btn btn-block btn-outline-primary waves-effect" >Enviar</button>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
     </div>
 </template>
 

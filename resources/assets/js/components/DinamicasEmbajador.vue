@@ -3,10 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="col-md-2 col-sm-8 offset-md-10 ">
-                    <a class="btn btn-block btn-success" href="/dinamicas/create">Proponer dinámica</a>
+                    <a class="btn btn-block btn-mdb-color" href="/dinamicas/create">Proponer dinámica</a>
                 </div>
                 <hr>
-                <table id="dinamicas" cellspacing="0" class="table table-bordered table-hover">
+                <table id="dinamicas" cellspacing="0" class="table table-bordered dt-responsive">
                     <thead>
                         <tr>
                             <th>Dinamica</th>
@@ -36,6 +36,7 @@
                         dataSrc: 'dinamicas',
                     },
                     scrollY: "300px",
+                    responsive: true,
                     columns: [
                         { data: 'DINAMICA' },
                         { data: 'DESCRIPCION', width: "35%" },

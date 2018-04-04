@@ -1,11 +1,11 @@
 <template>
-    <li class="nav-item dropdown">
-        <a class="nav-link " href="#" id="badgeNotificaciones" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#fff" >
+    <li class="nav-item dropdown notifications-nav">
+        <a class="nav-link dropdown-toggle waves-effect" id="badgeNotificaciones" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false">
+            <span class="badge red">{{ total }}</span> <i class="fa fa-bell"></i>
             Notificaciones
-            <span class="badge badge-light">{{ total }}</span>
         </a>
-
-        <div class="dropdown-menu" id="notificaciones" aria-labelledby="supportedContentDropdown">
+        <div class="dropdown-menu dropdown-info" id="notificaciones" aria-labelledby="supportedContentDropdown">
             <!--  MOSTRAR NOTIFICACIONES  -->
             <div v-if="notificaciones.length === 0" href="#" class="notidicacion-link" style="margin: 12px" >
                 <strong class="text-muted">Sin Notificaciones</strong>

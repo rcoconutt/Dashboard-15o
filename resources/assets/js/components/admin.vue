@@ -1,6 +1,6 @@
 <template>
     <div class="table-responsive">
-        <table id="tickets" cellspacing="0" class="table table-bordered table-hover">
+        <table id="tickets" cellspacing="0" class="table table-bordered dt-responsive">
             <thead>
             <tr>
                 <th># Ticket</th>
@@ -27,6 +27,7 @@
                         dataSrc: 'tickets',
                     },
                     scrollY: "300px",
+                    responsive: true,
                     columns: [
                         { data: 'ID_RECIBO' },
                         { data: 'usuario.NOMBRE' },
@@ -40,7 +41,7 @@
                                 return '';
                             }},
                         { data: 'ID_RECIBO', render: function( data, type, row, meta) {
-                                return '<a class="text-primary" href="/admin/recibo/' + data + '">Revisar</a>'
+                                return '<a class="btn btn-link btn-sm waves-effect text-primary" href="/admin/recibo/' + data + '">Revisar</a>'
                             }},
                     ],
                     language: {

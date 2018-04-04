@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <hr>
-                <table id="dinamicas" cellspacing="0" class="table table-bordered table-hover">
+                <table id="dinamicas" cellspacing="0" class="table table-bordered dt-responsive">
                     <thead>
                         <tr>
                             <th>Dinamica</th>
@@ -33,6 +33,7 @@
                         dataSrc: 'dinamicas',
                     },
                     scrollY: "300px",
+                    responsive: true,
                     columns: [
                         { data: 'DINAMICA' },
                         { data: 'DESCRIPCION', width: "30%" },

@@ -75,7 +75,7 @@
 
                 <div class="px-4">
                     <div class="table-responsive">
-                        <table class="table table-hover mb-0">
+                        <table class="table table-hover dt-responsive">
                             <thead>
                             <tr>
                                 <th class="th-lg"><a href="">Destilado<i class="fa fa-sort ml-1"></i></a></th>

@@ -14,7 +14,7 @@
                 <strong style="margin-left: 12px">Notificaciones</strong>:
                 <hr>
                 <div v-for="notificacion in notificaciones">
-                    <a href="#" @click="read( notificacion.id )" class="notidicacion-link text-secondary">
+                    <a href="#" @click="read( notificacion.id )" class="notidicacion-link waves-effect text-secondary">
                         <div class="notificacion">
                             {{ notificacion.message }}
 

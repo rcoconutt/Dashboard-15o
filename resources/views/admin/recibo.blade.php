@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card card-cascade">
+    <div class="container">
+    <div class="card">
         <div class="row">
-            <div class="col-xl-6 col-md-12">
-                <div class="view gradient-card-header light-blue lighten-1">
-                    <h2 class="white-text h2-responsive text-center" style="margin-top: 8px">Datos</h2>
+            <div class="col-xs-12 col-md-6">
+                <div class="view gradient-card-header text-dark">
+                    <h4 class="h2-responsive text-center" style="margin-top: 8px"><strong>Datos</strong></h4>
                 </div>
 
                 <div class="card-body">
@@ -27,7 +28,9 @@
                                         <option value="1">Aprobar</option>
                                         <option value="2">Rechazar</option>
                                     </select>
-                                    <button class="btn btn-success btn-block">Envíar</button>
+                                </div>
+                                <div class="form-group col-md-6" style="margin: 0 auto;">
+                                    <button class="btn btn-outline-success btn-sm btn-block">Envíar</button>
                                 </div>
                                 @if (session('message'))
                                     <div class="alert alert-success">
@@ -48,9 +51,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-md-12">
-                <div class="view gradient-card-header light-blue lighten-1">
-                    <h2 class="white-text h2-responsive text-center" style="margin-top: 8px">Foto</h2>
+            <div class="col-xs-12 col-md-6">
+                <div class="view gradient-card-header text-dark">
+                    <h4 class="text-dark h2-responsive text-center" style="margin-top: 8px"><strong>Foto</strong></h4>
                 </div>
 
                 <div class="card-body">
@@ -69,7 +72,7 @@
             <div class="card card-cascade narrower z-depth-0">
                 <div class="view gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
                     <div></div>
-                    <h4 class="h2-responsive color-white mb-0">Detalle de venta</h4>
+                    <h4 class="h2-responsive mb-0"><strong>Detalle de venta</strong></h4>
                     <div></div>
                 </div>
 
@@ -103,6 +106,7 @@
                 </div>
             </div>
         </section>
+    </div>
     </div>
 @endsection
 

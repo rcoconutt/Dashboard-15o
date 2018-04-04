@@ -10508,3 +10508,7 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   transform: scale(2);
 }
 
+.card-header {
+  background-color: #cfd8dc !important;
+}
+

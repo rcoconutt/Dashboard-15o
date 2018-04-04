@@ -83489,7 +83489,8 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        staticClass: "notidicacion-link text-secondary",
+                        staticClass:
+                          "notidicacion-link waves-effect text-secondary",
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {

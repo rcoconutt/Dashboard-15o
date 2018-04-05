@@ -62,7 +62,7 @@
                                     @endif
 
                                     @if(\Illuminate\Support\Facades\Auth::user()->rol == 4 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
-                                        <a class="dropdown-item" href="{{ route('admin') }}">Tickets</a>
+                                        <!--<a class="dropdown-item" href="{{ route('admin') }}">Tickets</a>-->
                                     @endif
 
                                     @if(\Illuminate\Support\Facades\Auth::user()->rol != 4)

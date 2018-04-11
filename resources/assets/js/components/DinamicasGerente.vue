@@ -5,21 +5,27 @@
 
                 <form action="/dinamicas/action" method="POST" id="form">
                     <input type="hidden" name="_token" v-model="csrf">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-12">
-                            <select name="actions" id="actions" class="form-control">
-                                <option disabled selected>Seleccionar una acción</option>
-                                <option value="1">Aprobar dinámicas</option>
-                                <option value="2">Rechazar dinámicas</option>
-                                <option value="3">Eliminar dinámicas</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <button class="btn btn-block btn-outline-amber" href="/dinamicas/create">Actualizar dinámica</button>
-                        </div>
-
-                        <div class="col-md-4 col-sm-12">
+                    <div class="row flex-row-reverse">
+                        <div class="col-md-4 first col-sm-12 text-right">
                             <a class="btn btn-block btn-mdb-color" href="/dinamicas/create">Crear dinámica</a>
+                        </div>
+                        <div class="col-md-4 col-sm-12"><br></div>
+                        <div class="col-md-4 second col-sm-12">
+                            <div class="row">
+                                <div class="col-8">
+                                    <select name="actions" id="actions" class="form-control" style="margin-top: 3px;">
+                                        <option value="0" disabled selected>Seleccionar una acción</option>
+                                        <option value="1">Aprobar dinámicas</option>
+                                        <option value="2">Rechazar dinámicas</option>
+                                        <option value="3">Eliminar dinámicas</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <button type="button" id="send" class="btn btn-sm btn-default" aria-label="Left Align">
+                                        <span class="fas fa-caret-right fa-lg" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

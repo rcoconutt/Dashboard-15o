@@ -5,22 +5,22 @@
             <span class="badge red">{{ total }}</span>
             Notificaciones
         </a>
-        <div class="dropdown-menu dropdown-info" id="notificaciones" aria-labelledby="supportedContentDropdown">
+        <div class="dropdown-menu dropdown-info notificacion-container" id="notificaciones" aria-labelledby="supportedContentDropdown">
             <!--  MOSTRAR NOTIFICACIONES  -->
-            <div v-if="notificaciones.length === 0" href="#" class="notidicacion-link" style="margin: 12px" >
+            <div v-if="notificaciones.length === 0" href="#" class="notificacion-link" style="margin: 12px" >
                 <strong class="text-muted">Sin Notificaciones</strong>
             </div>
             <div v-else>
                 <strong style="margin-left: 12px">Notificaciones</strong>:
                 <hr>
                 <div v-for="notificacion in notificaciones">
-                    <a href="#" @click="read( notificacion.id )" class="notidicacion-link waves-effect text-secondary">
+                    <a href="#" @click="read( notificacion.id )" class="notificacion-link waves-effect text-secondary">
                         <div class="notificacion">
                             {{ notificacion.message }}
 
                             <br>
-                            <div style="font-size: 10px">hace {{ notificacion.diff }} horas</div>
-                            <hr>
+                            <div style="font-size: 10px">hace {{ notificacion.diff }}</div>
+                            <br>
                         </div>
                     </a>
                 </div>
@@ -46,7 +46,33 @@
                     .then((response) => {
                         this.notificaciones = []
                         response.data.notificaciones.forEach((notificacion) => {
-                            notificacion.diff = Math.ceil(moment.duration(moment().diff(moment(notificacion.created_at))).asHours());
+                            let diff = Math.ceil(moment.duration(moment().diff(moment(notificacion.created_at))).asHours());
+
+                            if (diff > 23) {
+                                if (diff > 743) {
+                                    let meses = Math.ceil((diff / 744));
+
+                                    if (meses < 2) {
+                                        notificacion.diff = meses + " mes";
+                                    } else {
+                                        notificacion.diff = meses + " meses";
+                                    }
+                                } else {
+                                    let horas = Math.ceil((diff / 24));
+
+                                    if (horas < 2) {
+                                        notificacion.diff = horas + " día";
+                                    } else {
+                                        notificacion.diff = horas + " días";
+                                    }
+                                }
+                            } else {
+                                if (diff === 1) {
+                                    notificacion.diff = diff + " hora"
+                                } else {
+                                    notificacion.diff = diff + " horas"
+                                }
+                            }
                             this.notificaciones.push(notificacion);
                         });
 
@@ -73,9 +99,11 @@
         max-width: 300px;
         width: 290px;
         margin-left: 15px;
-        margin-bottom: 7px;
     }
-    .notidicacion-link {
+    .notificacion-link {
         text-decoration: none !important
+    }
+    .notificacion-container {
+        overflow-y: auto; height:400px;
     }
 </style>

@@ -51,24 +51,39 @@
                             @if(\Illuminate\Support\Facades\Auth::user()->rol != 4)
                                 <notificaciones :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></notificaciones>
                             @endif
+
+                            @if(\Illuminate\Support\Facades\Auth::user()->rol != 4)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link waves-effect" href="{{ route('dinamicas.index') }}" role="button">
+                                        Dinamicas
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if(\Illuminate\Support\Facades\Auth::user()->rol == 4 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
+                                <!--
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link waves-effect" href="{{ route('admin') }}" role="button">
+                                        Tickets
+                                    </a>
+                                </li>
+                                -->
+                            @endif
+
+                            @if(\Illuminate\Support\Facades\Auth::user()->rol == 1 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link waves-effect" href="{{ route('users.index') }}" role="button">
+                                        Usuarios
+                                    </a>
+                                </li>
+                            @endif
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle waves-effect" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 1 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
-                                        <a class="dropdown-item" href="{{ route('users.index') }}">Usuarios</a>
-                                    @endif
-
-                                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 4 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
-                                        <!--<a class="dropdown-item" href="{{ route('admin') }}">Tickets</a>-->
-                                    @endif
-
-                                    @if(\Illuminate\Support\Facades\Auth::user()->rol != 4)
-                                        <a class="dropdown-item" href="{{ route('dinamicas.index') }}">Dinamicas</a>
-                                    @endif
-
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -2,8 +2,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="col-md-2 col-sm-8 offset-md-10 ">
-                    <a class="btn btn-block btn-mdb-color" href="/dinamicas/create">Proponer dinámica</a>
+                <div class="row flex-row-reverse">
+                    <div class="col-md-4 first col-sm-12 text-right">
+                        <a class="btn btn-block btn-mdb-color" href="/dinamicas/create">Crear dinámica</a>
+                    </div>
+                    <div class="col-md-4 col-sm-12"></div>
+                    <div class="col-md-4 second col-sm-12"></div>
                 </div>
                 <hr>
                 <table id="dinamicas" cellspacing="0" class="table table-bordered dt-responsive">
@@ -61,7 +65,8 @@
                         },
                         info: "Mostrando _START_ a _END_ de _TOTAL_ dinamicas",
                         lengthMenu:    "Mostrar _MENU_ dinamicas",
-                        loading: "Cargando"
+                        loading: "Cargando",
+                        emptyTable: "Aún no hay dinámicas en esta Empresa"
                     }
                 });
             }

@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <dinamicas-supervisor></dinamicas-supervisor>
+    <dinamicas-supervisor :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></dinamicas-supervisor>
 @endsection

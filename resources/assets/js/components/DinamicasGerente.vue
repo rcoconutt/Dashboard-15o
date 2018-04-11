@@ -6,7 +6,6 @@
                 <form action="/dinamicas/action" method="POST" id="form">
                     <input type="hidden" name="_token" v-model="csrf">
                     <div class="row">
-                        <div class="col-md-4"></div>
                         <div class="col-md-4 col-sm-12">
                             <select name="actions" id="actions" class="form-control">
                                 <option disabled selected>Seleccionar una acción</option>
@@ -14,6 +13,9 @@
                                 <option value="2">Rechazar dinámicas</option>
                                 <option value="3">Eliminar dinámicas</option>
                             </select>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <button class="btn btn-block btn-outline-amber" href="/dinamicas/create">Actualizar dinámica</button>
                         </div>
 
                         <div class="col-md-4 col-sm-12">

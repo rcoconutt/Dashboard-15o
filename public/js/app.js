@@ -81025,7 +81025,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81040,6 +81040,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81108,11 +81116,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 },
                 scrollY: "300px",
                 responsive: true,
-                columns: [{ data: 'ID_DINAMICA', render: function render(data, type, row, meta) {
+                columns: [{
+                    data: 'ID_DINAMICA', render: function render(data, type, row, meta) {
                         return "<div class='form-check mb-2'><input class='form-check-input' name='dinamica_id[]' type='checkbox' value='" + data + "' ></div>";
-                    } }, { data: 'DINAMICA' }, { data: 'DESCRIPCION', width: "30%" }, { data: 'PREMIO' }, { data: 'FECHA_FIN', render: function render(data, type, row, meta) {
+                    }
+                }, { data: 'DINAMICA', width: "20%" }, { data: 'DESCRIPCION', width: "30%" }, { data: 'PREMIO', width: "20%" }, {
+                    data: 'FECHA_FIN', render: function render(data, type, row, meta) {
                         return __WEBPACK_IMPORTED_MODULE_0_moment___default()(data).format('DD-MM-YYYY');
-                    } }, { data: 'ACTIVO', render: function render(data, type, row, meta) {
+                    }
+                }, {
+                    data: 'ACTIVO', render: function render(data, type, row, meta) {
                         if (data === '0' || data === 0) {
                             return '<i class="fas fa-bookmark text-info"></i> Pendiente';
                         }
@@ -81123,7 +81136,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             return '<i class="fas fa-ban text-danger"></i> Rechazada';
                         }
                         return '';
-                    } }],
+                    }
+                }],
                 language: {
                     search: "Buscar:",
                     paginate: {
@@ -81145,8 +81159,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         $().ready(function () {
             _this.getDinamicas();
 
-            $('#actions').on('change', function () {
-                if (this.value == 3) {
+            $('#send').on('click', function (e) {
+                event.preventDefault();
+                var value = $("#actions").val();
+
+                if (value == 3) {
                     __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()({
                         title: "Confirmar acción",
                         text: "Realmente deseas eliminar las dinámicas seleccionadas",
@@ -81158,7 +81175,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
                     });
                 } else {
-                    $("#form").submit();
+                    if (value == 0 || value == null) {
+                        __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()({ title: "", text: "Selecciona una acción", button: "Entendido" });
+                    } else {
+                        var numberOfChecked = $('input:checkbox:checked').length;
+                        if (numberOfChecked > 0) {
+                            $("#form").submit();
+                        } else {
+                            __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()({ title: "", text: "Selecciona al menos una dinámica", button: "Entendido" });
+                        }
+                    }
                 }
             });
         });
@@ -81219,37 +81245,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4 col-sm-12" }, [
-        _c(
-          "select",
-          {
-            staticClass: "form-control",
-            attrs: { name: "actions", id: "actions" }
-          },
-          [
-            _c("option", { attrs: { disabled: "", selected: "" } }, [
-              _vm._v("Seleccionar una acción")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [
-              _vm._v("Aprobar dinámicas")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2" } }, [
-              _vm._v("Rechazar dinámicas")
-            ]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "3" } }, [
-              _vm._v("Eliminar dinámicas")
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4 col-sm-12" }, [
+    return _c("div", { staticClass: "row flex-row-reverse" }, [
+      _c("div", { staticClass: "col-md-4 first col-sm-12 text-right" }, [
         _c(
           "a",
           {
@@ -81258,6 +81255,62 @@ var staticRenderFns = [
           },
           [_vm._v("Crear dinámica")]
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 col-sm-12" }, [_c("br")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 second col-sm-12" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-8" }, [
+            _c(
+              "select",
+              {
+                staticClass: "form-control",
+                staticStyle: { "margin-top": "3px" },
+                attrs: { name: "actions", id: "actions" }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "0", disabled: "", selected: "" } },
+                  [_vm._v("Seleccionar una acción")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [
+                  _vm._v("Aprobar dinámicas")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
+                  _vm._v("Rechazar dinámicas")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [
+                  _vm._v("Eliminar dinámicas")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-default",
+                attrs: {
+                  type: "button",
+                  id: "send",
+                  "aria-label": "Left Align"
+                }
+              },
+              [
+                _c("span", {
+                  staticClass: "fas fa-caret-right fa-lg",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
+            )
+          ])
+        ])
       ])
     ])
   },
@@ -81389,7 +81442,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81404,6 +81457,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert__);
+//
+//
 //
 //
 //
@@ -81584,8 +81639,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }),
-      _vm._v(" "),
       _c("div", { staticClass: "col-md-4 col-sm-12" }, [
         _c(
           "select",
@@ -81610,6 +81663,17 @@ var staticRenderFns = [
               _vm._v("Eliminar dinámicas")
             ])
           ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 col-sm-12" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-block btn-outline-amber",
+            attrs: { href: "/dinamicas/create" }
+          },
+          [_vm._v("Actualizar dinámica")]
         )
       ]),
       _vm._v(" "),
@@ -81982,7 +82046,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81995,6 +82059,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+//
+//
+//
+//
 //
 //
 //
@@ -82058,7 +82126,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     },
                     info: "Mostrando _START_ a _END_ de _TOTAL_ dinamicas",
                     lengthMenu: "Mostrar _MENU_ dinamicas",
-                    loading: "Cargando"
+                    loading: "Cargando",
+                    emptyTable: "Aún no hay dinámicas en esta Empresa"
                 }
             });
         }
@@ -82090,15 +82159,21 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-12" }, [
-          _c("div", { staticClass: "col-md-2 col-sm-8 offset-md-10 " }, [
-            _c(
-              "a",
-              {
-                staticClass: "btn btn-block btn-mdb-color",
-                attrs: { href: "/dinamicas/create" }
-              },
-              [_vm._v("Proponer dinámica")]
-            )
+          _c("div", { staticClass: "row flex-row-reverse" }, [
+            _c("div", { staticClass: "col-md-4 first col-sm-12 text-right" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-block btn-mdb-color",
+                  attrs: { href: "/dinamicas/create" }
+                },
+                [_vm._v("Crear dinámica")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 col-sm-12" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 second col-sm-12" })
           ]),
           _vm._v(" "),
           _c("hr"),
@@ -82225,7 +82300,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -82244,6 +82319,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_pikaday__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_pikaday___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_pikaday__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -82397,7 +82477,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             cantidad: null,
             start: null,
             end: null,
-            error: null
+            error: null,
+            // Date pickers
+            startPicker: null,
+            endPicker: null
         };
     },
 
@@ -82448,34 +82531,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        var startPicker = new __WEBPACK_IMPORTED_MODULE_3_pikaday___default.a({
+        var lang = {
+            previousMonth: 'Mes anterior',
+            nextMonth: 'Mes siguiente',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+            weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+        };
+
+        this.startPicker = new __WEBPACK_IMPORTED_MODULE_3_pikaday___default.a({
             field: document.getElementById('start'),
-            i18n: {
-                previousMonth: 'Mes anterior',
-                nextMonth: 'Mes siguiente',
-                months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
-                weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-            },
+            i18n: lang,
             onSelect: function onSelect(date) {
                 this.start = __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY');
                 $("#start").val(__WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY'));
             }
         });
-        var endPicker = new __WEBPACK_IMPORTED_MODULE_3_pikaday___default.a({
+
+        this.endPicker = new __WEBPACK_IMPORTED_MODULE_3_pikaday___default.a({
             field: document.getElementById('end'),
-            i18n: {
-                previousMonth: 'Mes anterior',
-                nextMonth: 'Mes siguiente',
-                months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
-                weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-            },
+            i18n: lang,
             onSelect: function onSelect(date) {
                 this.end = __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY');
                 $("#end").val(__WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY'));
             }
         });
+
+        this.startPicker.setDate(__WEBPACK_IMPORTED_MODULE_2_moment___default()());
+        this.endPicker.setDate(__WEBPACK_IMPORTED_MODULE_2_moment___default()());
+    },
+    updated: function updated() {
+        if (this.startPicker != null) {
+            this.startPicker.setDate(__WEBPACK_IMPORTED_MODULE_2_moment___default()());
+            console.log("Test");
+        }
+
+        if (this.endPicker != null) {
+            this.endPicker.setDate(__WEBPACK_IMPORTED_MODULE_2_moment___default()());
+            console.log("Test");
+        }
     }
 });
 
@@ -82507,7 +82601,9 @@ var render = function() {
             _vm.error
               ? _c("div", { staticClass: "alert alert-danger" }, [
                   _vm._v(
-                    "\n                " + _vm._s(_vm.error) + "\n            "
+                    "\n                    " +
+                      _vm._s(_vm.error) +
+                      "\n                "
                   )
                 ])
               : _vm._e(),
@@ -82985,13 +83081,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-md-4 col-sm-12 offset-md-6" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-block btn-outline-primary waves-effect" },
-          [_vm._v("Enviar")]
-        )
+    return _c("div", { staticClass: "col-md-4 col-sm-12 offset-md-6" }, [
+      _c("button", { staticClass: "btn btn-outline-primary waves-effect" }, [
+        _vm._v("Enviar")
       ])
     ])
   }
@@ -83336,7 +83428,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.notificacion[data-v-0b593541] {\n    max-width: 300px;\n    width: 290px;\n    margin-left: 15px;\n    margin-bottom: 7px;\n}\n.notidicacion-link[data-v-0b593541] {\n    text-decoration: none !important\n}\n", ""]);
+exports.push([module.i, "\n.notificacion[data-v-0b593541] {\n    max-width: 300px;\n    width: 290px;\n    margin-left: 15px;\n}\n.notificacion-link[data-v-0b593541] {\n    text-decoration: none !important\n}\n.notificacion-container[data-v-0b593541] {\n    overflow-y: auto; height:400px;\n}\n", ""]);
 
 // exports
 
@@ -83399,7 +83491,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/notificaciones/' + this.user.id + '/0').then(function (response) {
                 _this.notificaciones = [];
                 response.data.notificaciones.forEach(function (notificacion) {
-                    notificacion.diff = Math.ceil(__WEBPACK_IMPORTED_MODULE_0_moment___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_0_moment___default()(notificacion.created_at))).asHours());
+                    var diff = Math.ceil(__WEBPACK_IMPORTED_MODULE_0_moment___default.a.duration(__WEBPACK_IMPORTED_MODULE_0_moment___default()().diff(__WEBPACK_IMPORTED_MODULE_0_moment___default()(notificacion.created_at))).asHours());
+
+                    if (diff > 23) {
+                        if (diff > 743) {
+                            var meses = Math.ceil(diff / 744);
+
+                            if (meses < 2) {
+                                notificacion.diff = meses + " mes";
+                            } else {
+                                notificacion.diff = meses + " meses";
+                            }
+                        } else {
+                            var horas = Math.ceil(diff / 24);
+
+                            if (horas < 2) {
+                                notificacion.diff = horas + " día";
+                            } else {
+                                notificacion.diff = horas + " días";
+                            }
+                        }
+                    } else {
+                        if (diff === 1) {
+                            notificacion.diff = diff + " hora";
+                        } else {
+                            notificacion.diff = diff + " horas";
+                        }
+                    }
                     _this.notificaciones.push(notificacion);
                 });
 
@@ -83454,7 +83572,7 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "dropdown-menu dropdown-info",
+        staticClass: "dropdown-menu dropdown-info notificacion-container",
         attrs: {
           id: "notificaciones",
           "aria-labelledby": "supportedContentDropdown"
@@ -83465,7 +83583,7 @@ var render = function() {
           ? _c(
               "div",
               {
-                staticClass: "notidicacion-link",
+                staticClass: "notificacion-link",
                 staticStyle: { margin: "12px" },
                 attrs: { href: "#" }
               },
@@ -83490,7 +83608,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "notidicacion-link waves-effect text-secondary",
+                          "notificacion-link waves-effect text-secondary",
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {
@@ -83508,12 +83626,10 @@ var render = function() {
                           _c("br"),
                           _vm._v(" "),
                           _c("div", { staticStyle: { "font-size": "10px" } }, [
-                            _vm._v(
-                              "hace " + _vm._s(notificacion.diff) + " horas"
-                            )
+                            _vm._v("hace " + _vm._s(notificacion.diff))
                           ]),
                           _vm._v(" "),
-                          _c("hr")
+                          _c("br")
                         ])
                       ]
                     )

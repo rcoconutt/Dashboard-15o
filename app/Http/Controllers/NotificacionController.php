@@ -33,9 +33,9 @@ class NotificacionController extends Controller
     public function api($user_id, $status = null) {
         try {
             if ($status == null) {
-                $notifications = Notificacion::where('user_id', $user_id)->get();
+                $notifications = Notificacion::where('user_id', $user_id)->orderByDesc('created_at')->get();
             } else {
-                $notifications = Notificacion::where(['user_id' => $user_id, 'status' => $status])->get();
+                $notifications = Notificacion::where(['user_id' => $user_id, 'status' => $status])->orderByDesc('created_at')->get();
             }
             return response()->json([
                 'success' => true,

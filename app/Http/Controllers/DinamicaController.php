@@ -42,9 +42,9 @@ class DinamicaController extends Controller
     {
         try {
             if ($brand_id == null) {
-                $dinamicas = Dinamica::all();
+                $dinamicas = Dinamica::orderByDesc('ID_DINAMICA')->get();
             } else {
-                $dinamicas = Dinamica::where('ID_BRAND', $brand_id)->get();
+                $dinamicas = Dinamica::where('ID_BRAND', $brand_id)->orderByDesc('ID_DINAMICA')->get();
             }
 
             return response()->json([

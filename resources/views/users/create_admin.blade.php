@@ -29,129 +29,151 @@
                             </ul>
                         </div>
                     @endif
-                    <div class="card-body col-8 offset-2">
+                    <div class="card-body col-10 offset-1">
                         <form method="POST" action="{{ route('users.store') }}">
                             @csrf
 
-                            <div class="md-form row">
-                                <input id="name" type="text"
-                                       class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
-                                       value="{{ old('name') }}" required autofocus>
-                                <label for="name">Nombre(s)</label>
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="md-form form-sm">
+                                        <input id="name" type="text"
+                                               class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                               name="name"
+                                               value="{{ old('name') }}" required autofocus>
+                                        <label for="name">Nombre(s)</label>
+                                        @if ($errors->has('name'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                            <div class="md-form row">
-                                <input id="last_name" type="text"
-                                       class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}"
-                                       name="last_name" value="{{ old('last_name') }}" required>
-                                <label for="last_name">Apellidos</label>
-                                @if ($errors->has('last_name'))
-                                    <span class="invalid-feedback">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="md-form form-sm">
+                                        <input id="last_name" type="text"
+                                               class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}"
+                                               name="last_name" value="{{ old('last_name') }}" required>
+                                        <label for="last_name">Apellidos</label>
+                                        @if ($errors->has('last_name'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                            <div class="md-form row">
-                                <input id="email" type="email"
-                                       class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
-                                       value="{{ old('email') }}" required >
-                                <label for="email">Correo electrónico</label>
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="md-form form-sm">
+                                        <input id="email" type="email"
+                                               class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                               name="email"
+                                               value="{{ old('email') }}" required>
+                                        <label for="email">Correo electrónico</label>
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                            <div class="md-form row">
-                                <input id="phone" type="text"
-                                       class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone"
-                                       value="{{ old('phone') }}" required>
-                                <label for="phone">Teléfono</label>
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="md-form form-sm">
+                                        <input id="phone" type="text"
+                                               class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                               name="phone"
+                                               value="{{ old('phone') }}" required>
+                                        <label for="phone">Teléfono</label>
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                                        @endif
+                                    </div>
+                                </div>
 
-                            <div class="md-form row">
-                                    <input id="password" type="password"
-                                           class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                           name="password" required>
-                                <label for="password">Contraseña</label>
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="md-form form-sm">
+                                        <input id="password" type="password"
+                                               class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                               name="password" required>
+                                        <label for="password">Contraseña</label>
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                    @endif
-                            </div>
-
-                            <div class="md-form row">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                           name="password_confirmation" required>
-                                <label for="password-confirm">Confirmar
-                                    Contraseña</label>
-                            </div>
-
-                            <div class="form-group row"><hr></div>
-                            <div class="form-group row">
-                                <label for="rol" class="col-md-4 col-form-label">Permisos</label>
-                                <div class="col-md-6">
-                                    <select name="rol" id="rol" class="form-control">
-                                        <option selected disabled>Selecciona una opción</option>
-                                        <option value="1">Gerente</option>
-                                        <option value="2">Supervisor</option>
-                                        <option value="3">Embajador</option>
-                                        <option value="4">Administrador Tickets</option>
-                                    </select>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row" style="display: none;" id="brandKind">
-                                <label class="col-md-3 col-form-label text-md-right">
-                                    <input type="radio" name="brand_kind" value="0">
-                                    Crear brand
-                                </label>
-                                <label class="col-md-3 col-form-label text-md-right">
-                                    <input type="radio" name="brand_kind" value="1">
-                                    Seleccionar brand
-                                </label>
-                            </div>
-
-                            <div class="form-group row" style="display: none;" id="new">
-                                <label for="new_brand" class="col-md-4 col-form-label text-md-right">Crear brand</label>
-
-                                <div class="col-md-6">
-                                    <input id="new_brand" type="text" class="form-control" name="new_brand">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="md-form form-sm">
+                                        <input id="password-confirm" type="password" class="form-control"
+                                               name="password_confirmation" required>
+                                        <label for="password-confirm">Confirmar
+                                            Contraseña</label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row" style="display: none;" id="use">
-                                <label for="brand_id" class="col-md-4 col-form-label text-md-right">Seleccionar
-                                    brand</label>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="rol" class="col-form-label">Permisos</label>
 
-                                <div class="col-md-6">
-                                    <select id="brand_id" class="form-control" name="brand_id">
-                                        <option selected disabled>Selecciona una opción</option>
-                                        @foreach(\App\Brand::all() as $brand)
-                                            <option value="{{ $brand->ID_BRAND }}">{{ $brand->BRAND }}</option>
-                                        @endforeach
-                                    </select>
+                                            <select name="rol" id="rol" class="form-control">
+                                                <option selected disabled>Selecciona una opción</option>
+                                                <option value="1">Gerente</option>
+                                                <option value="2">Supervisor</option>
+                                                <option value="3">Embajador</option>
+                                                <option value="4">Administrador Tickets</option>
+                                            </select>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-2">
-                                    <button type="submit" class="btn btn-block btn-outline-primary">
-                                        Crear cuenta
-                                    </button>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group" style="display: none;" id="brandKind">
+                                        <label class="col col-form-label text-md-right">
+                                            <input type="radio" name="brand_kind" value="0">
+                                            Crear nuevo brand
+                                        </label>
+                                        <label class="col col-form-label text-md-right">
+                                            <input type="radio" name="brand_kind" value="1">
+                                            Asignar a un brand
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="offset-md-6 col-md-6 col-sm-12" style="display: none;" id="new">
+                                    <div class="md-form form-sm">
+                                        <input id="new_brand" type="text" class="form-control" name="new_brand">
+                                        <label for="new_brand">Nuevo brand</label>
+                                    </div>
+                                </div>
+
+                                <div class="offset-md-6 col-md-6 col-sm-12" style="display: none;" id="use">
+                                    <div class="col-md-12 col-sm-12">
+                                        <label for="brand_id" class="col-form-label text-md-right">Asignar a brand</label>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12">
+                                        <select id="brand_id" class="form-control" name="brand_id">
+                                            <option selected disabled>Selecciona una opción</option>
+                                            @foreach(\App\Brand::all() as $brand)
+                                                <option value="{{ $brand->ID_BRAND }}">{{ $brand->BRAND }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12"><br></div>
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-6 offset-md-2">
+                                            <button type="submit" class="btn btn-block btn-outline-primary">
+                                                Crear cuenta
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>

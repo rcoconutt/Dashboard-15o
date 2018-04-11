@@ -11,3 +11,4 @@ Route::get('notificaciones/{id}/read', 'NotificacionController@read');
 Route::get('notificaciones/{user_id}/{status?}', 'NotificacionController@api');
 Route::get('ranking/{marca_id}', 'PuntosController@topByMarca');
 Route::get('tickets', 'RecibosController@api');
+Route::get('destilados', 'DestiladoController@index');

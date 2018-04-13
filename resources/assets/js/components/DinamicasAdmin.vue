@@ -57,7 +57,7 @@
 
     export default {
         name: "dinamicas-admin",
-        props: ['user'],
+        props: ['user', 'message'],
         data() {
             return {
                 all: null,
@@ -119,34 +119,38 @@
         },
         mounted() {
             $().ready(() => {
+                if (this.message.length > 0) {
+                    swal({ title: "", text: this.message, button: "Entendido", icon: "success", timer:3000 });
+                }
+
                 this.getDinamicas();
 
                 $('#send').on('click', function (e) {
                     event.preventDefault();
+                    let numberOfChecked = $('input:checkbox:checked').length;
                     let value = $("#actions").val();
-
-                    if (value == 3) {
-                        swal({
-                            title: "Confirmar acción",
-                            text: "Realmente deseas eliminar las dinámicas seleccionadas",
-                            icon: "error",
-                            buttons: ["Cancelar", "Eliminar"],
-                        }).then((value) => {
-                            if (value) {
-                                $("#form").submit();
-                            }
-                        });
-                    } else {
-                        if (value == 0 || value == null) {
-                            swal({ title: "", text: "Selecciona una acción", button: "Entendido" });
+                    if (numberOfChecked > 0) {
+                        if (value == 3) {
+                            swal({
+                                title: "Confirmar acción",
+                                text: "Realmente deseas eliminar las dinámicas seleccionadas",
+                                icon: "error",
+                                buttons: ["Cancelar", "Eliminar"],
+                            }).then((value) => {
+                                if (value) {
+                                    $("#form").submit();
+                                }
+                            });
                         } else {
-                            let numberOfChecked = $('input:checkbox:checked').length;
-                            if (numberOfChecked > 0) {
-                                $("#form").submit();
+                            if (value == 0 || value == null) {
+                                swal({title: "", text: "Selecciona una acción", button: "Entendido"});
                             } else {
-                                swal({ title: "", text: "Selecciona al menos una dinámica", button: "Entendido" });
+
+                                $("#form").submit();
                             }
                         }
+                    } else {
+                        swal({ title: "", text: "Selecciona al menos una dinámica", button: "Entendido" });
                     }
                 })
             });

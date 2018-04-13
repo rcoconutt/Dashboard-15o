@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-12 offset-md-6">
-                        <button class="btn btn-outline-primary waves-effect">Enviar</button>
+                        <button class="btn btn-outline-primary waves-effect" id="save" >Enviar</button>
                     </div>
                 </form>
             </div>
@@ -173,6 +173,8 @@
                 this.marca = group
             },
             save() {
+                $("#save").prop("disabled", true);
+
                 axios({
                     method: 'POST',
                     url: '/api/dinamicas',
@@ -203,6 +205,7 @@
                     window.location.href = '/dinamicas';
                 }).catch((response) => {
                     this.error = response.response.data.message;
+                    $("#save").prop("disabled", false);
                 });
 
             }
@@ -240,12 +243,10 @@
         updated() {
             if (this.startPicker != null) {
                 this.startPicker.setDate(moment());
-                console.log("Test");
             }
 
             if (this.endPicker != null) {
                 this.endPicker.setDate(moment());
-                console.log("Test");
             }
         }
     }

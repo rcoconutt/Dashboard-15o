@@ -107,22 +107,31 @@
         },
         mounted () {
             $().ready(() => {
+                if (this.message.length > 0) {
+                    swal({ title: "", text: this.message, button: "Entendido", icon: "success", timer:3000 });
+                }
+
                 this.getDinamicas();
 
                 $('#actions').on('change', function() {
-                    if (this.value == 3) {
-                        swal({
-                            title: "Confirmar acción",
-                            text: "Realmente deseas eliminar las dinámicas seleccionadas",
-                            icon: "error",
-                            buttons: ["Cancelar", "Eliminar"],
-                        }).then((value) => {
-                            if (value) {
-                                $("#form").submit();
-                            }
-                        });
+                    let numberOfChecked = $('input:checkbox:checked').length;
+                    if (numberOfChecked > 0) {
+                        if (this.value == 3) {
+                            swal({
+                                title: "Confirmar acción",
+                                text: "Realmente deseas eliminar las dinámicas seleccionadas",
+                                icon: "error",
+                                buttons: ["Cancelar", "Eliminar"],
+                            }).then((value) => {
+                                if (value) {
+                                    $("#form").submit();
+                                }
+                            });
+                        } else {
+                            $("#form").submit();
+                        }
                     } else {
-                        $("#form").submit();
+                        swal({ title: "", text: "Selecciona al menos una dinámica", button: "Entendido" });
                     }
                 })
             });

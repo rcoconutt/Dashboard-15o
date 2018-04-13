@@ -156,7 +156,6 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', init, false);
-
         function init() {
             createPikaday();
         }
@@ -251,6 +250,13 @@
             }
         }
 
+        let dynamicColors = function () {
+            let r = Math.floor(Math.random() * 255);
+            let g = Math.floor(Math.random() * 255);
+            let b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+        };
+
         function getMarcaData() {
             if (validateMarca()) {
                 let marca = $("#marca").val();
@@ -286,23 +292,32 @@
 
                     let labels = [];
                     let values = [];
+                    let color = [];
+
                     response.data.usuarios.forEach((usuario) => {
                         labels.push(usuario.NOMBRE);
                         values.push(usuario.total);
-
+                        color.push(dynamicColors());
                     });
                     let data = {
                         labels: labels,
                         datasets: [{
                             label: '# de ventas',
                             data: values,
-                            borderWidth: 1
+                            borderWidth: 1/*,
+                            backgroundColor: color,
+                            borderColor: 'rgba(200, 200, 200, 0.75)',
+                            hoverBorderColor: 'rgba(200, 200, 200, 1)'*/
                         }]
                     };
 
                     createChart(data, "chart_vendedores");
                 }).catch((response) => {
-                    error(response.response.data.message);
+                    if (response.response) {
+                        error(response.response.data.message);
+                    } else {
+                        error("Esta marca aún no cuenta con datos")
+                    }
                 })
             }
         }

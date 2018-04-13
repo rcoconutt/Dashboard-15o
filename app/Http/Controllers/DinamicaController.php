@@ -77,11 +77,16 @@ class DinamicaController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|min:6',
-                'premio' => 'required|min:6',
-                'venue' => 'required|numeric',
-                'zona' => 'required|numeric',
-            ]);
+                    'name' => 'required|min:6',
+                    'premio' => 'required|min:6',
+                    'venue' => 'required|numeric',
+                    'zona' => 'required|numeric',
+                    'start' => 'required|date',
+                    'end' => 'required|date',
+                ],
+                [
+                    'date'    => 'Selecciona una fecha valida',
+                ]);
 
             if ($validator->fails()) {
                 $errors = $validator->errors();
@@ -101,16 +106,20 @@ class DinamicaController extends Controller
             }
 
             if ($descripción == null) {
-                return response()->json(['success' => false, 'message' => "Ingresa las reglas de la dinámica"], 401);
+                if ($request->get('kind') == 1) {
+                    return response()->json(['success' => false, 'message' => "Ingresa la descripción de la dinámica"], 401);
+                } else {
+                    return response()->json(['success' => false, 'message' => "Ingresa las reglas de la dinámica"], 401);
+                }
             }
 
             $dinamica = Dinamica::create([
                 'ID_ZONA' => 0,
                 'ID_BRAND' => $brand_id,
                 'OBJETIVO' => $cantidad,
-                'DINAMICA' => $request->get('name'),
-                'DESCRIPCION' => $descripción,
-                'PREMIO' => $request->get('premio'),
+                'DINAMICA' => htmlentities($request->get('name')),
+                'DESCRIPCION' => htmlentities($descripción),
+                'PREMIO' => htmlentities($request->get('premio')),
                 'FECHA_INICIO' => Carbon::parse($request->get('start')),
                 'FECHA_FIN' => Carbon::parse($request->get('end')),
                 'ACTIVO' => 0,
@@ -146,12 +155,16 @@ class DinamicaController extends Controller
             if ($action == 1 || $action == 2) {
                 // Aprobar o rechazar
                 Dinamica::whereIn('ID_DINAMICA', $request->get('dinamica_id'))->update(['ACTIVO' => $action]);
+                if ($action == 1) {
+                    return redirect()->back()->with('message', 'Dinámicas aprobadas correctamente!');
+                } else {
+                    return redirect()->back()->with('message', 'Dinámicas rechazadas correctamente!');
+                }
             } else {
                 // Eliminar
                 Dinamica::whereIn('ID_DINAMICA', $request->get('dinamica_id'))->delete();
+                return redirect()->back()->with('message', 'Dinámicas eliminadas correctamente!');
             }
-
-            return redirect()->back()->with('message', 'Dinámicas actualizas');
         } catch (\Exception $ex) {
             return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
         }

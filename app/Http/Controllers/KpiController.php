@@ -23,7 +23,7 @@ class KpiController extends Controller
             $dinamicas = Dinamica::select('marca_id', 'ID_BRAND')->where('ID_BRAND', $brand_id)->get();
             $marcas = Marca::select('ID_MARCA', 'MARCA')->whereIn('ID_MARCA', $dinamicas->pluck('ID_MARCA'))->get();
         } else {
-            $marcas = Marca::select('ID_MARCA', 'MARCA')->get();
+            $marcas = Marca::select('ID_MARCA', 'MARCA')->where('ID_MARCA', "!=", 0)->get();
         }
 
         $centros = Centro::all();

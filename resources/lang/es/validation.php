@@ -152,6 +152,9 @@ return [
         'message' => 'mensaje',
         'venue' => 'centro de consumo',
         'zona' => 'zona o municipio',
-        'brand' => 'marca'
+        'brand' => 'marca',
+        'start' => 'fecha de inicio',
+        'end' => 'fecha de fin',
+        'rol' => 'permisos'
     ],
 ];

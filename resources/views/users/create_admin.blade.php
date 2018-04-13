@@ -30,7 +30,7 @@
                         </div>
                     @endif
                     <div class="card-body col-10 offset-1">
-                        <form method="POST" action="{{ route('users.store') }}">
+                        <form method="POST" id="form" action="{{ route('users.store') }}">
                             @csrf
 
                             <div class="row">
@@ -169,7 +169,7 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-2">
-                                            <button type="submit" class="btn btn-block btn-outline-primary">
+                                            <button type="submit" onclick="checkForm()" class="btn btn-block btn-outline-primary">
                                                 Crear cuenta
                                             </button>
                                         </div>
@@ -206,5 +206,26 @@
                 }
             });
         });
+
+        function checkForm() {
+            event.preventDefault();
+
+            let rol = $("#rol").val();
+            if (rol) {
+                $("#form").submit();
+            } else {
+                error("Selecciona los permisos del usuario")
+            }
+        }
+
+        function error(message) {
+            swal({
+                title: "",
+                text: message,
+                icon: "error",
+                button: "Entendido",
+                timer: 3000
+            });
+        }
     </script>
 @endpush

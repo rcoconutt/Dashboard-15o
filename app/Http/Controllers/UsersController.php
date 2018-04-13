@@ -75,7 +75,7 @@ class UsersController extends Controller
 
             if ($validator->fails()) {
                 $errors = $validator->errors();
-                return redirect()->back()->withErrors($errors);
+                return redirect()->back()->withInput($request->input())->withErrors($errors);
             }
 
             if (Auth::user()->rol == 0) {
@@ -105,12 +105,14 @@ class UsersController extends Controller
                 $brans_name = $brand->BRAND;
             }
 
+            $request->flash();
+
             $user = User::create([
-                'name' => $request->get('name'),
-                'email' => $request->get('email'),
+                'name' => htmlentities($request->get('name')),
+                'email' => htmlentities($request->get('email')),
                 'password' => Hash::make($request->get('password')),
-                'last_name' => $request->get('last_name'),
-                'phone' => $request->get('phone'),
+                'last_name' => htmlentities($request->get('last_name')),
+                'phone' => htmlentities($request->get('phone')),
                 'rol' => $request->get('rol'),
                 'brand_id' => $brand_id
             ]);
@@ -146,7 +148,7 @@ class UsersController extends Controller
 
             return redirect()->back()->with('message', 'Usuario creado correctamente');
         } catch (\Exception $ex) {
-            return redirect()->back()->withErrors(['message' => $ex->getMessage()]);
+            return redirect()->back()->withInput($request->input())->withErrors(['message' => $ex->getMessage()]);
         }
     }
 

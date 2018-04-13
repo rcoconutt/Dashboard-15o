@@ -12,6 +12,12 @@
                         <p class="h4 text-center mb-4"> Iniciar sesión</p>
                     </div>
 
+                    @if(isset($errors) && count($errors->all()) > 0)
+                        <div class="alert alert-danger">
+                            Usuario o contraseña incorrectos
+                        </div>
+                    @endif
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="md-form">

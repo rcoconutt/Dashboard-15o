@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <dinamicas-admin :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></dinamicas-admin>
+    <div>
+        <dinamicas-admin :message="'{{ (session('message')) ? session('message') : ""  }}'" :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></dinamicas-admin>
+    </div>
 @endsection

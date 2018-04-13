@@ -17,4 +17,8 @@ class Usuario extends Model
     public function recibos() {
         return $this->hasMany(Recibo::class, 'ID_USUARIO', 'ID_USUARIO');
     }
+
+    public function centro() {
+        return $this->hasOne(Centro::class, 'ID_CENTRO', 'ID_CENTRO');
+    }
 }

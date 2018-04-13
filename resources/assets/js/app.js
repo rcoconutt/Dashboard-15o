@@ -9,6 +9,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import Autocomplete from 'vuejs-auto-complete'
+import Chart from 'chart.js';
 
 Vue.component('dinamicas', require('./components/Dinamicas'));
 Vue.component('dinamicas-admin', require('./components/DinamicasAdmin'));

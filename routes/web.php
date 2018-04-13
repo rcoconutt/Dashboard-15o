@@ -16,7 +16,7 @@ Route::middleware(['auth', 'not-admin'])->group(function () {
     Route::resource('users', 'UsersController');
 });
 
-Route::get('/kpi', 'KpiController@index');
+Route::get('/kpi', 'KpiController@index')->name('kpi');
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin', 'UsersController@adminView')->name('admin');

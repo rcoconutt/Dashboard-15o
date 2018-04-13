@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Centro;
+use App\Dinamica;
 use App\Marca;
 use Illuminate\Http\Request;
 
@@ -33,6 +35,26 @@ class MarcasController extends Controller
                 'message' => 'success',
                 'marcas' => Marca::select('ID_MARCA', 'MARCA')->where('MARCA', 'LIKE', '%' . $q . '%')->get()
                 //'marcas' => Marca::all()
+            ], 200);
+        } catch (\Exception $ex) {
+            return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage()], 500);
+        }
+    }
+
+    public function marcas($brand_id = null)
+    {
+        if ($brand_id != null && is_numeric($brand_id) && $brand_id > 0) {
+            $dinamicas = Dinamica::select('marca_id', 'ID_BRAND')->where('ID_BRAND', $brand_id)->get();
+            $marcas = Marca::select('ID_MARCA', 'MARCA')->whereIn('ID_MARCA', $dinamicas->pluck('ID_MARCA'))->get();
+        } else {
+            $marcas = Marca::select('ID_MARCA', 'MARCA')->get();
+        }
+
+        try {
+            return response()->json([
+                'success' => true,
+                'message' => 'success',
+                'marcas' => $marcas
             ], 200);
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage()], 500);

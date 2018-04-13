@@ -15,6 +15,7 @@ try {
     window.dt = require('datatables.net-bs4')();
     require('pikaday')
     require('moment')
+    require('chart.js')
 } catch (e) {}
 
 /**

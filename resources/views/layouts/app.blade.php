@@ -15,6 +15,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/solid.js" integrity="sha384-P4tSluxIpPk9wNy8WSD8wJDvA8YZIkC6AQ+BfAFLXcUZIPQGu4Ifv4Kqq+i2XzrM" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/fontawesome.js" integrity="sha384-2IUdwouOFWauLdwTuAyHeMMRFfeyy4vqYNjodih+28v2ReC+8j+sLF9cK339k5hY" crossorigin="anonymous"></script>
     <script src="{{ asset('js/mdb.min.js') }}" defer></script>
+    <script src="{{ asset('js/pikaday.js') }}" defer></script>
+    <script src="{{ asset('js/moment.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -23,6 +25,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mdb.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/pikaday.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.dataTables.min.css') }}" rel="stylesheet">
 </head>
 <body class="fixed-sn white-skin">
@@ -61,14 +64,18 @@
                             @endif
 
                             @if(\Illuminate\Support\Facades\Auth::user()->rol == 4 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
-                                <!--
                                 <li class="nav-item dropdown">
                                     <a class="nav-link waves-effect" href="{{ route('admin') }}" role="button">
                                         Tickets
                                     </a>
                                 </li>
-                                -->
                             @endif
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link waves-effect" href="{{ route('kpi') }}" role="button">
+                                        Reportes
+                                    </a>
+                                </li>
 
                             @if(\Illuminate\Support\Facades\Auth::user()->rol == 1 || \Illuminate\Support\Facades\Auth::user()->rol == 0)
                                 <li class="nav-item dropdown">

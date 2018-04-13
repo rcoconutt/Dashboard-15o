@@ -44,13 +44,14 @@
             getNotifications: function () {
                 axios.get('/api/notificaciones/' + this.user.id + '/0')
                     .then((response) => {
-                        this.notificaciones = []
+                        this.notificaciones = [];
                         response.data.notificaciones.forEach((notificacion) => {
-                            let diff = Math.ceil(moment.duration(moment().diff(moment(notificacion.created_at))).asHours());
+                            let minutes = Math.floor(moment.duration(moment().diff(moment(notificacion.created_at))).asMinutes());
+                            let diff = Math.floor(moment.duration(moment().diff(moment(notificacion.created_at))).asHours());
 
                             if (diff > 23) {
                                 if (diff > 743) {
-                                    let meses = Math.ceil((diff / 744));
+                                    let meses = Math.floor((diff / 744));
 
                                     if (meses < 2) {
                                         notificacion.diff = meses + " mes";
@@ -58,7 +59,7 @@
                                         notificacion.diff = meses + " meses";
                                     }
                                 } else {
-                                    let horas = Math.ceil((diff / 24));
+                                    let horas = Math.floor((diff / 24));
 
                                     if (horas < 2) {
                                         notificacion.diff = horas + " día";
@@ -67,10 +68,18 @@
                                     }
                                 }
                             } else {
-                                if (diff === 1) {
-                                    notificacion.diff = diff + " hora"
+                                if (diff === 0) {
+                                    if (minutes === 1) {
+                                        notificacion.diff = minutes + " minuto"
+                                    } else {
+                                        notificacion.diff = minutes + " minutos"
+                                    }
                                 } else {
-                                    notificacion.diff = diff + " horas"
+                                    if (diff === 1) {
+                                        notificacion.diff = diff + " hora"
+                                    } else {
+                                        notificacion.diff = diff + " horas"
+                                    }
                                 }
                             }
                             this.notificaciones.push(notificacion);

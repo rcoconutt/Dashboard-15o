@@ -13,7 +13,8 @@ Route::middleware(['auth', 'not-admin'])->group(function () {
 
     Route::resource('dinamicas', 'DinamicaController');
     Route::post('/dinamicas/action', 'DinamicaController@action');
-    Route::resource('users', 'UsersController');
+    Route::resource('users', 'UsersController',
+        ['except' => ['show', 'edit', 'update', 'destroy']]);
 });
 
 Route::get('/kpi', 'KpiController@index')->name('kpi');

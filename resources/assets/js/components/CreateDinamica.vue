@@ -69,9 +69,31 @@
                         <input type="radio" id="two" value="0" v-model="kind">
                         <label for="two">Por puntos</label>
                         <div v-if="kind === '0'">
-                            <label for="reglas">Reglas: </label>
-                            <textarea class="form-control" rows="5" id="reglas" name="reglas" v-model="reglas"
-                                      placeholder=""></textarea>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="marca">Marca: </label>
+                                    <autocomplete
+                                            name="marca"
+                                            id="marca"
+                                            v-model="marca"
+                                            :source="marcas"
+                                            results-property="marcas"
+                                            results-display="MARCA"
+                                            results-value="ID_MARCA"
+                                            placeholder=""
+                                            input-class="form-control"
+                                            class="form-control"
+                                            @selected="addMarcaGroup"
+                                            @clear="removeMarca"
+                                    >
+                                    </autocomplete>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="reglas">Reglas: </label>
+                                    <textarea class="form-control" rows="5" id="reglas" name="reglas" v-model="reglas"
+                                              placeholder=""></textarea>
+                                </div>
+                            </div>
                         </div>
                         <div v-if="kind === '1'">
                             <div class="row">
@@ -203,7 +225,9 @@
                 }, 'slow');
             },
             save() {
-                $("#save").prop("disabled", true);
+                let button = $("#save");
+                button.prop("disabled", true);
+                button.html("<img src='/img/loading2.gif' height='20px'>");
 
                 axios({
                     method: 'POST',
@@ -238,21 +262,13 @@
                 }).catch((response) => {
                     this.error = response.response.data.message;
                     this.backToError();
-                    $("#save").prop("disabled", false);
+                    button.prop("disabled", false);
+                    button.html('ENVIAR');
                 });
 
             }
         },
         created() {
-            /*
-            axios.get('/api/venues')
-                .then((response) => {
-                    response.data.venues.forEach((venue) => {
-                        this.venues.push(venue)
-                    });
-                });
-                */
-
             axios.get('/api/municipios')
                 .then((response) => {
                     response.data.municipios.forEach((municipio) => {

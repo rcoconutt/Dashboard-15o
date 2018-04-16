@@ -101,11 +101,11 @@ class DinamicaController extends Controller
             $cantidad = -1;
             $name = htmlentities($request->get('name'));
             $descripción = $request->get('reglas');
-            $marca = 0;
+            $marca = ($request->get('marca') != null) ? $request->get('marca') : 0;
+
             if ($request->get('kind') == 1) {
                 $cantidad = $request->get('cantidad');
                 $descripción = $request->get('descripcion');
-                $marca = $request->get('marca');
             }
 
             if ($descripción == null) {

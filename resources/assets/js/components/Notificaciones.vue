@@ -11,7 +11,10 @@
                 <strong class="text-muted">Sin Notificaciones</strong>
             </div>
             <div v-else>
-                <strong style="margin-left: 12px">Notificaciones</strong>:
+                <strong style="margin-left: 12px">Notificaciones</strong>
+                <div class="readAll">
+                    <a href="#" @click="readAll">Eliminar notificaciones</a>
+                </div>
                 <hr>
                 <div v-for="notificacion in notificaciones">
                     <a href="#" @click="read( notificacion.id )" class="notificacion-link waves-effect text-secondary">
@@ -93,6 +96,12 @@
                     .then((response) => {
                         this.getNotifications()
                     })
+            },
+            readAll: function () {
+                axios.get('/api/notificaciones/' + this.user.id + '/all')
+                    .then((response) => {
+                        this.getNotifications()
+                    })
             }
         },
         mounted () {
@@ -113,6 +122,17 @@
         text-decoration: none !important
     }
     .notificacion-container {
-        overflow-y: auto; height:400px;
+        overflow-y: auto;
+        max-height:400px;
+    }
+    .readAll {
+        position:absolute;
+        right:0;
+        top:7px;
+    }
+    .readAll > a {
+        font-size: 11px!important;
+        margin-left: 8px!important;
+        margin-top: 5px;
     }
 </style>

@@ -14,7 +14,15 @@ class VenuesController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            return response()->json([
+                'success' => true,
+                'message' => 'success',
+                'venues' => Venue::all()
+            ], 200);
+        } catch (\Exception $ex) {
+            return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
+        }
     }
 
     public function search($venue)

@@ -91,7 +91,6 @@
             </div>
         </div>
 
-
         <section class="mb-5">
             <div class="card card-cascade narrower">
                 <section>
@@ -164,10 +163,10 @@
             let ctx = document.getElementById(chart_id);
             let chart = new Chart(ctx, {
                 type: 'bar',
-                responsive: true,
                 maintainAspectRatio: false,
                 data: data,
                 options: {
+                    responsive: true,
                     scales: {
                         yAxes: [{
                             ticks: {
@@ -250,15 +249,12 @@
             }
         }
 
-        let dynamicColors = function () {
-            let r = Math.floor(Math.random() * 255);
-            let g = Math.floor(Math.random() * 255);
-            let b = Math.floor(Math.random() * 255);
-            return "rgb(" + r + "," + g + "," + b + ")";
-        };
-
         function getMarcaData() {
             if (validateMarca()) {
+                let button = $("#send");
+                button.html("<img src='/img/loading2.gif' height='20px'>");
+                button.prop("disabled", true);
+
                 let marca = $("#marca").val();
                 let fecha_inicio = $("#fecha_inicio").val();
                 let fecha_fin = $("#fecha_fin").val();
@@ -288,42 +284,52 @@
 
                     data_marca.html(marca_text);
 
-                    $("#send_centro").prop('disabled', false);
-
                     let labels = [];
                     let values = [];
-                    let color = [];
+                    let colors = [];
 
                     response.data.usuarios.forEach((usuario) => {
                         labels.push(usuario.NOMBRE);
                         values.push(usuario.total);
-                        color.push(dynamicColors());
+                        colors.push(getColor());
                     });
+
                     let data = {
                         labels: labels,
                         datasets: [{
                             label: '# de ventas',
                             data: values,
-                            borderWidth: 1/*,
-                            backgroundColor: color,
+                            borderWidth: 1,
+                            backgroundColor: colors,
                             borderColor: 'rgba(200, 200, 200, 0.75)',
-                            hoverBorderColor: 'rgba(200, 200, 200, 1)'*/
+                            hoverBorderColor: 'rgba(200, 200, 200, 1)'
                         }]
                     };
 
                     createChart(data, "chart_vendedores");
+
+                    button.prop("disabled", false);
+                    button.html('<span class="fas fa-caret-right fa-lg" aria-hidden="true"></span>');
+                    $("#send_centro").prop("disabled", false);
                 }).catch((response) => {
                     if (response.response) {
                         error(response.response.data.message);
                     } else {
                         error("Esta marca aún no cuenta con datos")
                     }
+
+                    button.prop("disabled", false);
+                    button.html('<span class="fas fa-caret-right fa-lg" aria-hidden="true"></span>');
                 })
             }
         }
 
         function getCentroData() {
             if (validateCentro()) {
+                let button = $("#send_centro");
+                button.html("<img src='/img/loading2.gif' height='20px'>");
+                button.prop("disabled", true);
+
                 let marca = $("#marca").val();
                 let fecha_inicio = $("#fecha_inicio").val();
                 let fecha_fin = $("#fecha_fin").val();
@@ -337,23 +343,33 @@
                 }).then((response) => {
                     let labels = [];
                     let values = [];
+                    let colors = [];
                     response.data.dates.forEach((date) => {
                         labels.push(date.fecha);
                         values.push(date.total);
-
+                        colors.push(getColor());
                     });
                     let data = {
                         labels: labels,
                         datasets: [{
                             label: '# de ventas',
                             data: values,
-                            borderWidth: 1
+                            borderWidth: 1,
+                            backgroundColor: colors,
+                            borderColor: 'rgba(200, 200, 200, 0.75)',
+                            hoverBorderColor: 'rgba(200, 200, 200, 1)'
                         }]
                     };
 
                     createChart(data, "chart");
+
+                    button.prop("disabled", false);
+                    button.html('<span class="fas fa-caret-right fa-lg" aria-hidden="true"></span>');
                 }).catch((response) => {
                     error(response.response.data.message);
+
+                    button.prop("disabled", false);
+                    button.html('<span class="fas fa-caret-right fa-lg" aria-hidden="true"></span>');
                 });
             }
         }
@@ -366,6 +382,56 @@
                 button: "Entendido",
                 timer: 3000
             });
+        }
+
+        function getColor() {
+            let colors = [
+                "#00ffff",
+                "#f0ffff",
+                "#f5f5dc",
+                "#000000",
+                "#0000ff",
+                "#a52a2a",
+                "#00ffff",
+                "#00008b",
+                "#008b8b",
+                "#a9a9a9",
+                "#006400",
+                "#bdb76b",
+                "#8b008b",
+                "#556b2f",
+                "#ff8c00",
+                "#9932cc",
+                "#8b0000",
+                "#e9967a",
+                "#9400d3",
+                "#ff00ff",
+                "#ffd700",
+                "#008000",
+                "#4b0082",
+                "#f0e68c",
+                "#add8e6",
+                "#e0ffff",
+                "#90ee90",
+                "#d3d3d3",
+                "#ffb6c1",
+                "#ffffe0",
+                "#00ff00",
+                "#ff00ff",
+                "#800000",
+                "#000080",
+                "#808000",
+                "#ffa500",
+                "#ffc0cb",
+                "#800080",
+                "#800080",
+                "#ff0000",
+                "#c0c0c0",
+                "#ffffff",
+                "#ffff00",
+            ];
+
+            return colors[Math.floor(Math.random() * colors.length)];
         }
     </script>
 @endpush

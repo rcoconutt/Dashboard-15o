@@ -11,8 +11,10 @@
             </div>
             <div class="card-body">
                 <form @submit.prevent="save" method="post">
-                    <div class="alert alert-danger" v-if="error">
-                        {{ error }}
+                    <div id="error">
+                        <div class="alert alert-danger" v-if="error">
+                            {{ error }}
+                        </div>
                     </div>
                     <input type="hidden" v-model="user.brand_id"/>
                     <input type="hidden" v-model="user.id"/>
@@ -32,14 +34,14 @@
                                 name="venue"
                                 id="venue"
                                 v-model="venue"
-                                source="/api/venues/search/"
-                                results-property="venues"
+                                :source="venues"
                                 results-display="CENTRO"
                                 results-value="ID_CENTRO"
                                 placeholder=""
                                 input-class="form-control"
                                 class="form-control"
                                 @selected="addDistributionGroup"
+                                @clear="removeDistribution"
                         >
                         </autocomplete>
                     </div>
@@ -49,14 +51,14 @@
                                 name="zona"
                                 id="zona"
                                 v-model="zona"
-                                source="/api/municipios/search/"
-                                results-property="municipios"
+                                :source="municipios"
                                 results-display="MUNICIPIO"
                                 results-value="ID_MUNICIPIO"
                                 placeholder=""
                                 input-class="form-control"
                                 class="form-control"
                                 @selected="addZonaGroup"
+                                @clear="removeZona"
                         >
                         </autocomplete>
                     </div>
@@ -76,11 +78,12 @@
                                 <div class="col-md-6 col-sm-12">
                                     <label for="reglas">Reglas: </label>
                                     <div class="input-group mb-2">
-                                        <input class="form-control" name="cantidad" v-model="cantidad" id="cantidad"
+                                        <input class="form-control form-custom" name="cantidad" v-model="cantidad" id="cantidad"
                                                placeholder="" type="number"/>
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">copas</div>
-                                        </div>
+                                        <select class="form-control" id="tipo_consumo" name="tipo_consumo">
+                                            <option value="1">Botellas</option>
+                                            <option value="2">Copas</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -90,7 +93,7 @@
                                             name="marca"
                                             id="marca"
                                             v-model="marca"
-                                            source="/api/marcas/search/"
+                                            :source="marcas"
                                             results-property="marcas"
                                             results-display="MARCA"
                                             results-value="ID_MARCA"
@@ -98,6 +101,7 @@
                                             input-class="form-control"
                                             class="form-control"
                                             @selected="addMarcaGroup"
+                                            @clear="removeMarca"
                                     >
                                     </autocomplete>
                                 </div>
@@ -160,17 +164,45 @@
                 // Date pickers
                 startPicker: null,
                 endPicker: null,
+                // Autocomplete
+                venues: [],
+                municipios: [],
+                marcas: [],
             }
         },
         methods: {
             addDistributionGroup(group) {
                 this.venue = group;
+                let municipio_id = this.venue.selectedObject.ID_MUNICIPIO;
+                let municipio = null;
+                this.municipios.forEach((m) => {
+                    if (m.ID_MUNICIPIO == municipio_id) {
+                        municipio = m;
+                    }
+                });
+
+                //this.zona.display = municipio.MUNICIPIO;
+                //this.zona.value = municipio.ID_MUNICIPIO;MUNICIPIO;
+            },
+            removeDistribution() {
+                this.venue = null;
             },
             addZonaGroup(group) {
                 this.zona = group
             },
+            removeZona() {
+                this.zona = null;
+            },
             addMarcaGroup(group) {
                 this.marca = group
+            },
+            removeMarca() {
+                this.marca = null;
+            },
+            backToError() {
+                $('html,body').animate({
+                        scrollTop: $("#error").offset().top
+                }, 'slow');
             },
             save() {
                 $("#save").prop("disabled", true);
@@ -199,16 +231,41 @@
                         title: "",
                         text: response.data.message,
                         icon: "success",
-                        button: "Volver",
+                        button: "Entendido",
+                        timer: 3000,
                     });
-
-                    window.location.href = '/dinamicas';
+                    () => {
+                        window.location.href = '/dinamicas';
+                    };
                 }).catch((response) => {
                     this.error = response.response.data.message;
+                    this.backToError();
                     $("#save").prop("disabled", false);
                 });
 
             }
+        },
+        created() {
+            axios.get('/api/venues')
+                .then((response) => {
+                    response.data.venues.forEach((venue) => {
+                        this.venues.push(venue)
+                    });
+                });
+
+            axios.get('/api/municipios')
+                .then((response) => {
+                    response.data.municipios.forEach((municipio) => {
+                        this.municipios.push(municipio)
+                    });
+                });
+
+            axios.get('/api/marcas')
+                .then((response) => {
+                    response.data.marcas.forEach((marca) => {
+                        this.marcas.push(marca)
+                    });
+                });
         },
         mounted() {
             let lang = {
@@ -248,10 +305,19 @@
             if (this.endPicker != null) {
                 this.endPicker.setDate(moment());
             }
+
+            if (this.start) {
+                console.log(this.start);
+                $("#start").val(this.start);
+            } else {
+                console.log("Nada");
+            }
         }
     }
 </script>
 
 <style scoped>
-
+    .form-custom {
+        height: calc(2.19rem + 2px)!important;
+    }
 </style>

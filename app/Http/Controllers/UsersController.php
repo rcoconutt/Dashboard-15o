@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -148,6 +149,7 @@ class UsersController extends Controller
 
             return redirect()->back()->with('message', 'Usuario creado correctamente');
         } catch (\Exception $ex) {
+            Log::error("Deverror" . $ex->getMessage());
             return redirect()->back()->withInput($request->input())->withErrors(['message' => $ex->getMessage()]);
         }
     }

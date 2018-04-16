@@ -9,11 +9,13 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class DinamicaController extends Controller
 {
     use NotificacionTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -97,6 +99,7 @@ class DinamicaController extends Controller
             $user_id = $request->get('user_id');
             $autor = User::whereId($user_id)->first();
             $cantidad = -1;
+            $name = htmlentities($request->get('name'));
             $descripción = $request->get('reglas');
             $marca = 0;
             if ($request->get('kind') == 1) {
@@ -117,7 +120,7 @@ class DinamicaController extends Controller
                 'ID_ZONA' => 0,
                 'ID_BRAND' => $brand_id,
                 'OBJETIVO' => $cantidad,
-                'DINAMICA' => htmlentities($request->get('name')),
+                'DINAMICA' => $name,
                 'DESCRIPCION' => htmlentities($descripción),
                 'PREMIO' => htmlentities($request->get('premio')),
                 'FECHA_INICIO' => Carbon::parse($request->get('start')),
@@ -125,12 +128,13 @@ class DinamicaController extends Controller
                 'ACTIVO' => 0,
                 'municipio_id' => $request->get('zona'),
                 'marca_id' => $marca,
-                'user_id' => $user_id
+                'user_id' => $user_id,
+                'tipo_consumo' => $request->get('tipo_consumo')
             ]);
 
             $users = User::where('brand_id', $brand_id)->orWhere('rol', 0)->where('id', '!=', $user_id)->get();
             foreach ($users as $user) {
-                $message = $autor->name . " " . $autor->last_name . " ha creado una nueva dinámica: " . $request->get('name');
+                $message = $autor->name . " " . $autor->last_name . " ha creado una nueva dinámica: " . $name;
                 Notificacion::create([
                     'user_id' => $user->id,
                     'message' => $message
@@ -145,7 +149,8 @@ class DinamicaController extends Controller
                 'dinamica' => $dinamica
             ], 200);
         } catch (\Exception $ex) {
-            return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage() . $ex->getFile() . $ex->getLine()], 500);
+            Log::error("Deverror" . $ex->getMessage());
+            return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
         }
     }
 

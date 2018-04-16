@@ -222,7 +222,8 @@
                         user_id: this.user.id,
                         brand_id: this.user.brand_id,
                         start: $("#start").val(),
-                        end: $("#end").val()
+                        end: $("#end").val(),
+                        tipo_consumo: $("#tipo_consumo").val()
                     }
                 }).then((response) => {
                     swal({

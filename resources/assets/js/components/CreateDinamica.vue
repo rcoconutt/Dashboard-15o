@@ -29,23 +29,6 @@
                         <label for="premio">Premio de la dinámica: </label>
                     </div>
                     <div class="form-group">
-                        <label for="venue">Centro de consumo: </label>
-                        <autocomplete
-                                name="venue"
-                                id="venue"
-                                v-model="venue"
-                                :source="venues"
-                                results-display="CENTRO"
-                                results-value="ID_CENTRO"
-                                placeholder=""
-                                input-class="form-control"
-                                class="form-control"
-                                @selected="addDistributionGroup"
-                                @clear="removeDistribution"
-                        >
-                        </autocomplete>
-                    </div>
-                    <div class="form-group">
                         <label for="zona">Zona: </label>
                         <autocomplete
                                 name="zona"
@@ -59,6 +42,23 @@
                                 class="form-control"
                                 @selected="addZonaGroup"
                                 @clear="removeZona"
+                        >
+                        </autocomplete>
+                    </div>
+                    <div class="form-group" v-if="zona  ">
+                        <label for="venue">Centro de consumo: </label>
+                        <autocomplete
+                                name="venue"
+                                id="venue"
+                                v-model="venue"
+                                :source="venues"
+                                results-display="CENTRO"
+                                results-value="ID_CENTRO"
+                                placeholder=""
+                                input-class="form-control"
+                                class="form-control"
+                                @selected="addDistributionGroup"
+                                @clear="removeDistribution"
                         >
                         </autocomplete>
                     </div>
@@ -117,13 +117,13 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12">
                                 <label for="start">Fecha de inicio: </label>
-                                <input class="form-control" name="start" v-model="start" id="start"
+                                <input class="form-control" name="start" id="start"
                                        placeholder="Fecha de inicio" type="text"/>
                             </div>
 
                             <div class="col-md-6 col-sm-12">
                                 <label for="end">Fecha de fin: </label>
-                                <input class="form-control" name="end" v-model="end" id="end" placeholder="Fecha de fin"
+                                <input class="form-control" name="end" id="end" placeholder="Fecha de fin"
                                        type="text"/>
                             </div>
                         </div>
@@ -173,22 +173,20 @@
         methods: {
             addDistributionGroup(group) {
                 this.venue = group;
-                let municipio_id = this.venue.selectedObject.ID_MUNICIPIO;
-                let municipio = null;
-                this.municipios.forEach((m) => {
-                    if (m.ID_MUNICIPIO == municipio_id) {
-                        municipio = m;
-                    }
-                });
-
-                //this.zona.display = municipio.MUNICIPIO;
-                //this.zona.value = municipio.ID_MUNICIPIO;MUNICIPIO;
             },
             removeDistribution() {
                 this.venue = null;
             },
             addZonaGroup(group) {
-                this.zona = group
+                this.zona = group;
+                let municipio_id = group.selectedObject.ID_MUNICIPIO;
+                this.venues = [];
+                axios.get('/api/venues/' + municipio_id)
+                    .then((response) => {
+                        response.data.venues.forEach((venue) => {
+                            this.venues.push(venue)
+                        });
+                    });
             },
             removeZona() {
                 this.zona = null;
@@ -233,10 +231,9 @@
                         icon: "success",
                         button: "Entendido",
                         timer: 3000,
-                    });
-                    () => {
+                    }).then((response) => {
                         window.location.href = '/dinamicas';
-                    };
+                    });
                 }).catch((response) => {
                     this.error = response.response.data.message;
                     this.backToError();
@@ -246,12 +243,14 @@
             }
         },
         created() {
+            /*
             axios.get('/api/venues')
                 .then((response) => {
                     response.data.venues.forEach((venue) => {
                         this.venues.push(venue)
                     });
                 });
+                */
 
             axios.get('/api/municipios')
                 .then((response) => {
@@ -280,7 +279,6 @@
                 field: document.getElementById('start'),
                 i18n: lang,
                 onSelect: function (date) {
-                    this.start = moment(date).format('DD-MM-YYYY');
                     $("#start").val(moment(date).format('DD-MM-YYYY'));
                 }
             });
@@ -289,7 +287,6 @@
                 field: document.getElementById('end'),
                 i18n: lang,
                 onSelect: function (date) {
-                    this.end = moment(date).format('DD-MM-YYYY');
                     $("#end").val(moment(date).format('DD-MM-YYYY'));
                 }
             });
@@ -304,13 +301,6 @@
 
             if (this.endPicker != null) {
                 this.endPicker.setDate(moment());
-            }
-
-            if (this.start) {
-                console.log(this.start);
-                $("#start").val(this.start);
-            } else {
-                console.log("Nada");
             }
         }
     }

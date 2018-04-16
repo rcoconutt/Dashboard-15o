@@ -12,13 +12,19 @@ class VenuesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($municipio_id = null)
     {
         try {
+            if ($municipio_id != null) {
+                $venues = Venue::where('ID_MUNICIPIO', $municipio_id)->get();
+            } else {
+                $venues = Venue::all();
+            }
+
             return response()->json([
                 'success' => true,
                 'message' => 'success',
-                'venues' => Venue::all()
+                'venues' => $venues
             ], 200);
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => "Error, código 500"], 500);

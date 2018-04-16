@@ -113812,22 +113812,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         addDistributionGroup: function addDistributionGroup(group) {
             this.venue = group;
-            var municipio_id = this.venue.selectedObject.ID_MUNICIPIO;
-            var municipio = null;
-            this.municipios.forEach(function (m) {
-                if (m.ID_MUNICIPIO == municipio_id) {
-                    municipio = m;
-                }
-            });
-
-            //this.zona.display = municipio.MUNICIPIO;
-            //this.zona.value = municipio.ID_MUNICIPIO;MUNICIPIO;
         },
         removeDistribution: function removeDistribution() {
             this.venue = null;
         },
         addZonaGroup: function addZonaGroup(group) {
+            var _this = this;
+
             this.zona = group;
+            var municipio_id = group.selectedObject.ID_MUNICIPIO;
+            this.venues = [];
+            axios.get('/api/venues/' + municipio_id).then(function (response) {
+                response.data.venues.forEach(function (venue) {
+                    _this.venues.push(venue);
+                });
+            });
         },
         removeZona: function removeZona() {
             this.zona = null;
@@ -113844,7 +113843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, 'slow');
         },
         save: function save() {
-            var _this = this;
+            var _this2 = this;
 
             $("#save").prop("disabled", true);
 
@@ -113874,35 +113873,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     icon: "success",
                     button: "Entendido",
                     timer: 3000
-                });
-                (function () {
+                }).then(function (response) {
                     window.location.href = '/dinamicas';
                 });
             }).catch(function (response) {
-                _this.error = response.response.data.message;
-                _this.backToError();
+                _this2.error = response.response.data.message;
+                _this2.backToError();
                 $("#save").prop("disabled", false);
             });
         }
     },
     created: function created() {
-        var _this2 = this;
+        var _this3 = this;
 
-        axios.get('/api/venues').then(function (response) {
-            response.data.venues.forEach(function (venue) {
-                _this2.venues.push(venue);
+        /*
+        axios.get('/api/venues')
+            .then((response) => {
+                response.data.venues.forEach((venue) => {
+                    this.venues.push(venue)
+                });
             });
-        });
+            */
 
         axios.get('/api/municipios').then(function (response) {
             response.data.municipios.forEach(function (municipio) {
-                _this2.municipios.push(municipio);
+                _this3.municipios.push(municipio);
             });
         });
 
         axios.get('/api/marcas').then(function (response) {
             response.data.marcas.forEach(function (marca) {
-                _this2.marcas.push(marca);
+                _this3.marcas.push(marca);
             });
         });
     },
@@ -113919,7 +113920,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             field: document.getElementById('start'),
             i18n: lang,
             onSelect: function onSelect(date) {
-                this.start = __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY');
                 $("#start").val(__WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY'));
             }
         });
@@ -113928,7 +113928,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             field: document.getElementById('end'),
             i18n: lang,
             onSelect: function onSelect(date) {
-                this.end = __WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY');
                 $("#end").val(__WEBPACK_IMPORTED_MODULE_2_moment___default()(date).format('DD-MM-YYYY'));
             }
         });
@@ -113943,13 +113942,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         if (this.endPicker != null) {
             this.endPicker.setDate(__WEBPACK_IMPORTED_MODULE_2_moment___default()());
-        }
-
-        if (this.start) {
-            console.log(this.start);
-            $("#start").val(this.start);
-        } else {
-            console.log("Nada");
         }
     }
 });
@@ -114105,41 +114097,6 @@ var render = function() {
               "div",
               { staticClass: "form-group" },
               [
-                _c("label", { attrs: { for: "venue" } }, [
-                  _vm._v("Centro de consumo: ")
-                ]),
-                _vm._v(" "),
-                _c("autocomplete", {
-                  staticClass: "form-control",
-                  attrs: {
-                    name: "venue",
-                    id: "venue",
-                    source: _vm.venues,
-                    "results-display": "CENTRO",
-                    "results-value": "ID_CENTRO",
-                    placeholder: "",
-                    "input-class": "form-control"
-                  },
-                  on: {
-                    selected: _vm.addDistributionGroup,
-                    clear: _vm.removeDistribution
-                  },
-                  model: {
-                    value: _vm.venue,
-                    callback: function($$v) {
-                      _vm.venue = $$v
-                    },
-                    expression: "venue"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group" },
-              [
                 _c("label", { attrs: { for: "zona" } }, [_vm._v("Zona: ")]),
                 _vm._v(" "),
                 _c("autocomplete", {
@@ -114165,6 +114122,43 @@ var render = function() {
               ],
               1
             ),
+            _vm._v(" "),
+            _vm.zona
+              ? _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "venue" } }, [
+                      _vm._v("Centro de consumo: ")
+                    ]),
+                    _vm._v(" "),
+                    _c("autocomplete", {
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "venue",
+                        id: "venue",
+                        source: _vm.venues,
+                        "results-display": "CENTRO",
+                        "results-value": "ID_CENTRO",
+                        placeholder: "",
+                        "input-class": "form-control"
+                      },
+                      on: {
+                        selected: _vm.addDistributionGroup,
+                        clear: _vm.removeDistribution
+                      },
+                      model: {
+                        value: _vm.venue,
+                        callback: function($$v) {
+                          _vm.venue = $$v
+                        },
+                        expression: "venue"
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("input", {
@@ -114357,77 +114351,9 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-                  _c("label", { attrs: { for: "start" } }, [
-                    _vm._v("Fecha de inicio: ")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.start,
-                        expression: "start"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "start",
-                      id: "start",
-                      placeholder: "Fecha de inicio",
-                      type: "text"
-                    },
-                    domProps: { value: _vm.start },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.start = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6 col-sm-12" }, [
-                  _c("label", { attrs: { for: "end" } }, [
-                    _vm._v("Fecha de fin: ")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.end,
-                        expression: "end"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "end",
-                      id: "end",
-                      placeholder: "Fecha de fin",
-                      type: "text"
-                    },
-                    domProps: { value: _vm.end },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.end = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]),
+            _vm._m(2),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(3)
           ]
         )
       ])
@@ -114472,6 +114398,44 @@ var staticRenderFns = [
         _c("option", { attrs: { value: "2" } }, [_vm._v("Copas")])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6 col-sm-12" }, [
+          _c("label", { attrs: { for: "start" } }, [
+            _vm._v("Fecha de inicio: ")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              name: "start",
+              id: "start",
+              placeholder: "Fecha de inicio",
+              type: "text"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6 col-sm-12" }, [
+          _c("label", { attrs: { for: "end" } }, [_vm._v("Fecha de fin: ")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              name: "end",
+              id: "end",
+              placeholder: "Fecha de fin",
+              type: "text"
+            }
+          })
+        ])
+      ])
+    ])
   },
   function() {
     var _vm = this

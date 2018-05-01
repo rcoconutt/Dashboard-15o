@@ -64,6 +64,34 @@ class DinamicaController extends Controller
         }
     }
 
+    /*
+     * Devuelve las dinámicas por zona o centro de consumo
+     */
+    public function indexByZona($zona_id, $centro_id)
+    {
+        try {
+            $zonas = DinamicaHasZone::where('zona_id', $zona_id)->get();
+            $centros = DinamicaHasCenter::where('centro_id', $centro_id)->get();
+
+            $dinamicas = Dinamica::with('centros', 'zonas')
+                ->whereIn('ID_DINAMICA', $zonas->pluck('dinamica_id'))
+                ->orWhereIn('ID_DINAMICA', $centros->pluck('dinamica_id'))
+                ->orWhere('municipio_id', $zona_id)
+                ->orderByDesc('ID_DINAMICA')->get();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'success',
+                'dinamicas' => $dinamicas
+            ], 200);
+        } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+            return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -99,7 +127,7 @@ class DinamicaController extends Controller
             }
 
             $zonas = $request->get('zona');
-            $venues = $request->get('venues');
+            $venues = $request->get('venue');
             if (count($zonas) < 1) {
                 return response()->json(['success' => false, 'message' => "Ingresa al menos una zona"], 401);
             }

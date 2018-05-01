@@ -45,13 +45,13 @@
                             >
                             </autocomplete>
                         </div>
-                        <br>
                         <div class="float-right">
                             <a @click.prevent="addZonaInput" href="#" class="btn btn-primary border-0 rounded-0 p-2">
                                 <i class="fa fa-play align-middle" aria-hidden="true"></i>
                                 <span class="align-middle">Agregar zona</span>
                             </a>
                         </div>
+                        <br>
                     </div>
                     <div class="form-group">
                         <label >Centro de consumo: </label>
@@ -70,8 +70,6 @@
                             >
                             </autocomplete>
                         </div>
-
-                        <br>
                         <div class="float-right">
                             <a @click.prevent="addCenterInput" href="#" class="btn btn-primary border-0 rounded-0 p-2">
                                 <i class="fa fa-play align-middle" aria-hidden="true"></i>
@@ -80,6 +78,7 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <br><br>
                         <input type="radio" id="one" value="1" v-model="kind">
                         <label for="one">Por ventas</label>
                         <br>

@@ -39,6 +39,10 @@ class UsersController extends Controller
                 'users' => $users
             ], 200);
         } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+
             return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
         }
     }
@@ -149,7 +153,10 @@ class UsersController extends Controller
 
             return redirect()->back()->with('message', 'Usuario creado correctamente');
         } catch (\Exception $ex) {
-            Log::error("Deverror" . $ex->getMessage());
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+
             return redirect()->back()->withInput($request->input())->withErrors(['message' => $ex->getMessage()]);
         }
     }

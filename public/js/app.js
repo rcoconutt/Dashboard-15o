@@ -113909,27 +113909,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var button = $("#save");
             button.prop("disabled", true);
             button.html("<img src='/img/loading2.gif' height='20px'>");
+            var data = {
+                name: this.name,
+                premio: this.premio,
+                //venue: this.venue,
+                zona: this.zona,
+                kind: this.kind,
+                reglas: this.reglas,
+                cantidad: this.cantidad,
+                descripcion: this.descripcion,
+                marca: this.marca,
+                user_id: this.user.id,
+                brand_id: this.user.brand_id,
+                start: $("#start").val(),
+                end: $("#end").val(),
+                tipo_consumo: $("#tipo_consumo").val()
+            };
+
+            /*
+            this.zona.forEach((z) => {
+                data.
+            });
+            */
 
             axios({
                 method: 'POST',
                 url: '/api/dinamicas',
                 json: true,
-                data: {
-                    name: this.name,
-                    premio: this.premio,
-                    venue: this.venue,
-                    zona: this.zona,
-                    kind: this.kind,
-                    reglas: this.reglas,
-                    cantidad: this.cantidad,
-                    descripcion: this.descripcion,
-                    marca: this.marca,
-                    user_id: this.user.id,
-                    brand_id: this.user.brand_id,
-                    start: $("#start").val(),
-                    end: $("#end").val(),
-                    tipo_consumo: $("#tipo_consumo").val()
-                }
+                data: data
             }).then(function (response) {
                 __WEBPACK_IMPORTED_MODULE_1_sweetalert___default()({
                     title: "",

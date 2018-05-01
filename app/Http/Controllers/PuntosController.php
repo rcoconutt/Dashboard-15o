@@ -54,6 +54,10 @@ class PuntosController extends Controller
         } catch (ModelNotFoundException $ex) {
             return response()->json(['success' => false, 'message' => "No se encontró la dinámica"], 400);
         } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+
             return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage()], 500);
         }
 

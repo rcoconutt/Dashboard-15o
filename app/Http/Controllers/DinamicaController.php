@@ -57,6 +57,9 @@ class DinamicaController extends Controller
                 'dinamicas' => $dinamicas
             ], 200);
         } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
             return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
         }
     }
@@ -95,8 +98,8 @@ class DinamicaController extends Controller
                 return response()->json(['success' => false, 'message' => $errors->first()], 401);
             }
 
-            $zonas[] = $request->get('zonas');
-            $venues[] = $request->get('venues');
+            $zonas = $request->get('zona');
+            $venues = $request->get('venues');
             if (count($zonas) < 1) {
                 return response()->json(['success' => false, 'message' => "Ingresa al menos una zona"], 401);
             }
@@ -169,7 +172,9 @@ class DinamicaController extends Controller
                 'dinamica' => $dinamica
             ], 200);
         } catch (\Exception $ex) {
-            Log::error("Deverror" . $ex->getMessage());
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
             return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
         }
     }
@@ -191,6 +196,9 @@ class DinamicaController extends Controller
                 return redirect()->back()->with('message', 'Dinámicas eliminadas correctamente!');
             }
         } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
             return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
         }
     }

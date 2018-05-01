@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="../js/login.js"></script>
+        <link rel="stylesheet" href="../css/login.css">
+    </head>
+    <body>
+        <form name="login" action="../controllers/login.php" method="POST" onsubmit="return validateForm()">
+            <div class="full-screen-div">
+                <img src="../images/login/golden-leaf.png" style="width: 100%; height: 100%;" class="golden-leaf" alt="">
+            </div>
+            <div class="center-div">
+                <div class="center-div-top">
+                    <div class="glass-and-bottle-of-wine">
+                        <img src="../images/login/glass-and-bottle-of-wine.png" srcset="../images/login/glass-and-bottle-of-wine@2x.png 2x,../images/login/glass-and-bottle-of-wine@3x.png 3x" alt="">
+                    </div>
+                    <div class="-oz">
+                        1.5 oz
+                    </div>
+                </div>
+                <div class="center-div-bottom">
+                    <div class="bienvenido">
+                        Bienvenido
+                    </div>
+                    <div class="user-data">
+                        <input class="user-data-input" id="user" name="user" type="text" placeholder="Username"/>
+                        <div class="user-data-line"></div>
+                        <input class="user-data-input" id="pass" name="pass" type="password" placeholder="Password"/>
+                        
+                        <!--<div class="user-data-user">
+                            <input class="user-data-input" id="user" type="text" placeholder="Username"/>
+                        </div>
+                        <div class="user-data-line">.</div>
+                        <div class="user-data-user">
+                            <input class="user-data-input" id="pass" type="text" placeholder="Password"/>
+                        </div>-->
+                    </div>
+                    <button class="button" >INICIO DE SESI&Oacute;N</button>
+                    <div class="user-options">
+                        <div class="recuerdame">
+                            <input id="remember" name="remember" type="checkbox">Recuerdame
+                        </div>
+                        <div class="olvidar">
+                            <a href="#">Olvid&eacute; contrase&ntilde;a</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Dinamica;
+use App\DinamicaHasCenter;
+use App\DinamicaHasZone;
 use App\Notificacion;
 use App\Traits\NotificacionTrait;
 use App\User;
@@ -44,9 +46,9 @@ class DinamicaController extends Controller
     {
         try {
             if ($brand_id == null) {
-                $dinamicas = Dinamica::orderByDesc('ID_DINAMICA')->get();
+                $dinamicas = Dinamica::with('centros', 'zonas')->orderByDesc('ID_DINAMICA')->get();
             } else {
-                $dinamicas = Dinamica::where('ID_BRAND', $brand_id)->orderByDesc('ID_DINAMICA')->get();
+                $dinamicas = Dinamica::with('centros', 'zonas')->where('ID_BRAND', $brand_id)->orderByDesc('ID_DINAMICA')->get();
             }
 
             return response()->json([
@@ -81,8 +83,6 @@ class DinamicaController extends Controller
             $validator = Validator::make($request->all(), [
                     'name' => 'required|min:6',
                     'premio' => 'required|min:6',
-                    'venue' => 'required|numeric',
-                    'zona' => 'required|numeric',
                     'start' => 'required|date',
                     'end' => 'required|date',
                 ],
@@ -93,6 +93,12 @@ class DinamicaController extends Controller
             if ($validator->fails()) {
                 $errors = $validator->errors();
                 return response()->json(['success' => false, 'message' => $errors->first()], 401);
+            }
+
+            $zonas[] = $request->get('zonas');
+            $venues[] = $request->get('venues');
+            if (count($zonas) < 1) {
+                return response()->json(['success' => false, 'message' => "Ingresa al menos una zona"], 401);
             }
 
             $brand_id = $request->get('brand_id');
@@ -126,11 +132,25 @@ class DinamicaController extends Controller
                 'FECHA_INICIO' => Carbon::parse($request->get('start')),
                 'FECHA_FIN' => Carbon::parse($request->get('end')),
                 'ACTIVO' => 0,
-                'municipio_id' => $request->get('zona'),
+                'municipio_id' => 0,
                 'marca_id' => $marca,
                 'user_id' => $user_id,
                 'tipo_consumo' => $request->get('tipo_consumo')
             ]);
+
+            foreach ($zonas as $zona) {
+                DinamicaHasZone::create([
+                    'dinamica_id' => $dinamica->ID_DINAMICA,
+                    'zona_id' => $zona
+                ]);
+            }
+
+            foreach ($venues as $venue) {
+                DinamicaHasCenter::create([
+                    'dinamica_id' => $dinamica->ID_DINAMICA,
+                    'centro_id' => $venue
+                ]);
+            }
 
             $users = User::where('brand_id', $brand_id)->orWhere('rol', 0)->where('id', '!=', $user_id)->get();
             foreach ($users as $user) {

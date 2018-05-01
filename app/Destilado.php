@@ -8,6 +8,7 @@ class Destilado extends Model
 {
     protected $table = 'CAT_DESTILADO';
     protected $primaryKey = 'ID_DESTILADO';
+    public $timestamps = false;
 
     protected $fillable = [
         'ID_DESTILADO', 'ID_GRUPO', 'DESTILADO', 'IMAGEN', 'ANEJAMIENTO', 'CARACTERISTICAS',

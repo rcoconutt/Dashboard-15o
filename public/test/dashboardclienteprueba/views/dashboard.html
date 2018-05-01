@@ -1,0 +1,235 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <link rel="stylesheet" href="../fontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../css/dashboard.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="../js/dashboard.js"></script>
+    </head>
+    <body>
+        <?php
+            require '../controllers/dashboard.php';
+        ?>
+        <form name="dashboard">
+            <div class="header-div">
+                <div class="-oz">
+                    1.5 oz
+                </div>
+                <div class="header-user-data-div">
+                    <div class="header-user-data-name-div">
+                        Felipe Hern&aacute;ndez
+                    </div>
+                    <div class="header-user-data-avatar-div">
+                    </div>
+                </div>
+            </div>
+            <div class="body-div">
+                <div class="body-menu-div">
+                    <button class="button button-home">&nbsp;&nbsp;Home</button>
+                    <button class="button button-kpis">&nbsp;&nbsp;Mis KPIs</button>
+                    <button class="button button-reportes">&nbsp;&nbsp;Mis Reportes</button>
+                </div>
+                <div class="body-container-div">
+                    <div class="body-container-top-div">
+                        <div class="body-container-top-brand-div">
+                            Heineken
+                        </div>
+                        <div class="body-container-top-brand-insight-div">
+                            <div class="body-container-top-brand-insight-box-div">
+                                <div class="body-container-top-brand-insight-box-header-div">
+                                    <div class="body-container-top-brand-insight-box-header-title-div">
+                                        CENTRO DE CONSUMO
+                                    </div>
+                                    <div class="body-container-top-brand-insight-box-header-artifacts-div">
+                                        <div class="body-container-top-brand-insight-box-header-artifacts-left-div">
+                                            <i class="fa fa-cog" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="body-container-top-brand-insight-box-header-artifacts-right-div">
+                                            <div class="body-container-top-brand-insight-box-header-artifacts-right-table-div">
+                                                <div class="body-container-top-brand-insight-box-header-artifacts-right-column-div">
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                </div>
+                                                <div class="body-container-top-brand-insight-box-header-artifacts-right-column-div">
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="body-container-top-brand-insight-box-body-div">
+                                    <div class="body-container-top-brand-insight-box-body-left-div">
+                                        <img src="../images/home/group-5.png" srcset="../images/home/group-5@2x.png 2x,../images/home/group-5@3x.png 3x" alt="">
+                                    </div>
+                                    <div class="body-container-top-brand-insight-box-body-center-div">
+                                        <div class="body-container-top-brand-insight-box-body-right-top-div">
+                                            <p>CDMX<p>
+                                        </div>
+                                        <div class="body-container-top-brand-insight-box-body-right-bottom-div">
+                                            <p><b>450</b> Copas</p>
+                                        </div>
+                                    </div>
+                                    <div class="body-container-top-brand-insight-box-body-right-div">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-container-top-brand-insight-box-div">
+                                <div class="body-container-top-brand-insight-box-header-div">
+                                    <div class="body-container-top-brand-insight-box-header-title-div">
+                                        BARTENDER CON MAS VENTAS
+                                    </div>
+                                    <div class="body-container-top-brand-insight-box-header-artifacts-div">
+                                        <div class="body-container-top-brand-insight-box-header-artifacts-left-div">
+                                            <img src="../images/home/star.png" srcset="../images/home/star@2x.png 2x,../images/home/star@3x.png 3x" alt="">
+                                        </div>
+                                        <div class="body-container-top-brand-insight-box-header-artifacts-right-div">
+                                            <div class="body-container-top-brand-insight-box-header-artifacts-right-table-div">
+                                                <div class="body-container-top-brand-insight-box-header-artifacts-right-column-div">
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                </div>
+                                                <div class="body-container-top-brand-insight-box-header-artifacts-right-column-div">
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                    <div class="body-container-top-brand-insight-box-header-artifacts-right-row-div">.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="body-container-top-brand-insight-box-body-div">
+                                    <div class="body-container-top-brand-insight-box-body-left-div">
+                                        <img src="../images/home/group-5.png" srcset="../images/home/group-5@2x.png 2x,../images/home/group-5@3x.png 3x" alt="">
+                                    </div>
+                                    <div class="body-container-top-brand-insight-box-body-center-div">
+                                        <div class="body-container-top-brand-insight-box-body-right-top-div">
+                                            <p>CDMX<p>
+                                        </div>
+                                        <div class="body-container-top-brand-insight-box-body-right-bottom-div">
+                                            <p><b>450</b> Copas</p>
+                                        </div>
+                                    </div>
+                                    <div class="body-container-top-brand-insight-box-body-right-div">
+                                        <div class="body-container-top-brand-insight-box-body-center-avatar-div">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body-container-center-div">
+                        <div class="body-container-center-header-div">
+                            Reportes de desplazamiento
+                        </div>
+                        <div class="body-container-center-header-filters-cointainer-div">
+                            <div class="body-container-center-header-filters-cointainer-left-div">
+                                <div class="body-container-center-header-filters-cointainer-left-dates-div">
+                                    <div class="body-container-center-header-filters-cointainer-left-dates-input-div">
+                                        <input class="form-control body-container-center-header-filters-cointainer-left-date-intput" 
+                                               type="text" name="selected_date" id="iniDatepicker"/>
+                                    </div>
+                                    <div class="body-container-center-header-filters-cointainer-left-dates-input-div">
+                                        <input class="form-control body-container-center-header-filters-cointainer-left-date-intput" 
+                                               type="text" name="selected_date" id="endDatepicker"/>
+                                    </div>
+                                </div>
+                                <div class="body-container-center-header-filters-cointainer-left-line-div"></div>
+                                <div class="body-container-center-header-filters-cointainer-left-search-div"></div>
+                            </div>
+                            <div class="body-container-center-header-filters-cointainer-right-div">
+                                <div class="body-container-center-header-filters-cointainer-left-dates-div">
+                                    <div class="body-container-center-header-filters-cointainer-left-dates-input-div text">
+                                        CENTROS DE CONSUMO
+                                    </div>
+                                    <div class="body-container-center-header-filters-cointainer-left-dates-input-div">
+                                        
+                                    </div>
+                                </div>
+                                <div class="body-container-center-header-filters-cointainer-left-line-div clean"></div>
+                                <div class="body-container-center-header-filters-cointainer-left-search-div">
+                                    <div class="body-container-center-header-filters-cointainer-left-dates-input-div">
+                                        <input class="body-container-center-header-filters-cointainer-left-search-field-input" id="search_field" type="text" 
+                                               placeholder="INGRESE CENTRO DE CONSUMO"/>
+                                    </div>
+                                    <div class="body-container-center-header-filters-cointainer-left-search-space-div"></div>
+                                    <div class="body-container-center-header-filters-cointainer-left-dates-input-div">
+                                        <button class="body-container-center-header-filters-cointainer-left-search-button" >Buscar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body-container-center-graph">
+                            <div class="body-container-center-graph-style" id="columnchart_material" ></div>
+                        </div>
+                    </div>
+                    <div class="body-container-bottom-div">
+                        <div class="body-container-center-header-div">
+                            Reportes por bartender
+                        </div>
+                        <div class="body-container-center-header-filters-cointainer-div">
+                            <div class="body-container-center-header-filters-cointainer-left-dates-div">
+                                <div class="body-container-center-header-filters-cointainer-left-dates-input-div">
+                                    <input class="form-control body-container-center-header-filters-cointainer-left-date-intput" 
+                                           type="text" name="selected_date" id="iniDatepickerB"/>
+                                </div>
+                                <div class="body-container-center-header-filters-cointainer-left-dates-input-div">
+                                    <input class="form-control body-container-center-header-filters-cointainer-left-date-intput" 
+                                           type="text" name="selected_date" id="endDatepickerB"/>
+                                </div>
+                            </div>
+                            <div class="body-container-center-header-filters-cointainer-left-line-div"></div>
+                            <div class="body-container-center-header-filters-cointainer-left-search-div"></div>
+                        </div>
+                        <div class="body-container-center-graph body-container-bottom-reset-color">
+                            <div class="body-container-bottom-stats-div">
+                                <div class="body-container-bottom-stats-graph-div" id="bartender1"></div>
+                                <div class="body-container-bottom-stats-user-info-div">
+                                    <div class="body-container-bottom-stats-user-info-avatar-div"></div>
+                                    <div class="body-container-bottom-stats-user-info-name-div">
+                                        Jos&eacute; Alcantara
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-container-bottom-stats-space-div"></div>
+                            <div class="body-container-bottom-stats-div">
+                                <div class="body-container-bottom-stats-graph-div" id="bartender2"></div>
+                                <div class="body-container-bottom-stats-user-info-div">
+                                    <div class="body-container-bottom-stats-user-info-avatar-div"></div>
+                                    <div class="body-container-bottom-stats-user-info-name-div">
+                                        Yahir Zavaleta
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-container-bottom-stats-space-div"></div>
+                            <div class="body-container-bottom-stats-div">
+                                <div class="body-container-bottom-stats-graph-div" id="bartender3"></div>
+                                <div class="body-container-bottom-stats-user-info-div">
+                                    <div class="body-container-bottom-stats-user-info-avatar-div"></div>
+                                    <div class="body-container-bottom-stats-user-info-name-div">
+                                        Felipe Hern&aacute;ndez
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+    
+</html>

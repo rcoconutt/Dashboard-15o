@@ -19,3 +19,11 @@ Route::get('tickets', 'RecibosController@api');
 Route::get('destilados', 'DestiladoController@index');
 Route::post('kpi', 'KpiController@getMarcaData');
 Route::post('kpi/centro', 'KpiController@getCentroData');
+
+Route::apiResource('venues', 'VenuesController')->except([
+    'show'
+]);
+
+Route::apiResource('municipios', 'MunicipiosController')->except([
+    'index', 'show'
+]);

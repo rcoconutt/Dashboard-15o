@@ -29,38 +29,55 @@
                         <label for="premio">Premio de la dinámica: </label>
                     </div>
                     <div class="form-group">
-                        <label for="zona">Zona: </label>
-                        <autocomplete
-                                name="zona"
-                                id="zona"
-                                v-model="zona"
-                                :source="municipios"
-                                results-display="MUNICIPIO"
-                                results-value="ID_MUNICIPIO"
-                                placeholder=""
-                                input-class="form-control"
-                                class="form-control"
-                                @selected="addZonaGroup"
-                                @clear="removeZona"
-                        >
-                        </autocomplete>
+                        <label >Zona: </label>
+                        <div v-for="i in zonasCounter">
+                            <autocomplete
+                                    name="zonas[]"
+                                    :source="municipios"
+                                    results-display="MUNICIPIO"
+                                    results-value="ID_MUNICIPIO"
+                                    placeholder=""
+                                    input-class="form-control"
+                                    class="form-control"
+                                    @selected="addZonaGroup"
+                                    @clear="removeZona"
+                                    ref="zonaInput"
+                            >
+                            </autocomplete>
+                        </div>
+                        <br>
+                        <div class="float-right">
+                            <a @click.prevent="addZonaInput" href="#" class="btn btn-primary border-0 rounded-0 p-2">
+                                <i class="fa fa-play align-middle" aria-hidden="true"></i>
+                                <span class="align-middle">Agregar zona</span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="form-group" v-if="zona  ">
-                        <label for="venue">Centro de consumo: </label>
-                        <autocomplete
-                                name="venue"
-                                id="venue"
-                                v-model="venue"
-                                :source="venues"
-                                results-display="CENTRO"
-                                results-value="ID_CENTRO"
-                                placeholder=""
-                                input-class="form-control"
-                                class="form-control"
-                                @selected="addDistributionGroup"
-                                @clear="removeDistribution"
-                        >
-                        </autocomplete>
+                    <div class="form-group">
+                        <label >Centro de consumo: </label>
+                        <div v-for="i in venuesCounter">
+                            <autocomplete
+                                    name="venue[]"
+                                    :source="venues"
+                                    results-display="CENTRO"
+                                    results-value="ID_CENTRO"
+                                    placeholder=""
+                                    input-class="form-control"
+                                    class="form-control"
+                                    @selected="addDistributionGroup"
+                                    @clear="removeDistribution"
+                                    ref="venueInput"
+                            >
+                            </autocomplete>
+                        </div>
+
+                        <br>
+                        <div class="float-right">
+                            <a @click.prevent="addCenterInput" href="#" class="btn btn-primary border-0 rounded-0 p-2">
+                                <i class="fa fa-play align-middle" aria-hidden="true"></i>
+                                <span class="align-middle">Agregar Centro</span>
+                            </a>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="radio" id="one" value="1" v-model="kind">
@@ -171,8 +188,8 @@
         props: ['user'],
         data() {
             return {
-                venue: null,
-                zona: null,
+                venue: [],
+                zona: [],
                 marca: null,
                 name: null,
                 reglas: null,
@@ -190,28 +207,47 @@
                 venues: [],
                 municipios: [],
                 marcas: [],
+                // Counters
+                zonasCounter: 1,
+                venuesCounter: 1,
             }
         },
         methods: {
             addDistributionGroup(group) {
-                this.venue = group;
+                this.venue.push(group.value);
             },
             removeDistribution() {
-                this.venue = null;
+                this.venue  = [];
+                let inputs = this.$refs.venueInput;
+
+                inputs.forEach((input) => {
+                    if (input.value) {
+                        this.venue .push(input.value);
+                    }
+                });
             },
             addZonaGroup(group) {
-                this.zona = group;
-                let municipio_id = group.selectedObject.ID_MUNICIPIO;
-                this.venues = [];
-                axios.get('/api/venues/' + municipio_id)
-                    .then((response) => {
-                        response.data.venues.forEach((venue) => {
-                            this.venues.push(venue)
-                        });
-                    });
+                this.zona.push(group.value)
+            },
+            addZonaInput() {
+                if (this.zonasCounter < 5) {
+                    this.zonasCounter++;
+                }
+            },
+            addCenterInput() {
+                if (this.venuesCounter < 5) {
+                    this.venuesCounter++;
+                }
             },
             removeZona() {
-                this.zona = null;
+                this.zona = [];
+                let inputs = this.$refs.zonaInput;
+
+                inputs.forEach((input) => {
+                    if (input.value) {
+                        this.zona.push(input.value);
+                    }
+                });
             },
             addMarcaGroup(group) {
                 this.marca = group
@@ -273,6 +309,13 @@
                 .then((response) => {
                     response.data.municipios.forEach((municipio) => {
                         this.municipios.push(municipio)
+                    });
+                });
+
+            axios.get('/api/venues')
+                .then((response) => {
+                    response.data.venues.forEach((venue) => {
+                        this.venues.push(venue)
                     });
                 });
 

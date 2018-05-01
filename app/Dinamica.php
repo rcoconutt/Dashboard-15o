@@ -19,4 +19,12 @@ class Dinamica extends Model
     ];
 
     public $timestamps = false;
+
+    public function zonas() {
+        return $this->belongsToMany(Municipio::class, 'dinamica_has_zones', 'dinamica_id', 'zona_id');
+    }
+
+    public function centros() {
+        return $this->belongsToMany(Centro::class, 'dinamica_has_centers', 'dinamica_id', 'centro_id');
+    }
 }

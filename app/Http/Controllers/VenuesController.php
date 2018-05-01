@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Centro;
 use App\Venue;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VenuesController extends Controller
 {
@@ -45,16 +48,6 @@ class VenuesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -62,7 +55,32 @@ class VenuesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'municipio' => 'required|numeric',
+                'nombre' => 'required|string|min:2',
+                'status' => 'required|numeric',
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+                return response()->json(['success' => false, 'message' => $errors->first()], 400);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'El centro de consumo se creo correctamente',
+                'venue' => Centro::create([
+                    'ID_MUNICIPIO' => $request->get('municipio'),
+                    'CENTRO' => $request->get('nombre'),
+                    'FECHA_ALTA' => Carbon::now(),
+                    'FECHA_BAJA' => null,
+                    'ACTIVO' => $request->get('status'),
+                ])
+            ], 201);
+        } catch (\Exception $ex) {
+            return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
+        }
     }
 
     /**
@@ -82,7 +100,7 @@ class VenuesController extends Controller
      * @param  \App\Venue  $venue
      * @return \Illuminate\Http\Response
      */
-    public function edit(Venue $venue)
+    public function edit(Venue $venue, Request $request)
     {
         //
     }
@@ -96,7 +114,32 @@ class VenuesController extends Controller
      */
     public function update(Request $request, Venue $venue)
     {
-        //
+        try {
+            $validator = Validator::make($request->all(), [
+                'municipio' => 'required|numeric',
+                'nombre' => 'required|string|min:2',
+                'status' => 'required|numeric',
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors();
+                return response()->json(['success' => false, 'message' => $errors->first()], 400);
+            }
+
+            $venue->update([
+                'ID_MUNICIPIO' => $request->get('municipio'),
+                'CENTRO' => $request->get('nombre'),
+                'ACTIVO' => $request->get('status'),
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'El centro de consumo se actualizó correctamente!',
+                'venue' => $venue
+            ], 201);
+        } catch (\Exception $ex) {
+            return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
+        }
     }
 
     /**
@@ -107,6 +150,15 @@ class VenuesController extends Controller
      */
     public function destroy(Venue $venue)
     {
-        //
+        try {
+            $venue->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'El centro de consumo se eliminó correctamente',
+            ], 201);
+        } catch (\Exception $ex) {
+            return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
+        }
     }
 }

@@ -1,0 +1,512 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 28, 2017, 10:21:08 AM
+    Author     : Christian
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body,html {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.full-screen-div{
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    left: 0; 
+    overflow: hidden
+}
+
+.header-div{
+    position: absolute;
+    float: top;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+}
+
+.-oz {
+    float: left;
+    width: 100px;
+    height: 46px;
+    margin-top: 11px;
+    margin-left: 29px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 34px;
+    opacity: 0.5;
+    color: #273142;
+}
+
+.header-user-data-div{
+    float: right;
+    width: 230px;
+    height: 46px;
+    margin-top: 11px;
+    margin-left: 29px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #7f8fa4;
+}
+
+.header-user-data-name-div{
+    position: relative;
+    float: left;
+    top: 12px;
+    
+}
+
+.header-user-data-avatar-div{
+    position: relative;
+    float: right;
+    top: 3px;
+    right: 19px;
+    width: 41px;
+    height: 41px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #d8d8d8;
+}
+
+.body-div{
+    position: absolute;
+    top:70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #f2f5f8;
+}
+
+.body-menu-div{
+    position: absolute;
+    float: left;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    width: 197px;
+    border-radius: 4px;
+    border: solid 1px #e6eaee;
+    background-color: white;
+}
+
+.button {
+    width: 100%;
+    height: 41px;
+    border-width: 1px;
+    border-color: #bfc7d1;
+    opacity: 0.5;
+    background-color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: #6c7c93;
+    text-align: left;
+    text-decoration: none;
+}
+
+.button-home{
+    top: 0;
+    border-style: none none solid none;
+    background-color: #dbdfe5;
+}
+
+.button-kpis{
+    top: 41px;
+    border-style: none none solid none;
+}
+
+.button-reportes{
+    border-style: none none solid none;
+    top: 82px;
+}
+
+.body-container-div{
+    position: absolute;
+    float: left;
+    top: 0;
+    left: 199px;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: #f2f5f8;
+    overflow: auto;
+}
+
+.body-container-top-div{
+    position: absolute;
+    float: left;
+    top: 0;
+    left: 27px;
+    right: 0;
+    height: 346px;
+    margin: auto;
+}
+
+.body-container-top-brand-div{
+    width: 100%;
+    height: 60px;
+    margin-top: 52px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 44px;
+    opacity: 0.5;
+    color: #6c7c93;
+    /*background-color: #0294ff;*/
+}
+
+.body-container-top-brand-insight-div{
+    width: 100%;
+    height: 200px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 44px;
+    color: #6c7c93;
+    /*background-color: cyan;*/
+}
+
+.body-container-top-brand-insight-box-div{
+    float: left;
+    margin-top: 39px;
+    margin-right: 25px;
+    width: 380px;
+    height: 161px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px #e6eaee;
+}
+
+.body-container-top-brand-insight-box-header-div{
+    float: top;
+    width: 100%;
+    height: 45.5px;
+    border-width: 1px;
+    border-color: rgba(151, 151, 151, 0.2);
+    border-style: none none solid none;
+}
+
+.body-container-top-brand-insight-box-header-title-div{
+    position: relative;
+    float: left;
+    width: 75%;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%); 
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #9fa9ba;
+}
+
+.body-container-top-brand-insight-box-header-artifacts-div{
+    position: relative;
+    float: right;
+    width: 25%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #9fa9ba;
+}
+
+.body-container-top-brand-insight-box-header-artifacts-left-div{
+    position: relative;
+    float: left;
+    top: 2px;
+    width: 50%;
+    left: 50px;
+}
+
+.body-container-top-brand-insight-box-header-artifacts-right-div{
+    position: relative;
+    float: right;
+    right: 6px;
+    top: -14px;
+    width: 50%;
+}
+
+.body-container-top-brand-insight-box-header-artifacts-right-table-div{
+    width: 10px; height: 20px; float: right;
+}
+
+.body-container-top-brand-insight-box-header-artifacts-right-column-div{
+    float: left; width: 5px; height: 8px;
+}
+
+.body-container-top-brand-insight-box-header-artifacts-right-row-div{
+    float: top; width: 4px; height: 4px;
+}
+
+.body-container-top-brand-insight-box-body-div{
+    float: top;
+    width: 100%;
+    height: 113.5px;
+}
+
+.body-container-top-brand-insight-box-body-left-div{
+    position: relative;
+    float: left;
+    top: 4px;
+    left: 5px;
+    width: 65px;
+}
+
+.body-container-top-brand-insight-box-body-center-div{
+    position: relative;
+    float: left;
+    top: 4px;
+    width: 234px;
+    height: 93%;
+}
+
+.body-container-top-brand-insight-box-body-right-div{
+    position: relative;
+    float: left;
+    top: 4px;
+    width: 73px;
+    height: 93%;
+}
+
+.body-container-top-brand-insight-box-body-right-top-div{
+    position: relative;
+    float: top;
+    top: -18px;
+    left: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    color: #354052;
+}
+
+.body-container-top-brand-insight-box-body-right-bottom-div{
+    position: relative;
+    float: top;
+    top: -53px;
+    left: 12px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 35px;
+    color: #354052;
+}
+
+.body-container-top-brand-insight-box-body-center-avatar-div{
+    position: relative;
+    float: top;
+    top: 22.5px;
+    width: 66px;
+    height: 66px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #d8d8d8;
+}
+
+.body-container-center-div{
+    position: absolute;
+    float: left;
+    top: 380px;
+    left: 27px;
+    right: 0;
+    height: 554px;
+    margin: auto;
+}
+
+.body-container-center-header-div{
+    width: 90%;
+    height: 61px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 45px;
+    color: #283141;
+}
+
+.body-container-center-header-filters-cointainer-div{
+    width: 1038px;
+    height: 70px;
+}
+
+.body-container-center-header-filters-cointainer-left-div{
+    float: left;
+    width: 631px;
+    height: 100%;
+    
+}
+
+.body-container-center-header-filters-cointainer-right-div{
+    float: right;
+    width: 385px;
+    height: 100%;
+}
+
+.body-container-center-header-filters-cointainer-left-dates-div{
+    float:top;
+    width: 631px;
+    height: 24px;
+}
+
+.body-container-center-header-filters-cointainer-left-dates-input-div{
+    float:left;
+    height: 100%;
+}
+
+.body-container-center-header-filters-cointainer-left-date-intput{
+    font-family: 'Open Sans', sans-serif;
+    width: 109px;
+    font-size: 16px;
+    color: #7f8fa4;
+    border: none;
+    border-width: 0px;
+    background-color: #f2f5f8;
+}
+
+.body-container-center-header-filters-cointainer-left-line-div{
+    float: top;
+    width: 218px;
+    height: 0px;
+    border: solid 1px #7f8fa4;
+}
+
+.body-container-center-header-filters-cointainer-left-search-div{
+    float: top;
+    height: 36px;
+}
+
+.body-container-center-header-filters-cointainer-left-search-field-input{
+    width: 273px;
+    height: 36px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px #cccfd4;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #9fa9ba;
+}
+
+.body-container-center-header-filters-cointainer-left-search-space-div{
+    float: left;
+    width: 17px;
+    height: 36px;
+}
+
+.body-container-center-header-filters-cointainer-left-search-button{
+    width: 89px;
+    height: 36px;
+    border-radius: 4px;
+    background-color: #0294ff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #9fa9ba;
+}
+
+.clean{
+    height: 1px;
+    border: none 0px;
+}
+
+.body-container-center-graph{
+    height: 410px;
+    width: 1050px;
+    background-color: white;
+}
+
+.body-container-center-graph-style{
+    position: relative;
+    height: 381px;
+    width: 800px;
+    top: 24px;
+    left: 28px;
+}
+
+.body-container-bottom-div{
+    position: absolute;
+    float: left;
+    top: 950px;
+    left: 27px;
+    right: 0;
+    height: 581px;
+    margin: auto;
+}
+
+.body-container-bottom-reset-color{
+    background-color: #f2f5f8;
+}
+
+.body-container-bottom-stats-div{
+    float: left;
+    width: 202px;
+    height: 381px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px #e6eaee;
+}
+
+.body-container-bottom-stats-space-div{
+    float: left;
+    width: 21px;
+    height: 381px;
+}
+
+.body-container-bottom-stats-graph-div{
+    float: top;
+    height: 297px;
+}
+
+.body-container-bottom-stats-user-info-div{
+    float: top;
+    height: 84px;
+}
+
+.body-container-bottom-stats-user-info-avatar-div{
+    position: relative;
+    float: left;
+    top: 20px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #d8d8d8;
+}
+
+.body-container-bottom-stats-user-info-name-div{
+    position: relative;
+    float: left;
+    top: 35px;
+    left: 43px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #7f8fa4;
+}
+
+
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    opacity:  0.3;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   opacity:  0.3;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   opacity:  0.3;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   opacity:  0.3;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   opacity:  0.3;
+}   

@@ -155,6 +155,7 @@ return [
         'brand' => 'marca',
         'start' => 'fecha de inicio',
         'end' => 'fecha de fin',
-        'rol' => 'permisos'
+        'rol' => 'permisos',
+        'anejamiento' => 'añejamiento'
     ],
 ];

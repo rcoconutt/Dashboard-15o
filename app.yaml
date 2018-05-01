@@ -1,0 +1,26 @@
+runtime: php
+env: flex
+
+runtime_config:
+  document_root: public
+
+# Skip ".env"
+skip_files:
+  - .env
+
+env_variables:
+  # Environment variables.
+  APP_LOG: errorlog
+  APP_KEY: base64:i8f3UCd9U3Ll4jFvu1oqbubZG0k7F1SqyLn3w5ht5RE=
+  APP_DEBUG: true
+  STORAGE_DIR: /tmp
+  CACHE_DRIVER: database
+  SESSION_DRIVER: database
+  DB_HOST: localhost
+  DB_DATABASE: 15onzas
+  DB_USERNAME: root
+  DB_PASSWORD: 1puntocinco.com
+  DB_SOCKET: "/cloudsql/puntocinco-202119:us-central1:unopuntocinco-db"
+
+beta_settings:
+    cloud_sql_instances: "puntocinco-202119:us-central1:unopuntocinco-db"

@@ -1,0 +1,31 @@
+[14-Aug-2017 05:53:01 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 18401103 bytes) in /home/u66977058/public_html/test/api.php on line 146
+[14-Aug-2017 05:57:32 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 18533995 bytes) in /home/u66977058/public_html/test/api.php on line 146
+[14-Aug-2017 06:06:16 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 18356091 bytes) in /home/u66977058/public_html/test/api.php on line 146
+[27-Sep-2017 15:44:17 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect failed. Host 'localhost' is not allowed to connect to this MySQL server' in /home/u66977058/public_html/test/api.php:110
+Stack trace:
+#0 /home/u66977058/public_html/test/api.php(2007): MySQL->connect('127.0.0.1', 'U15ONZAS_USER', 'U15ONZAS_USER', '15ONZAS', NULL, NULL, 'utf8')
+#1 /home/u66977058/public_html/test/api.php(2507): PHP_CRUD_API->__construct(Array)
+#2 {main}
+  thrown in /home/u66977058/public_html/test/api.php on line 110
+[09-Nov-2017 10:25:16 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 52375559 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[09-Nov-2017 10:25:33 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 52375559 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[09-Nov-2017 10:41:51 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 52375559 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[09-Nov-2017 10:44:17 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 52375559 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[09-Nov-2017 10:56:55 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 52375559 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[16-Nov-2017 17:56:53 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 61495651 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[16-Nov-2017 17:57:39 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 61495651 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[16-Nov-2017 18:02:59 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 61495651 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[16-Nov-2017 18:03:23 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 61495651 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[04-Dec-2017 04:29:31 UTC] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 53230277 bytes) in /home/u66977058/public_html/test/api.php on line 1925
+[25-Jan-2018 14:59:33 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect failed. Host 'localhost' is not allowed to connect to this MySQL server' in /home/u66977058/public_html/test/api.php:109
+Stack trace:
+#0 /home/u66977058/public_html/test/api.php(2005): MySQL->connect('127.0.0.1', 'U15ONZAS_USER', 'U15ONZAS_USER', '15ONZAS', NULL, NULL, 'utf8')
+#1 /home/u66977058/public_html/test/api.php(2510): PHP_CRUD_API->__construct(Array)
+#2 {main}
+  thrown in /home/u66977058/public_html/test/api.php on line 109
+[22-Mar-2018 17:29:38 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Connect failed. Host 'localhost' is not allowed to connect to this MySQL server' in /home/u66977058/public_html/test/api.php:109
+Stack trace:
+#0 /home/u66977058/public_html/test/api.php(2005): MySQL->connect('127.0.0.1', 'U15ONZAS_USER', 'U15ONZAS_USER', '15ONZAS', NULL, NULL, 'utf8')
+#1 /home/u66977058/public_html/test/api.php(2510): PHP_CRUD_API->__construct(Array)
+#2 {main}
+  thrown in /home/u66977058/public_html/test/api.php on line 109

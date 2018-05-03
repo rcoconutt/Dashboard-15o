@@ -10,7 +10,7 @@ class Recibo extends Model
     protected $primaryKey = 'ID_RECIBO';
     public $timestamps = false;
     protected $fillable = [
-        'ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'RECIBO', 'NUMERO', 'FECHA', 'status'
+        'ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'RECIBO', 'NUMERO', 'FECHA', 'status', 'url'
     ];
 
     public function desgloce() {

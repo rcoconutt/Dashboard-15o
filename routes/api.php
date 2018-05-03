@@ -21,6 +21,8 @@ Route::get('destilados', 'DestiladoController@index');
 Route::post('kpi', 'KpiController@getMarcaData');
 Route::post('kpi/centro', 'KpiController@getCentroData');
 
+Route::post('recibos', 'RecibosController@store');
+
 Route::apiResource('venues', 'VenuesController')->except([
     'show'
 ]);

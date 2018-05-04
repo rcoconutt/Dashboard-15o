@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Recibo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -86,7 +87,10 @@ class RecibosController extends Controller
 
             return $recibo->ID_RECIBO;
         } catch (\Exception $ex) {
-            return response()->json(['success' => false, 'message' => $ex->getMessage() . $ex->getFile() . $ex->getLine()], 500);
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+            return $ex->getMessage();
         }
     }
 }

@@ -2502,12 +2502,11 @@ class PHP_CRUD_API {
 // uncomment the lines below when running in stand-alone mode:
 $api = new PHP_CRUD_API(array(
  	'dbengine'=>'MySQL',
- 	'hostname'=>'127.0.0.1',
+ 	'hostname'=>'7.52.194.35.bc.googleusercontent.com',
  	'username'=>'root',
- 	'password'=>'1puntocinco.com',
- 	'database'=>'15onzas',
- 	'charset'=>'utf8',
-    'socket' => '/cloudsql/puntocinco-202119:us-central1:unopuntocinco-db'
+ 	'password'=>'ANVujCekEvm5ZvTV',
+ 	'database'=>'testing',
+ 	'charset'=>'utf8'
  ));
  $api->executeCommand();
 // For Microsoft SQL Server 2012 use:

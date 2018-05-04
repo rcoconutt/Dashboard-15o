@@ -6,6 +6,9 @@
         <div class="row">
             <div class="col-xs-12 col-md-6">
                 <div class="view gradient-card-header text-dark">
+                    <a href="{{ url('admin') }}"  class="btn btn-sm btn-outline-default navbar-btn pull-left" style="margin-top: 10px; margin-left: 15px">
+                        <span class="fas fa-caret-left fa-lg" aria-hidden="true"></span> Volver
+                    </a>
                     <h4 class="h2-responsive text-center" style="margin-top: 8px"><strong>Datos</strong></h4>
                 </div>
 
@@ -60,7 +63,15 @@
                     <div class="row card-body">
                         <div class="col-md-12 text-center">
                             <a href="#" onclick="event.preventDefault();">
-                                <img src="data:image/jpeg;base64,{{ base64_encode($recibo->RECIBO) }}" width="250px" id="content" height="250px" style="margin: 0 auto;"/>
+                                @if($recibo->RECIBO)
+                                    <img src="data:image/jpeg;base64,{{ base64_encode($recibo->RECIBO) }}" width="250px" id="content" height="250px" style="margin: 0 auto;"/>
+                                @else
+                                    @if($recibo->url)
+                                        <img src="{{ $recibo->url }}" width="250px" id="content" height="250px" style="margin: 0 auto;">
+                                    @else
+                                        <img src="{{ asset('images/null.png') }}" width="250px" id="content" height="250px" style="margin: 0 auto;">
+                                    @endif
+                                @endif
                             </a>
                         </div>
                     </div>

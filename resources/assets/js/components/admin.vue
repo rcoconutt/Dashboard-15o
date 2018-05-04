@@ -44,6 +44,7 @@
                                 return '<a class="btn btn-link btn-sm waves-effect text-primary" href="/admin/recibo/' + data + '">Revisar</a>'
                             }},
                     ],
+                    aaSorting: [ [0,'desc'] ],
                     language: {
                         search: "Buscar:",
                         paginate: {

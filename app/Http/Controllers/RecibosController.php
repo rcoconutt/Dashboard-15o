@@ -16,7 +16,7 @@ class RecibosController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'success',
-                'tickets' => Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')->with('usuario', 'centro')->get()
+                'tickets' => Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')->orderBy('FECHA', 'desc')->with('usuario', 'centro')->get()
             ], 200);
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => "Error, código 500" . $ex->getMessage()], 500);
@@ -64,11 +64,14 @@ class RecibosController extends Controller
 
             //$recibo = $request->get('RECIBO');
             $file_data = $request->input('RECIBO');
-            $file_name = 'image_'.time().'.png';
+            $file_name = '/' . Carbon::now()->year . '/' . Carbon::now()->month . '/recibo_' . time() . '.png';
             list($type, $file_data) = explode(';', $file_data);
             list(, $file_data) = explode(',', $file_data);
+            $disk = Storage::disk('gcs');
+
             if ($file_data != "") {
-                Storage::disk('public')->put($file_name,base64_decode($file_data));
+                $disk->put($file_name, base64_decode($file_data));
+                $disk->setVisibility($file_name, 'public');
             }
 
             $recibo = Recibo::create([
@@ -78,10 +81,10 @@ class RecibosController extends Controller
                 'NUMERO' => null,
                 'FECHA' => Carbon::now(),
                 'status' => 0,
-                //'url' =>
+                'url' => $disk->url($file_name)
             ]);
 
-            return response()->json(['success' => false, 'message' => 'El recibo se creo correctamente']);
+            return $recibo->ID_RECIBO;
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => $ex->getMessage() . $ex->getFile() . $ex->getLine()], 500);
         }

@@ -161,6 +161,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
 
+        // GCP Storage
+        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
+
     ],
 
     /*

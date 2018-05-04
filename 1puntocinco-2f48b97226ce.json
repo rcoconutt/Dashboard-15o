@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "puntocinco-202119",
+  "private_key_id": "2f48b97226ceb1e25d95c662c2295ebe5f53a6e6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvbLwV8q3gWf+z\n3fMOongHPDgDICDCgKmpvk8b6XAfh1N/ij66scXTuLaWJO060+JTABhjyYP0AWHU\n32Zy7BCICiejvUkVzAj/pSkAIuSkIQteq570UkmdRm2ti6XUIL2b7LOIfIDEzzpi\nja5i8YXwRV6Gj0enmzrUEbC/uW/9gzOOt4uY3bcFE98gBy0FT4xJYGeZol2zKjsR\nRtCpOylZ6OdYdv8xQkPdjpKTTRn+KiGq8Z47nzvLlQigLTHccTbc3tNur4HqmJ8m\n5Ii8z6ORr/NBe1Buieoms0zVyondMdlwy6pOY0GEVvaUiGIJgLhViaIlKHMPBZR7\nRuMna3x7AgMBAAECggEADQTKd0KEVD25np/zytE/NneUnJQaJPUmzORvuzLkJvgv\nDSxgTWX7Ys621jEKs1lILEAPOftEN1aRlm+3Na4pPT9WWRjSFLOzXe2O5mYF29xh\nRfcB8UCDcBBAUXx8o7UuUnpgNIUw3+o/0KfnxOCxv6FroMbUsC6dULcOC/HMyt59\n6qvc7ipQOURzyirBYvtZUmhkgcQCIZ4239zlMucNvTOWEW3QKQN1yeIIsxUWCKwR\nY7ue37gFR3H2KfKSsfDEQaMYNnjMdBFQ0QX3z/6AWW12m57TC43FSBphy33fmRIJ\nJ6LuvRQhKzSg7DclZLlsddqz8sCiyHuy8ykruXSIEQKBgQDj0E2tPoiYt3Y5iQG+\nKqWrr77JQcBreBe1afy18mFbdWOsRqtEarOBTp0t9pJsvoDF3VS0iVlHjjyhMtHK\n20p4+hIWRlIULgs9V6IhG1N1MTGwAUCOZ75u0nsSipS8SKcX91l48jmEgYpRSKCd\n9W/4fgP5YsZ5Or47AnG0AbNI6QKBgQDFIRS+S+pIl1/wFrh4AktUHLC/MmWTHv/l\n/UW7fYSN23e09EqRIfzHJ5glTbMySb6etoXqGX8UtWS9wPAiE/huEdrM5p99YE//\nfJ2u0Cft4pCK9AIxVH58MgHF8QvHJOeOqeIlSdXcIsJ2ehkNlNsWPJcyds2NM5Nd\n9BAbRVt7wwKBgQCT2IfQuxijI81SIZxD8iF6fp/utQFPvayFS7d5zUdpt5FsKKDV\n0fmVHZPcVH1KnYes4asrT0flrGWkp/qHEDIQuRor4o86EXex48GQgs9y6u44L1fa\nE3H/MhI1QkKsvunSH/CtEWZKnFdL0TqLyNFWD1I88uGjo3/5g+iOzduwoQKBgBSz\nTpxVGHsa+kYZ/LENfJ+Oi7joL+ZtIO4j1IjFu3+yBjYIWTQ4X3UCYWW5bRHg0JWW\nESXuG3wvOC787bqGYlYcpd9ScHkX/g6UJXLQBQFkA020Je7MMqQUFD+W+melJnPC\nvy6vPDfrpoQOekcE1KTXJAF2nEsxmU4KbQ6QD/VFAoGAKd7oJXZ883V/lBjGyE8w\nJPhji6hqT7B99f5vwm2DHenTqE8JQTk4mP/aicW6QSL/5wC1Qef5FRaKz4Q4LjVm\n89AWGH1E9ZBE8GeDStG9ifyxVbyREKdpx4NV36tXPYzNbpzB21fBblP8+xnao+DZ\nLwuQpouZn4WORf1t0YnoDxg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "google-cloud-storage@puntocinco-202119.iam.gserviceaccount.com",
+  "client_id": "118062468487306825190",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-cloud-storage%40puntocinco-202119.iam.gserviceaccount.com"
+}

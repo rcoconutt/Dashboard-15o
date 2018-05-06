@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Estado;
 use App\Municipio;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class MunicipiosController extends Controller
@@ -20,7 +23,7 @@ class MunicipiosController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'success',
-                'municipios' => Municipio::all()
+                'municipios' => Municipio::with('estado')->get()
             ], 200);
         } catch (\Exception $ex) {
             return response()->json(['success' => false, 'message' => "Error, código 500"], 500);
@@ -47,7 +50,8 @@ class MunicipiosController extends Controller
      */
     public function create()
     {
-        //
+        $estados = Estado::all();
+        return view('zonas.create', compact('estados'));
     }
 
     /**
@@ -77,8 +81,8 @@ class MunicipiosController extends Controller
                 'municipio' => Municipio::create([
                     "ID_ESTADO" => $request->get('estado'),
                     "ID_ZONA" => 0,
-                    "ABREVIATURA" => $request->get('abreviatura'),
-                    'MUNICIPIO' => $request->get('nombre'),
+                    "ABREVIATURA" => htmlentities($request->get('abreviatura')),
+                    'MUNICIPIO' => htmlentities($request->get('nombre')),
                     'FECHA_ALTA' => Carbon::now(),
                     'FECHA_BAJA' => null,
                     'ACTIVO' => $request->get('status'),
@@ -89,15 +93,9 @@ class MunicipiosController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Municipio  $municipio
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Municipio $municipio)
+    public function show()
     {
-        //
+        return view('zonas.index');
     }
 
     /**
@@ -106,9 +104,45 @@ class MunicipiosController extends Controller
      * @param  \App\Municipio  $municipio
      * @return \Illuminate\Http\Response
      */
-    public function edit(Municipio $municipio)
+    public function edit($municipio)
     {
-        //
+        try {
+            $municipio = Municipio::where('ID_MUNICIPIO', $municipio)->firstOrFail();
+            $estados = Estado::all();
+
+            return view('zonas.update', compact('municipio', 'estados'));
+        } catch (ModelNotFoundException $ex) {
+            return redirect()->back()->withErrors(['error' => "Zona no encontrada"]);
+        } catch (\Exception $ex) {
+            return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
+        }
+    }
+
+    public function action(Request $request) {
+        try {
+            $action = $request->get('actions');
+            if ($action == 1 || $action == 2) {
+                if ($action == 2) {
+                    $action = 0;
+                }
+                // Aprobar o rechazar
+                Municipio::whereIn('ID_MUNICIPIO', $request->get('municipio_id'))->update(['ACTIVO' => $action]);
+                if ($action == 1) {
+                    return redirect()->back()->with('message', 'Zonas habilitadas correctamente!');
+                } else {
+                    return redirect()->back()->with('message', 'Zonas deshabilitadas correctamente! ');
+                }
+            } else {
+                // Eliminar
+                Municipio::whereIn('ID_MUNICIPIO', $request->get('municipio_id'))->delete();
+                return redirect()->back()->with('message', 'Zonas eliminadas correctamente!');
+            }
+        } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+            return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
+        }
     }
 
     /**
@@ -135,8 +169,8 @@ class MunicipiosController extends Controller
 
             $municipio->update([
                 "ID_ESTADO" => $request->get('estado'),
-                "ABREVIATURA" => $request->get('abreviatura'),
-                'MUNICIPIO' => $request->get('nombre'),
+                "ABREVIATURA" => htmlentities($request->get('abreviatura')),
+                'MUNICIPIO' => htmlentities($request->get('nombre')),
                 'ACTIVO' => $request->get('status'),
             ]);
 

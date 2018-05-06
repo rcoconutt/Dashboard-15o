@@ -13,4 +13,8 @@ class Municipio extends Model
     protected $fillable = [
         "ID_MUNICIPIO","ID_ESTADO","ID_ZONA","MUNICIPIO","ABREVIATURA","FECHA_ALTA","FECHA_BAJA","ACTIVO"
     ];
+
+    public function estado() {
+        return $this->hasOne(Estado::class, 'ID_ESTADO', 'ID_ESTADO');
+    }
 }

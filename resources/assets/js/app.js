@@ -21,6 +21,12 @@ Vue.component('users', require('./components/Users'));
 Vue.component('notificaciones', require('./components/Notificaciones'));
 Vue.component('users-admin', require('./components/UsersAdmin'));
 Vue.component('admin', require('./components/admin'));
+
+// Zonas
+Vue.component('zonas-index', require('./components/zonas/ZonasIndex'));
+Vue.component('zonas-create', require('./components/zonas/ZonasCreate'));
+Vue.component('zonas-update', require('./components/zonas/ZonasUpdate'));
+
 Vue.component(Autocomplete);
 
 const app = new Vue({

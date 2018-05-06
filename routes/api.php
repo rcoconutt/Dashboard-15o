@@ -30,3 +30,4 @@ Route::apiResource('venues', 'VenuesController')->except([
 Route::apiResource('municipios', 'MunicipiosController')->except([
     'index', 'show'
 ]);
+

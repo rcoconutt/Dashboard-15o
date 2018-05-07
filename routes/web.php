@@ -29,7 +29,15 @@ Route::middleware(['auth', 'not-admin'])->group(function () {
     Route::get('/venues', 'VenuesController@show');
     Route::post('/venues/action', 'VenuesController@action');
     Route::get('/venues/create', 'VenuesController@create');
-    Route::get('/venues/{zona_id}', 'VenuesController@edit');
+    Route::get('/venues/{venue_id}', 'VenuesController@edit');
+
+    Route::get('/destilados', 'DestiladoController@show');
+    Route::post('/destilados/action', 'DestiladoController@action');
+    Route::get('/destilados/create', 'DestiladoController@create');
+    Route::get('/destilados/{destilado_id}', 'DestiladoController@edit');
+    Route::put('/destilados/{destilado_id}', 'DestiladoController@update');
+    Route::post('/destilados', 'DestiladoController@store');
+
 });
 
 /*

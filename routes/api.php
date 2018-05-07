@@ -31,3 +31,5 @@ Route::apiResource('municipios', 'MunicipiosController')->except([
     'index', 'show'
 ]);
 
+Route::get('/v1/destilados', 'DestiladoController@api');
+Route::put('/v1/destilados/{destilado_id}', 'DestiladoController@update');

@@ -6,7 +6,7 @@
                     <a class="btn btn-sm btn-link btn-block waves-effect" href="/zonas">Volver</a>
                 </div>
                 <div class="col-md-6 col-sm-12 text-center">
-                    <strong>Crear nueva zona</strong>
+                    <strong>Actualizar zona</strong>
                 </div>
             </div>
             <div class="card-body">

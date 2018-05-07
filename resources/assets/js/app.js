@@ -32,6 +32,10 @@ Vue.component('venues-index', require('./components/venues/VenuesIndex'));
 Vue.component('venues-create', require('./components/venues/VenuesCreate'));
 Vue.component('venues-update', require('./components/venues/VenuesUpdate'));
 
+// Destilados
+Vue.component('destilados-index', require('./components/destilados/DestiladosIndex'));
+Vue.component('destilados-update', require('./components/destilados/DestiladosUpdate'));
+
 Vue.component(Autocomplete);
 
 const app = new Vue({

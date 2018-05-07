@@ -10,7 +10,7 @@
                     </div>
                 @endif
                 <hr>
-                <admin></admin>
+                <admin :message="'{{ (session('message')) ? session('message') : ""  }}'" :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></admin>
             </div>
         </div>
     </div>

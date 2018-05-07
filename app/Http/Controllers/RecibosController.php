@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Desgloce;
 use App\Recibo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -48,6 +49,21 @@ class RecibosController extends Controller
             return redirect()->back()->with('message', 'El recibo se actualizó correctamente');
         } catch (\Exception $ex) {
             return redirect()->back()->withErrors(["error" => $ex->getMessage()]);
+        }
+    }
+
+    public function action(Request $request) {
+        try {
+            // Eliminar
+            Desgloce::whereIn('ID_RECIBO', $request->get('recibo_id'))->delete();
+            Recibo::whereIn('ID_RECIBO', $request->get('recibo_id'))->delete();
+
+            return redirect()->back()->with('message', 'Tickets eliminados correctamente!');
+        } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+            return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
         }
     }
 

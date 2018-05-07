@@ -115558,7 +115558,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -115587,11 +115587,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "admin",
+    props: ['user', 'message'],
+    data: function data() {
+        return {
+            error: null,
+            all: null,
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+    },
+
     methods: {
         getTickets: function getTickets() {
             $('#tickets').DataTable({
@@ -115601,7 +115629,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 },
                 scrollY: "300px",
                 responsive: true,
-                columns: [{ data: 'ID_RECIBO' }, { data: 'usuario.NOMBRE' }, { data: 'FECHA', render: function render(data, type, row, meta) {
+                columns: [{ data: 'ID_RECIBO', render: function render(data, type, row, meta) {
+                        return "<div class='form-check mb-2'><input class='form-check-input' name='recibo_id[]' type='checkbox' value='" + data + "' ></div>";
+                    } }, { data: 'usuario.NOMBRE' }, { data: 'FECHA', render: function render(data, type, row, meta) {
                         return __WEBPACK_IMPORTED_MODULE_0_moment___default()(data).format('DD-MM-YYYY');
                     } }, { data: 'status', render: function render(data, type, row, meta) {
                         if (data === '0' || data === 0) {
@@ -115637,7 +115667,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         $().ready(function () {
+            if (_this.message.length > 0) {
+                swal({ title: "", text: _this.message, button: "Entendido", icon: "success", timer: 3000 });
+            }
+
             _this.getTickets();
+
+            $('#send').on('click', function (e) {
+                event.preventDefault();
+                var numberOfChecked = $('input:checkbox:checked').length;
+                var value = $("#actions").val();
+                if (numberOfChecked > 0) {
+                    swal({
+                        title: "Confirmar acción",
+                        text: "Realmente deseas eliminar las tickets seleccionadas",
+                        icon: "error",
+                        buttons: ["Cancelar", "Eliminar"]
+                    }).then(function (value) {
+                        if (value) {
+                            $("#form").submit();
+                        }
+                    });
+                } else {
+                    swal({ title: "", text: "Selecciona al menos un ticket", button: "Entendido" });
+                }
+            });
         });
     }
 });
@@ -115650,37 +115704,103 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c(
+          "form",
+          {
+            attrs: {
+              action: "/admin/recibo/action",
+              method: "POST",
+              id: "form"
+            }
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.csrf,
+                  expression: "csrf"
+                }
+              ],
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.csrf = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._m(1)
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "table-responsive" }, [
-      _c(
-        "table",
-        {
-          staticClass: "table table-bordered dt-responsive",
-          attrs: { id: "tickets", cellspacing: "0" }
-        },
-        [
-          _c("thead", [
-            _c("tr", [
-              _c("th", [_vm._v("# Ticket")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Bartender")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Fecha de envío")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Estado")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("Revisar")])
-            ])
-          ])
-        ]
-      )
+    return _c("div", { staticClass: "row flex-row-reverse" }, [
+      _c("div", { staticClass: "col-md-4 second col-sm-12" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 col-sm-12" }, [_c("br")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4 second col-sm-12" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-sm btn-outline-danger",
+            attrs: { type: "button", id: "send", "aria-label": "Left Align" }
+          },
+          [
+            _vm._v(
+              "\n                            Eliminar seleccionados\n                        "
+            )
+          ]
+        )
+      ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "table",
+      {
+        staticClass: "table table-bordered dt-responsive",
+        attrs: { id: "tickets", cellspacing: "0" }
+      },
+      [
+        _c("thead", [
+          _c("tr", [
+            _c("th", [_vm._v("#")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Bartender")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Fecha de envío")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Estado")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Revisar")])
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true

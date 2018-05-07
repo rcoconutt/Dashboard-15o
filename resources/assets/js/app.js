@@ -27,6 +27,11 @@ Vue.component('zonas-index', require('./components/zonas/ZonasIndex'));
 Vue.component('zonas-create', require('./components/zonas/ZonasCreate'));
 Vue.component('zonas-update', require('./components/zonas/ZonasUpdate'));
 
+// Centros de consumo
+Vue.component('venues-index', require('./components/venues/VenuesIndex'));
+Vue.component('venues-create', require('./components/venues/VenuesCreate'));
+Vue.component('venues-update', require('./components/venues/VenuesUpdate'));
+
 Vue.component(Autocomplete);
 
 const app = new Vue({

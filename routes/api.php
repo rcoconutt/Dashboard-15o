@@ -4,7 +4,7 @@ Route::get('dinamicas/{brand_id?}', 'DinamicaController@api');
 Route::get('dinamicas/{zona_id}/{centro_id}', 'DinamicaController@indexByZona');
 Route::post('dinamicas', 'DinamicaController@store');
 Route::get('venues/search/{q}', 'VenuesController@search');
-Route::get('venues/{municipio?}', 'VenuesController@index');
+Route::get('venues', 'VenuesController@index');
 Route::get('municipios/search/{q}', 'MunicipiosController@search');
 Route::get('municipios', 'MunicipiosController@index');
 Route::get('marcas/search/{q}', 'MarcasController@search');
@@ -24,7 +24,7 @@ Route::post('kpi/centro', 'KpiController@getCentroData');
 Route::post('recibos', 'RecibosController@store');
 
 Route::apiResource('venues', 'VenuesController')->except([
-    'show'
+    'show', 'index'
 ]);
 
 Route::apiResource('municipios', 'MunicipiosController')->except([

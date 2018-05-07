@@ -13,4 +13,8 @@ class Venue extends Model
     protected $fillable = [
         'ID_CENTRO', 'ID_MUNICIPIO', 'CENTRO', 'FECHA_ALTA', 'FECHA_BAJA', 'ACTIVO',
     ];
+
+    public function municipio() {
+        return $this->hasOne(Municipio::class, 'ID_MUNICIPIO', 'ID_MUNICIPIO');
+    }
 }

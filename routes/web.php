@@ -25,6 +25,11 @@ Route::middleware(['auth', 'not-admin'])->group(function () {
     Route::post('/zonas/action', 'MunicipiosController@action');
     Route::get('/zonas/create', 'MunicipiosController@create');
     Route::get('/zonas/{zona_id}', 'MunicipiosController@edit');
+
+    Route::get('/venues', 'VenuesController@show');
+    Route::post('/venues/action', 'VenuesController@action');
+    Route::get('/venues/create', 'VenuesController@create');
+    Route::get('/venues/{zona_id}', 'VenuesController@edit');
 });
 
 /*

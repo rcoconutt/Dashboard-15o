@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Centro;
+use App\Municipio;
 use App\Venue;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class VenuesController extends Controller
@@ -21,7 +24,7 @@ class VenuesController extends Controller
             if ($municipio_id != null) {
                 $venues = Venue::where('ID_MUNICIPIO', $municipio_id)->get();
             } else {
-                $venues = Venue::all();
+                $venues = Venue::with('municipio')->get();
             }
 
             return response()->json([
@@ -83,26 +86,55 @@ class VenuesController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Venue  $venue
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Venue $venue)
-    {
-        //
+    public function action(Request $request) {
+        try {
+            $action = $request->get('actions');
+            if ($action == 1 || $action == 2) {
+                if ($action == 2) {
+                    $action = 0;
+                }
+                // Aprobar o rechazar
+                Venue::whereIn('ID_CENTRO', $request->get('centro_id'))->update(['ACTIVO' => $action]);
+                if ($action == 1) {
+                    return redirect()->back()->with('message', 'Centros habilitados correctamente!');
+                } else {
+                    return redirect()->back()->with('message', 'Centros deshabilitados correctamente! ');
+                }
+            } else {
+                // Eliminar
+                Venue::whereIn('ID_CENTRO', $request->get('centro_id'))->delete();
+                return redirect()->back()->with('message', 'Centros eliminadas correctamente!');
+            }
+        } catch (\Exception $ex) {
+            Log::error("DevError Line " . $ex->getLine());
+            Log::error("DevError File " . $ex->getFile());
+            Log::error("Deverror Message " . $ex->getMessage());
+            return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Venue  $venue
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Venue $venue, Request $request)
+    public function create() {
+        $zonas = Municipio::all();
+        return view('venues.create', compact('zonas'));
+    }
+
+    public function show()
     {
-        //
+        return view('venues.index');
+    }
+
+    public function edit($venue)
+    {
+        try {
+            $venue = Venue::where('ID_CENTRO', $venue)->firstOrFail();
+            $zonas = Municipio::all();
+
+            return view('venues.update', compact('venue', 'zonas'));
+        } catch (ModelNotFoundException $ex) {
+            return redirect()->back()->withErrors(['error' => "Zona no encontrada"]);
+        } catch (\Exception $ex) {
+            return redirect()->back()->withErrors(['error' => $ex->getMessage()]);
+        }
     }
 
     /**

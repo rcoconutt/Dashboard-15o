@@ -41,6 +41,10 @@ Vue.component('marcas-index', require('./components/marcas/MarcasIndex'));
 Vue.component('marcas-update', require('./components/marcas/MarcasUpdate'));
 Vue.component('marcas-create', require('./components/marcas/MarcasCreate'));
 
+// KPI
+Vue.component('marcas-autocomplete', require('./components/kpi/MarcasAutocomplete'));
+Vue.component('centros-autocomplete', require('./components/kpi/CentrosAutocomplete'));
+
 Vue.component(Autocomplete);
 
 const app = new Vue({

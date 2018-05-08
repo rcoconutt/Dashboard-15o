@@ -4,7 +4,8 @@
     <div class="container-fluid">
         <section class="mt-lg-5">
             <div class="row justify-content-center">
-                <div class="col-md-3">
+                <div class="col-md-2">
+                    <!--
                     <div class="form-group">
                         <select class="form-control" id="marca" name="marca">
                             <option disabled selected> Selecciona una marca</option>
@@ -13,15 +14,20 @@
                             @endforeach
                         </select>
                     </div>
+                    -->
+                    <marcas-autocomplete :marcas="{{ $marcas }}" :user="{{ \Illuminate\Support\Facades\Auth::user() }}"></marcas-autocomplete>
+                </div>
+                <div class="col-md-3">
+                    <centros-autocomplete :centros="{{ $centros }}" :zonas="{{ $zonas }}"></centros-autocomplete>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="Fecha de inicio">
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="Fecha de fin">
                     </div>
@@ -53,7 +59,7 @@
                             <div class="data">
                                 <img src="{{ asset('images/cup.png') }}" style="position: absolute">
                                 <div style="margin-left: 100px">
-                                    <p>Centro de consumo</p>
+                                    <p id="marca_o_centro"></p>
                                     <h3 id="data_centro" class="font-weight-bold dark-grey-text"></h3>
                                     <h4 id="data_centro_copas" class="font-weight-bold dark-grey-text"></h4>
                                 </div>
@@ -87,7 +93,7 @@
         <div>
             <hr>
             <div class="row justify-content-center">
-                <h2 class="font-weight-bold dark-grey-text">Reportes de vendedores</h2>
+                <h2 class="font-weight-bold dark-grey-text">Reporte de vendedores</h2>
             </div>
         </div>
 
@@ -110,26 +116,8 @@
         <div>
             <hr>
             <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <h2 class="font-weight-bold dark-grey-text">Reportes de desplazamiento</h2>
-                </div>
 
-                <div class="col-md-3 text-center">
-                    <div class="form-group">
-                        <select class="form-control" id="centro" name="centro">
-                            <option disabled selected> Selecciona una centro de consumo</option>
-                            @foreach($centros as $centro)
-                                <option value="{{ $centro->ID_CENTRO }}">{{ $centro->CENTRO }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-3 text-center">
-                    <button type="button" id="send_centro" onclick="getCentroData()" class="btn btn-sm btn-default" aria-label="Left Align" disabled>
-                        <span class="fas fa-caret-right fa-lg" aria-hidden="true"></span>
-                    </button>
-                </div>
+                <h2 id="desplazamiento" class="font-weight-bold dark-grey-text">Reporte de desplazamiento</h2>
             </div>
         </div>
 
@@ -154,28 +142,53 @@
 
 @push('scripts')
     <script>
+        let chartA = null, chartB = null;
         document.addEventListener('DOMContentLoaded', init, false);
         function init() {
             createPikaday();
         }
 
-        function createChart(data, chart_id) {
+        function createChart(data, chart_id, id) {
             let ctx = document.getElementById(chart_id);
-            let chart = new Chart(ctx, {
-                type: 'bar',
-                maintainAspectRatio: false,
-                data: data,
-                options: {
-                    responsive: true,
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+            if (id == 1) {
+                if (chartA) {
+                    chartA.destroy();
                 }
-            });
+                chartA = new Chart(ctx, {
+                    type: 'bar',
+                    maintainAspectRatio: false,
+                    data: data,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            } else {
+                if (chartB) {
+                    chartB.destroy();
+                }
+                chartB = new Chart(ctx, {
+                    type: 'bar',
+                    maintainAspectRatio: false,
+                    data: data,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
         }
 
         function createPikaday() {
@@ -204,12 +217,16 @@
             });
         }
 
-        function validateMarca() {
-            let marca = $("#marca").val();
+        function validate() {
+            //let marca = $("#marca").val();
+            let marca = $("input[name=marca]").val();
+            let zona = $("input[name=zona]").val();
+            let centro = $("input[name=centro]").val();
             let fecha_inicio = $("#fecha_inicio").val();
             let fecha_fin = $("#fecha_fin").val();
 
-            if (marca && marca > 0) {
+            if ((marca && marca > 0) || (zona && zona > 0) || (centro && centro >0)) {
+            //if ((marca && marca > 0 || )) {
                 let parsed_fecha = moment(fecha_inicio, 'DD-MM-YYYY');
 
 
@@ -234,11 +251,12 @@
                     return false;
                 }
             } else {
-                error("Selecciona una marca",);
+                error("Selecciona una marca, centro de consumo o zona");
                 return false;
             }
         }
 
+        /*
         function validateCentro() {
             let centro = $("#centro").val();
             if (centro) {
@@ -248,18 +266,22 @@
                 return false;
             }
         }
+        */
 
         function getMarcaData() {
-            if (validateMarca()) {
+            if (validate()) {
                 let button = $("#send");
                 button.html("<img src='/img/loading2.gif' height='20px'>");
                 button.prop("disabled", true);
 
-                let marca = $("#marca").val();
+                //let marca = $("#marca").val();
+                let marca = $("input[name=marca]").val();
+                let centro = $("input[name=centro]").val();
+                let zona = $("input[name=zona]").val();
                 let fecha_inicio = $("#fecha_inicio").val();
                 let fecha_fin = $("#fecha_fin").val();
-                let marca_text = $("#marca").find("option[value='" + marca + "']").text();
-
+                //let marca_text = $("#marca").find("option[value='" + marca + "']").text();
+                let marca_text = "Marca";
 
                 let data_marca = $("#data_marca");
 
@@ -269,18 +291,83 @@
                 let vendedor_vendedor = $("#data_bartender");
                 let vendedor_copas = $("#data_bartender_copas");
 
-                axios.post('/api/kpi', {
+                axios.post('/api/v1/kpi', {
                     marca_id: marca,
                     fecha_inicio: fecha_inicio,
                     fecha_fin: fecha_fin,
+                    centro_id: centro,
+                    zona_id: zona
                 }).then((response) => {
                     let usuario = response.data.usuario;
                     vendedor_vendedor.html(usuario.NOMBRE);
                     vendedor_copas.html(usuario.total + " copas");
 
-                    let centro = response.data.centro;
-                    centro_centro.html(centro.CENTRO);
-                    centro_copas.html(centro.total + " copas");
+                    // por centro
+                    if (response.data.centro || response.data.marca) {
+                        if (response.data.centro) {
+                            let centro = response.data.centro;
+                            centro_centro.html(centro.CENTRO);
+                            centro_copas.html(centro.total + " copas");
+                            $("#marca_o_centro").html("Centro de consumo con más ventas");
+
+                            let labels = [];
+                            let values = [];
+                            let colors = [];
+
+                            $("#desplazamiento").html("Reporte de Centros de consumo");
+
+                            response.data.centros.forEach((centro) => {
+                                labels.push(centro.CENTRO);
+                                values.push(centro.total);
+                                colors.push(getColor());
+                            });
+
+                            let data = {
+                                labels: labels,
+                                datasets: [{
+                                    label: '# de ventas',
+                                    data: values,
+                                    borderWidth: 1,
+                                    backgroundColor: colors,
+                                    borderColor: 'rgba(200, 200, 200, 0.75)',
+                                    hoverBorderColor: 'rgba(200, 200, 200, 1)'
+                                }]
+                            };
+
+                            createChart(data, "chart", 2);
+                        } else {
+                            $("#marca_o_centro").html("Marca con más ventas");
+                            let marca = response.data.marca;
+                            centro_centro.html(marca.MARCA);
+                            centro_copas.html(marca.total + " copas");
+
+                            let labels = [];
+                            let values = [];
+                            let colors = [];
+
+                            response.data.marcas.forEach((marca) => {
+                                labels.push(marca.MARCA);
+                                values.push(marca.total);
+                                colors.push(getColor());
+                            });
+
+                            let data = {
+                                labels: labels,
+                                datasets: [{
+                                    label: '# de ventas',
+                                    data: values,
+                                    borderWidth: 1,
+                                    backgroundColor: colors,
+                                    borderColor: 'rgba(200, 200, 200, 0.75)',
+                                    hoverBorderColor: 'rgba(200, 200, 200, 1)'
+                                }]
+                            };
+
+                            $("#desplazamiento").html("Reporte de marcas");
+
+                            createChart(data, "chart", 2);
+                        }
+                    }
 
                     data_marca.html(marca_text);
 
@@ -306,12 +393,13 @@
                         }]
                     };
 
-                    createChart(data, "chart_vendedores");
+                    createChart(data, "chart_vendedores", 1);
 
                     button.prop("disabled", false);
                     button.html('<span class="fas fa-caret-right fa-lg" aria-hidden="true"></span>');
                     $("#send_centro").prop("disabled", false);
                 }).catch((response) => {
+                    console.log(response);
                     if (response.response) {
                         error(response.response.data.message);
                     } else {
@@ -324,13 +412,15 @@
             }
         }
 
+        /*
         function getCentroData() {
             if (validateCentro()) {
                 let button = $("#send_centro");
                 button.html("<img src='/img/loading2.gif' height='20px'>");
                 button.prop("disabled", true);
 
-                let marca = $("#marca").val();
+                //let marca = $("#marca").val();
+                let marca = $("input[name=marca]").val();
                 let fecha_inicio = $("#fecha_inicio").val();
                 let fecha_fin = $("#fecha_fin").val();
                 let centro = $("#centro").val();
@@ -373,6 +463,7 @@
                 });
             }
         }
+        */
 
         function error(message) {
             swal({

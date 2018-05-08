@@ -8,9 +8,7 @@
                 <div class="card-body">
 
                     <!--Header-->
-                    <div class="form-header">
-                        <p class="h4 text-center mb-4"> Iniciar sesión</p>
-                    </div>
+                    <p class="h4 text-center mb-4"> Iniciar sesión</p>
 
                     @if(isset($errors) && count($errors->all()) > 0)
                         <div class="alert alert-danger">

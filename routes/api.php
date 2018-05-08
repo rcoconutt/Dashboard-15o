@@ -20,6 +20,7 @@ Route::get('tickets', 'RecibosController@api');
 Route::get('destilados', 'DestiladoController@index');
 Route::post('kpi', 'KpiController@getMarcaData');
 Route::post('kpi/centro', 'KpiController@getCentroData');
+Route::post('/v1/kpi', 'KpiController@getData');
 
 Route::post('recibos', 'RecibosController@store');
 

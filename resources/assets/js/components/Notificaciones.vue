@@ -1,7 +1,7 @@
 <template>
     <li class="nav-item dropdown notifications-nav">
         <a class="nav-link dropdown-toggle waves-effect" id="badgeNotificaciones" data-toggle="dropdown" aria-haspopup="true"
-           aria-expanded="false">
+           aria-expanded="false" @click="readAll">
             <span class="badge red">{{ total }}</span>
             Notificaciones
         </a>
@@ -13,7 +13,7 @@
             <div v-else>
                 <strong style="margin-left: 12px">Notificaciones</strong>
                 <div class="readAll">
-                    <a href="#" @click="readAll">Eliminar notificaciones</a>
+                    <!--<a href="#" @click="readAll">Eliminar notificaciones</a>-->
                 </div>
                 <hr>
                 <div v-for="notificacion in notificaciones">
@@ -98,10 +98,13 @@
                     })
             },
             readAll: function () {
-                axios.get('/api/notificaciones/' + this.user.id + '/all')
-                    .then((response) => {
-                        this.getNotifications()
-                    })
+                if (this.total > 0) {
+                    axios.get('/api/notificaciones/' + this.user.id + '/all')
+                        .then((response) => {
+                            //this.getNotifications()
+                            this.total = 0;
+                        })
+                }
             }
         },
         mounted () {

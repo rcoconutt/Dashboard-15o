@@ -50623,7 +50623,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(279);
-module.exports = __webpack_require__(439);
+module.exports = __webpack_require__(444);
 
 
 /***/ }),
@@ -50672,7 +50672,7 @@ Vue.component('venues-update', __webpack_require__(429));
 
 // Destilados
 Vue.component('destilados-index', __webpack_require__(434));
-Vue.component('destilados-update', __webpack_require__(443));
+Vue.component('destilados-update', __webpack_require__(439));
 
 Vue.component(__WEBPACK_IMPORTED_MODULE_0_vuejs_auto_complete___default.a);
 
@@ -113828,6 +113828,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -114562,18 +114568,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass: "form-control",
-        attrs: { id: "tipo_consumo", name: "tipo_consumo" }
-      },
-      [
-        _c("option", { attrs: { value: "1" } }, [_vm._v("Botellas")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2" } }, [_vm._v("Copas")])
-      ]
-    )
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("div", { staticClass: "input-group-text" }, [_vm._v("unidades")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "hidden",
+          id: "tipo_consumo",
+          name: "tipo_consumo",
+          value: "1"
+        }
+      })
+    ])
   },
   function() {
     var _vm = this
@@ -115087,9 +115093,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         readAll: function readAll() {
             var _this3 = this;
 
-            axios.get('/api/notificaciones/' + this.user.id + '/all').then(function (response) {
-                _this3.getNotifications();
-            });
+            if (this.total > 0) {
+                axios.get('/api/notificaciones/' + this.user.id + '/all').then(function (response) {
+                    //this.getNotifications()
+                    _this3.total = 0;
+                });
+            }
         }
     },
     mounted: function mounted() {
@@ -115121,7 +115130,8 @@ var render = function() {
           "data-toggle": "dropdown",
           "aria-haspopup": "true",
           "aria-expanded": "false"
-        }
+        },
+        on: { click: _vm.readAll }
       },
       [
         _c("span", { staticClass: "badge red" }, [_vm._v(_vm._s(_vm.total))]),
@@ -115160,13 +115170,7 @@ var render = function() {
                   _vm._v("Notificaciones")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "readAll" }, [
-                  _c(
-                    "a",
-                    { attrs: { href: "#" }, on: { click: _vm.readAll } },
-                    [_vm._v("Eliminar notificaciones")]
-                  )
-                ]),
+                _c("div", { staticClass: "readAll" }),
                 _vm._v(" "),
                 _c("hr"),
                 _vm._v(" "),
@@ -115656,8 +115660,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         next: "Siguiente",
                         last: "Último"
                     },
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ dinamicas",
-                    lengthMenu: "Mostrar _MENU_ dinamicas",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ tickets",
+                    lengthMenu: "Mostrar _MENU_ tickets",
                     loading: "Cargando"
                 }
             });
@@ -118847,27 +118851,18 @@ if (false) {
 
 /***/ }),
 /* 439 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 440 */,
-/* 441 */,
-/* 442 */,
-/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(444)
+  __webpack_require__(440)
 }
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(446)
+var __vue_script__ = __webpack_require__(442)
 /* template */
-var __vue_template__ = __webpack_require__(447)
+var __vue_template__ = __webpack_require__(443)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -118906,13 +118901,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 444 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(445);
+var content = __webpack_require__(441);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -118932,7 +118927,7 @@ if(false) {
 }
 
 /***/ }),
-/* 445 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -118946,7 +118941,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 446 */
+/* 442 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119050,7 +119045,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 447 */
+/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -119299,6 +119294,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-0b138971", module.exports)
   }
 }
+
+/***/ }),
+/* 444 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

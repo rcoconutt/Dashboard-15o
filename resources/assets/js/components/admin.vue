@@ -82,8 +82,8 @@
                             next:       "Siguiente",
                             last:       "Último"
                         },
-                        info: "Mostrando _START_ a _END_ de _TOTAL_ dinamicas",
-                        lengthMenu:    "Mostrar _MENU_ dinamicas",
+                        info: "Mostrando _START_ a _END_ de _TOTAL_ tickets",
+                        lengthMenu:    "Mostrar _MENU_ tickets",
                         loading: "Cargando"
                     }
                 });

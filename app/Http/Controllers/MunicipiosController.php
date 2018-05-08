@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Estado;
 use App\Municipio;
+use App\Traits\ClearString;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
 
 class MunicipiosController extends Controller
 {
+    use ClearString;
+
     /**
      * Display a listing of the resource.
      *
@@ -81,8 +84,8 @@ class MunicipiosController extends Controller
                 'municipio' => Municipio::create([
                     "ID_ESTADO" => $request->get('estado'),
                     "ID_ZONA" => 0,
-                    "ABREVIATURA" => htmlentities($request->get('abreviatura')),
-                    'MUNICIPIO' => htmlentities($request->get('nombre')),
+                    "ABREVIATURA" => $this->clearString($request->get('abreviatura')),
+                    'MUNICIPIO' => $this->clearString($request->get('nombre')),
                     'FECHA_ALTA' => Carbon::now(),
                     'FECHA_BAJA' => null,
                     'ACTIVO' => $request->get('status'),
@@ -169,8 +172,8 @@ class MunicipiosController extends Controller
 
             $municipio->update([
                 "ID_ESTADO" => $request->get('estado'),
-                "ABREVIATURA" => htmlentities($request->get('abreviatura')),
-                'MUNICIPIO' => htmlentities($request->get('nombre')),
+                "ABREVIATURA" => $this->clearString($request->get('abreviatura')),
+                'MUNICIPIO' => $this->clearString($request->get('nombre')),
                 'ACTIVO' => $request->get('status'),
             ]);
 

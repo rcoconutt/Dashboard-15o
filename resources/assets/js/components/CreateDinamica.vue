@@ -114,14 +114,20 @@
                         <div v-if="kind === '1'">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
-                                    <label for="reglas">Reglas: </label>
+                                    <label for="reglas">Cantidad: </label>
                                     <div class="input-group mb-2">
                                         <input class="form-control form-custom" name="cantidad" v-model="cantidad" id="cantidad"
                                                placeholder="" type="number"/>
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">unidades</div>
+                                            <input type="hidden" id="tipo_consumo" name="tipo_consumo" value="1"/>
+                                        </div>
+                                        <!--
                                         <select class="form-control" id="tipo_consumo" name="tipo_consumo">
                                             <option value="1">Botellas</option>
                                             <option value="2">Copas</option>
                                         </select>
+                                        -->
                                     </div>
                                 </div>
 

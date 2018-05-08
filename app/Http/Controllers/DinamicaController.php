@@ -6,6 +6,7 @@ use App\Dinamica;
 use App\DinamicaHasCenter;
 use App\DinamicaHasZone;
 use App\Notificacion;
+use App\Traits\ClearString;
 use App\Traits\NotificacionTrait;
 use App\User;
 use Carbon\Carbon;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 class DinamicaController extends Controller
 {
-    use NotificacionTrait;
+    use NotificacionTrait, ClearString;
 
     /**
      * Display a listing of the resource.
@@ -136,7 +137,7 @@ class DinamicaController extends Controller
             $user_id = $request->get('user_id');
             $autor = User::whereId($user_id)->first();
             $cantidad = -1;
-            $name = htmlentities($request->get('name'));
+            $name = $this->clearString($request->get('name'));
             $descripción = $request->get('reglas');
             $marca = ($request->get('marca') != null) ? $request->get('marca') : 0;
 
@@ -158,8 +159,8 @@ class DinamicaController extends Controller
                 'ID_BRAND' => $brand_id,
                 'OBJETIVO' => $cantidad,
                 'DINAMICA' => $name,
-                'DESCRIPCION' => htmlentities($descripción),
-                'PREMIO' => htmlentities($request->get('premio')),
+                'DESCRIPCION' => $this->clearString($descripción),
+                'PREMIO' => $this->clearString($request->get('premio')),
                 'FECHA_INICIO' => Carbon::parse($request->get('start')),
                 'FECHA_FIN' => Carbon::parse($request->get('end')),
                 'ACTIVO' => 0,

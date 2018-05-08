@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Destilado;
+use App\Traits\ClearString;
 use App\Venue;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
 
 class DestiladoController extends Controller
 {
+    use ClearString;
+
     /**
      * Display a listing of the resource.
      *
@@ -93,7 +96,7 @@ class DestiladoController extends Controller
             }
 
             $anejamientos[] = $request->get('anejamiento');
-            $destilado = htmlentities($request->get('destilado'));
+            $destilado = $this->clearString($request->get('destilado'));
             // Valida si existe el ID_GRUPO
             $checkDestilado = Destilado::where('DESTILADO')->first();
             $grupo_id = null;
@@ -110,8 +113,8 @@ class DestiladoController extends Controller
                     'ID_GRUPO' => $grupo_id,
                     'DESTILADO' => $destilado,
                     'IMAGEN',
-                    'ANEJAMIENTO' => htmlentities($anejamiento),
-                    'CARACTERISTICAS' => htmlentities($request->get('caracteristicas')),
+                    'ANEJAMIENTO' => $this->clearString($anejamiento),
+                    'CARACTERISTICAS' => $this->clearString($request->get('caracteristicas')),
                     'FECHA_ALTA' => Carbon::now(),
                     'FECHA_BAJA' => null,
                     'ACTIVO' => 0,
@@ -184,9 +187,9 @@ class DestiladoController extends Controller
             }
 
             $destilado->update([
-                'DESTILADO' => htmlentities($request->get('destilado')),
-                'ANEJAMIENTO' => htmlentities($request->get('anejamiento')),
-                'CARACTERISTICAS' => htmlentities($request->get('caracteristicas')),
+                'DESTILADO' => $this->clearString($request->get('destilado')),
+                'ANEJAMIENTO' => $this->clearString($request->get('anejamiento')),
+                'CARACTERISTICAS' => $this->clearString($request->get('caracteristicas')),
             ]);
 
             return redirect('/destilados')->with('message', "El destilado se actualizó correctamente");

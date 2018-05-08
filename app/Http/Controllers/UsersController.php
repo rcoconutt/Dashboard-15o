@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Traits\ClearString;
 use App\Traits\NotificacionTrait;
 use App\User;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
-    use NotificacionTrait;
+    use NotificacionTrait, ClearString;
     /**
      * Display a listing of the resource.
      *
@@ -113,11 +114,11 @@ class UsersController extends Controller
             $request->flash();
 
             $user = User::create([
-                'name' => htmlentities($request->get('name')),
-                'email' => htmlentities($request->get('email')),
+                'name' => $this->clearString($request->get('name')),
+                'email' => $this->clearString($request->get('email')),
                 'password' => Hash::make($request->get('password')),
-                'last_name' => htmlentities($request->get('last_name')),
-                'phone' => htmlentities($request->get('phone')),
+                'last_name' => $this->clearString($request->get('last_name')),
+                'phone' => $this->clearString($request->get('phone')),
                 'rol' => $request->get('rol'),
                 'brand_id' => $brand_id
             ]);

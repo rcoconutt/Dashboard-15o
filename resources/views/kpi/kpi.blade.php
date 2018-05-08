@@ -73,7 +73,7 @@
                             <div class="data">
                                 <img src="{{ asset('images/cup.png') }}" style="position: absolute">
                                 <div style="margin-left: 100px">
-                                    <p>Bartender con más ventas</p>
+                                    <p>Usuario con más ventas</p>
                                     <h3 id="data_bartender" class="font-weight-bold dark-grey-text"></h3>
                                     <h4 id="data_bartender_copas" class="font-weight-bold dark-grey-text"></h4>
                                 </div>

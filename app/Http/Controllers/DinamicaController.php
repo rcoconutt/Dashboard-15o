@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Centro;
 use App\Dinamica;
 use App\DinamicaHasCenter;
 use App\DinamicaHasZone;
@@ -9,6 +10,7 @@ use App\Notificacion;
 use App\Traits\ClearString;
 use App\Traits\NotificacionTrait;
 use App\User;
+use App\Usuario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -154,13 +156,15 @@ class DinamicaController extends Controller
                 }
             }
 
+            $premio = $this->clearString($request->get('premio'));
+
             $dinamica = Dinamica::create([
                 'ID_ZONA' => 0,
                 'ID_BRAND' => $brand_id,
                 'OBJETIVO' => $cantidad,
                 'DINAMICA' => $name,
                 'DESCRIPCION' => $this->clearString($descripción),
-                'PREMIO' => $this->clearString($request->get('premio')),
+                'PREMIO' => $premio,
                 'FECHA_INICIO' => Carbon::parse($request->get('start')),
                 'FECHA_FIN' => Carbon::parse($request->get('end')),
                 'ACTIVO' => 0,
@@ -193,6 +197,14 @@ class DinamicaController extends Controller
                 ]);
 
                 $this->email($user, $message, "Nueva dinámica creada");
+            }
+
+            $centros = Centro::whereIn('ID_MUNICIPIO', $zonas)->get();
+            $clientes = Usuario::whereIn('ID_CENTRO', $venues)
+                ->orWhereIn('ID_CENTRO', $centros->pluck('ID_CENTRO'))->get();
+
+            foreach ($clientes as $cliente) {
+                $this->push($cliente, 'Te invitamos a participar en nuestra nueva dinámica ' . $name . ' y gana ' . $premio, 'Hay una nueva dinámica en tu zona');
             }
 
             return response()->json([

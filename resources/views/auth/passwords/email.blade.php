@@ -8,7 +8,7 @@
                     <div class="card-body">
 
                         <!--Header-->
-                            <p class="h4 text-center mb-4">Recuperar contraseña</p>
+                        <p class="h4 text-center mb-4">Recuperar contraseña</p>
 
                         @if (session('status'))
                             <div class="alert alert-success">

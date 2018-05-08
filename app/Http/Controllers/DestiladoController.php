@@ -108,12 +108,23 @@ class DestiladoController extends Controller
                 $grupo_id = $checkDestilado->ID_GRUPO;
             }
 
+            $imagen = $request->file('logo');
+            if ($imagen != null) {
+                $rules = ['file' => 'required|image|mimes:jpeg,png,jpg|max:2048'];
+                $validator = Validator::make(['file' => $imagen], $rules);
+
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    //return response()->json(['success' => false, 'message' => $errors->first()], 400);
+                    return redirect()->back()->withErrors($errors);
+                }
+            }
+
             foreach ($anejamientos as $anejamiento) {
                 Destilado::create([
                     'ID_GRUPO' => $grupo_id,
                     'DESTILADO' => $destilado,
-                    'IMAGEN',
-                    'ANEJAMIENTO' => $this->clearString($anejamiento),
+                    'IMAGEN' => file_get_contents($imagen),                    'ANEJAMIENTO' => $this->clearString($anejamiento),
                     'CARACTERISTICAS' => $this->clearString($request->get('caracteristicas')),
                     'FECHA_ALTA' => Carbon::now(),
                     'FECHA_BAJA' => null,
@@ -171,18 +182,11 @@ class DestiladoController extends Controller
             if ($imagen != null) {
                 $rules = ['file' => 'required|image|mimes:jpeg,png,jpg|max:2048'];
                 $validator = Validator::make(['file' => $imagen], $rules);
-                if ($validator->passes()) {
-                    /*
-                    $today = Carbon::now();
-                    $path = $photo->storeAs("/public/" . $today->year . "/" . $today->month . "/" . $today->day, uniqid() . "." . $photo->getClientOriginalExtension());
-                    ProductPhoto::create([
-                        'product_id' => $product->id,
-                        'photo_url' => Storage::url($path),
-                        'thumbnail_url' => Storage::url($path),
-                        'size' => $photo->getSize(),
-                        'name' => $photo->getClientOriginalName()
-                    ]);
-                    */
+
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    //return response()->json(['success' => false, 'message' => $errors->first()], 400);
+                    return redirect()->back()->withErrors($errors);
                 }
             }
 
@@ -190,6 +194,7 @@ class DestiladoController extends Controller
                 'DESTILADO' => $this->clearString($request->get('destilado')),
                 'ANEJAMIENTO' => $this->clearString($request->get('anejamiento')),
                 'CARACTERISTICAS' => $this->clearString($request->get('caracteristicas')),
+                'IMAGEN' => file_get_contents($imagen)
             ]);
 
             return redirect('/destilados')->with('message', "El destilado se actualizó correctamente");
@@ -199,16 +204,5 @@ class DestiladoController extends Controller
             Log::error("Deverror Message " . $ex->getMessage());
             return redirect()->back()->withErrors(["error" => $ex->getMessage()]);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

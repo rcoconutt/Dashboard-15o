@@ -2505,7 +2505,7 @@ $api = new PHP_CRUD_API(array(
  	'hostname'=>'7.52.194.35.bc.googleusercontent.com',
  	'username'=>'root',
  	'password'=>'ANVujCekEvm5ZvTV',
- 	'database'=>'testing',
+ 	'database'=>'backend',
  	'charset'=>'utf8'
  ));
  $api->executeCommand();

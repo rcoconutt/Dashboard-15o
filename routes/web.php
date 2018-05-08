@@ -31,6 +31,11 @@ Route::middleware(['auth', 'not-admin'])->group(function () {
     Route::get('/venues/create', 'VenuesController@create');
     Route::get('/venues/{venue_id}', 'VenuesController@edit');
 
+    ROute::get('/marcas', 'MarcasController@show');
+    Route::post('/marcas/action', 'MarcasController@action');
+    Route::get('/marcas/create', 'MarcasController@create');
+    Route::get('/marcas/{venue_id}', 'MarcasController@edit');
+
     Route::get('/destilados', 'DestiladoController@show');
     Route::post('/destilados/action', 'DestiladoController@action');
     Route::get('/destilados/create', 'DestiladoController@create');

@@ -3,10 +3,10 @@
         <div class="card">
             <div class="card-header row">
                 <div class="col-md-6 col-sm-12 text-center">
-                    <a class="btn btn-sm btn-link btn-block waves-effect" href="/destilados">Volver</a>
+                    <a class="btn btn-sm btn-link btn-block waves-effect" href="/marcas">Volver</a>
                 </div>
                 <div class="col-md-6 col-sm-12 text-center">
-                    <strong>Actualizar destilado</strong>
+                    <strong>Actualizar marca</strong>
                 </div>
             </div>
             <div class="card-body">
@@ -20,28 +20,30 @@
                     <input type="hidden" v-model="user.id"/>
                     <div class="row">
                         <div class="md-form col-md-6">
-                            <input type="text" class="form-control" name="name" id="name" v-model="destilado.DESTILADO" placeholder=""
+                            <input type="text" class="form-control" name="name" id="name" v-model="marca.MARCA" placeholder=""
                                    required/>
-                            <label for="name">Nombre del destilado: </label>
+                            <label for="name">Nombre de la marca: </label>
                         </div>
-                        <div class="md-form col-md-6">
-                            <input type="text" class="form-control" name="anejamiento" id="anejamiento" v-model="destilado.ANEJAMIENTO" placeholder=""
-                                   required/>
-                            <label for="name">Nombre del añejamiento: </label>
+                        <div class="form-group col-md-6">
+                            <label for="destilado">Destilado</label>
+                            <select id="destilado" name="destilado" class="form-control" v-model="marca.ID_DESTILADO">
+                                <option v-for="destilado in destilados" v-bind:value="destilado.ID_DESTILADO">
+                                    {{ destilado.DESTILADO }} - {{ destilado.ANEJAMIENTO }}
+                                </option>
+                            </select>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="md-form col-md-6">
-                            <img :src="imagen"/>
+                    <div class="form-group row">
+                        <div class="col-md-6 align-middle">
+                            <label for="status">Activo</label>
+                            <select id="status" name="estado" class="form-control" v-model="marca.ACTIVO">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
                         </div>
-                        <div class="md-form col-md-6">
-                            <input type="text" class="form-control" name="anejamiento" id="anejamiento" v-model="destilado.ANEJAMIENTO" placeholder=""
-                                   required/>
-                            <label for="name">Nombre del añejamiento: </label>
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-primary waves-effect" id="save" style="margin-top: 20px">Enviar</button>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12 offset-md-6">
-                        <button class="btn btn-outline-primary waves-effect" id="save">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -51,8 +53,8 @@
 
 <script>
     export default {
-        name: "destilados-update",
-        props: ['user', 'destilado', 'imagen'],
+        name: "marcas-update",
+        props: ['user', 'marca', 'destilados'],
         data() {
             return {
                 error: null,
@@ -71,12 +73,12 @@
 
                 axios({
                     method: 'PUT',
-                    url: '/api/v1/destilados/' + this.destilado.ID_DESTILADO,
+                    url: '/api/v1/marcas/' + this.marca.ID_MARCA,
                     json: true,
                     data: {
-                        municipio: this.venue.ID_MUNICIPIO,
-                        nombre: this.venue.CENTRO,
-                        status: this.venue.ACTIVO,
+                        marca: this.marca.MARCA,
+                        destilado: this.marca.ID_DESTILADO,
+                        estado: this.marca.ACTIVO
                     }
                 }).then((response) => {
                     swal({
@@ -86,13 +88,13 @@
                         button: "Entendido",
                         timer: 3000,
                     }).then((response) => {
-                        window.location.href = '/venues';
+                        window.location.href = '/marcas';
                     });
                 }).catch((response) => {
                     this.error = response.response.data.message;
                     this.backToError();
                     button.prop("disabled", false);
-                    button.html('Guardar');
+                    button.html('ENVIAR');
                 });
 
             }

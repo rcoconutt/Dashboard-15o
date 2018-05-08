@@ -36,6 +36,11 @@ Vue.component('venues-update', require('./components/venues/VenuesUpdate'));
 Vue.component('destilados-index', require('./components/destilados/DestiladosIndex'));
 Vue.component('destilados-update', require('./components/destilados/DestiladosUpdate'));
 
+// Marcas
+Vue.component('marcas-index', require('./components/marcas/MarcasIndex'));
+Vue.component('marcas-update', require('./components/marcas/MarcasUpdate'));
+Vue.component('marcas-create', require('./components/marcas/MarcasCreate'));
+
 Vue.component(Autocomplete);
 
 const app = new Vue({

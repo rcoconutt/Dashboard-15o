@@ -65,6 +65,11 @@
             }
         },
         methods: {
+            backToError() {
+                $('html,body').animate({
+                    scrollTop: $("#error").offset().top
+                }, 'slow');
+            },
             save() {
                 let button = $("#save");
                 button.prop("disabled", true);

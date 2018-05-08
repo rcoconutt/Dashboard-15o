@@ -64,9 +64,18 @@ class KpiController extends Controller
                  */
 
                 $desgloces = Desgloce::where('ID_MARCA', $marca_id)->whereBetween('FECHA', [$fecha_inicio, $fecha_fin])->groupBy('ID_RECIBO')->get();
-                $recibos = Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')->whereIn('ID_RECIBO', $desgloces->pluck('ID_RECIBO'))->get();
+                $recibos = Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status', 'RECIBO', 'url')
+                    ->with('usuario', 'centro')
+                    ->where('status', 1)
+                    ->orWhere('status', 0)
+                    ->whereIn('ID_RECIBO', $desgloces->pluck('ID_RECIBO'))
+                    ->get();
                 $usuarios = Usuario::select('ID_USUARIO', 'ID_PUESTO', 'ID_CENTRO', 'NOMBRE', 'USERNAME', 'ACTIVO')->whereIn('ID_USUARIO', $recibos->pluck('ID_USUARIO'))->get();
                 $centros = Centro::whereIn('ID_CENTRO', $recibos->pluck('ID_CENTRO'))->get();
+
+                foreach ($recibos as $recibo) {
+                    $recibo->RECIBO = base64_encode($recibo->RECIBO);
+                }
 
                 // Obtiene el mejor usuario con datos
                 foreach ($usuarios as $usuario) {
@@ -112,7 +121,8 @@ class KpiController extends Controller
                     'usuario' => $usuario,
                     'centro' => $centro,
                     'usuarios' => $usuarios->values()->all(),
-                    'centros' => $centros->values()->all()
+                    'centros' => $centros->values()->all(),
+                    'recibos' => $recibos
                 ], 200);
 
             } elseif ($marca_id == null && ($centro_id != null || $zona_id != null)) {
@@ -121,8 +131,10 @@ class KpiController extends Controller
                  */
                 if ($zona_id != null) {
                     $centros = Centro::where('ID_MUNICIPIO', $zona_id)->get();
-                    $recibos = Recibo::
-                        select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')
+                    $recibos = Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')
+                        ->with('usuario', 'centro')
+                        ->where('status', 1)
+                        ->orWhere('status', 0)
                         ->whereIn('ID_CENTRO', $centros->pluck('ID_CENTRO'))
                         ->whereBetween('FECHA', [$fecha_inicio, $fecha_fin])
                         ->groupBy('ID_RECIBO')->get();
@@ -172,11 +184,14 @@ class KpiController extends Controller
                         'usuario' => $usuario,
                         'marca' => $marca,
                         'usuarios' => $usuarios->values()->all(),
-                        'marcas' => $marcas->values()->all()
+                        'marcas' => $marcas->values()->all(),
+                        'recibos' => $recibos
                     ], 200);
                 } else {
-                    $recibos = Recibo::
-                        select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')
+                    $recibos = Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')
+                        ->with('usuario', 'centro')
+                        ->where('status', 1)
+                        ->orWhere('status', 0)
                         ->where('ID_CENTRO', $centro_id)
                         ->whereBetween('FECHA', [$fecha_inicio, $fecha_fin])
                         ->groupBy('ID_RECIBO')->get();
@@ -226,7 +241,8 @@ class KpiController extends Controller
                         'usuario' => $usuario,
                         'marca' => $marca,
                         'usuarios' => $usuarios->values()->all(),
-                        'marcas' => $marcas->values()->all()
+                        'marcas' => $marcas->values()->all(),
+                        'recibos' => $recibos
                     ], 200);
                 }
             } else {
@@ -235,8 +251,11 @@ class KpiController extends Controller
                  */
                 if ($zona_id != null) {
                     $centros = Centro::where('ID_MUNICIPIO', $zona_id)->get();
-                    $recibos = Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')->
-                        whereIn('ID_CENTRO', $centros->pluck('ID_CENTRO'))
+                    $recibos = Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')
+                        ->with('usuario', 'centro')
+                        ->where('status', 1)
+                        ->orWhere('status', 0)
+                        ->whereIn('ID_CENTRO', $centros->pluck('ID_CENTRO'))
                         ->whereBetween('FECHA', [$fecha_inicio, $fecha_fin])
                         ->groupBy('ID_RECIBO')->get();
                     $desgloces = Desgloce::whereIn('ID_RECIBO', $recibos->pluck('ID_RECIBO'))->where('ID_MARCA', $marca_id)->get();
@@ -287,10 +306,14 @@ class KpiController extends Controller
                         'usuario' => $usuario,
                         'centro' => $centro,
                         'usuarios' => $usuarios->values()->all(),
-                        'centros' => $centros->values()->all()
+                        'centros' => $centros->values()->all(),
+                        'recibos' => $recibos
                     ], 200);
                 } else {
                     $recibos = Recibo::select('ID_RECIBO', 'ID_CENTRO', 'ID_USUARIO', 'NUMERO', 'FECHA', 'status')
+                        ->with('usuario', 'centro')
+                        ->where('status', 1)
+                        ->orWhere('status', 0)
                         ->where('ID_CENTRO', $centro_id)
                         ->whereBetween('FECHA', [$fecha_inicio, $fecha_fin])
                         ->groupBy('ID_RECIBO')->get();
@@ -322,6 +345,7 @@ class KpiController extends Controller
                         'message' => 'success',
                         'usuario' => $usuario,
                         'usuarios' => $usuarios->values()->all(),
+                        'recibos' => $recibos
                     ], 200);
                 }
             }

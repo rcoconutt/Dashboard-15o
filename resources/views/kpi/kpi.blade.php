@@ -137,6 +137,52 @@
                 </section>
             </div>
         </section>
+
+        <section>
+            <div class="card card-cascade narrower z-depth-0" style="z-index: 1;">
+                <div class="view gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+                    <div></div>
+                    <h4 class="h2-responsive mb-0"><strong>Detalle de Reporte</strong></h4>
+                    <div></div>
+                </div>
+
+                <div class="px-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover dt-responsive" id="recibos">
+                            <thead>
+                            <tr>
+                                <th class="th-lg">No. Recibo</th>
+                                <th class="th-lg"><a href="">Usuario<i class="fa fa-sort ml-1"></i></a></th>
+                                <th class="th-lg"><a href="">Centro<i class="fa fa-sort ml-1"></i></a></th>
+                                <th class="th-lg"><a href="">Fecha<i class="fa fa-sort ml-1"></i></a></th>
+                                <th class="th-lg"><a href="">Recibo<i class="fa fa-sort ml-1"></i></a></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Recibo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="recibo_photo" width="480px" height="480px">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">data-dismiss="modal"</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -268,6 +314,18 @@
         }
         */
 
+        function openModal(image, url) {
+            if (image) {
+                $("#recibo_photo").attr("src", "data:image/jpeg;base64," + image);
+            }
+
+            if (url) {
+                $("#recibo_photo").attr("src", url);
+            }
+
+            $('#exampleModal').modal('show');
+        }
+
         function getMarcaData() {
             if (validate()) {
                 let button = $("#send");
@@ -301,6 +359,19 @@
                     let usuario = response.data.usuario;
                     vendedor_vendedor.html(usuario.NOMBRE);
                     vendedor_copas.html(usuario.total + " copas");
+
+                    response.data.recibos.forEach(function (recibo) {
+                        $('#recibos tr:last').after('<tr>' +
+                            '<td style="text-align: center">'+ recibo.ID_RECIBO+ '</td>' +
+                            '<td style="text-align:center">' + recibo.usuario.NOMBRE + '</td>' +
+                            '<td style="text-align:center">' + recibo.centro.CENTRO + '</td>' +
+                            '<td style="text-align:center">' + recibo.FECHA + '</td>'+
+                            '<td style="text-align:center">' +
+                            '<button type="button" class="btn btn-link btn-sm" onclick="openModal(\''+ recibo.RECIBO +'\', \''+ recibo.url +'\')">' +
+                            'Ver' +
+                            '</button></td>' +
+                            '</tr>');
+                    });
 
                     // por centro
                     if (response.data.centro || response.data.marca) {

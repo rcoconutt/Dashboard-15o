@@ -27,7 +27,7 @@
                         <div class="md-form col-md-6">
                             <input type="text" class="form-control" name="abreviatura" id="abreviatura" v-model="abreviatura" placeholder=""
                                    required/>
-                            <label for="name">Abreviatura de la zona: </label>
+                            <label for="abreviatura">Abreviatura de la zona: </label>
                         </div>
                     </div>
                     <div class="form-group row">

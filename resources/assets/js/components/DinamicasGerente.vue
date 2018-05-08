@@ -35,7 +35,7 @@
                             <tr>
                                 <th></th>
                                 <th>Dinamica</th>
-                                <th>Descripción</th>
+                                <th>Descripción/Reglas</th>
                                 <th>Premio</th>
                                 <th>Fecha de termino</th>
                                 <th>Estado</th>

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 trait NotificacionTrait
 {
     public function email(User $user, $notificacion, $message) {
-        //Mail::to($user->email)->send(new \App\Mail\NotificacionMail($notificacion, $user->name . " " . $user->last_name, $message));
+        Mail::to($user->email)->send(new \App\Mail\NotificacionMail($notificacion, $user->name . " " . $user->last_name, $message));
     }
 
     public function push(Usuario $user, $message, $title) {

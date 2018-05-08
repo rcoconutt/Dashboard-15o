@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <p class="h4 text-center mb-4">Reestablecer contraseña</p>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}">

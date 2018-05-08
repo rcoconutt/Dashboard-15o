@@ -80,7 +80,7 @@
         </div>
 
         <section>
-            <div class="card card-cascade narrower z-depth-0">
+            <div class="card card-cascade narrower z-depth-0" style="z-index: 1;">
                 <div class="view gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
                     <div></div>
                     <h4 class="h2-responsive mb-0"><strong>Detalle de venta</strong></h4>
@@ -125,11 +125,33 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
-            $('#content').hover(function () {
-                    $(this).addClass('transition');
+            let timeoutId, item = $("#content");
+            item.hover(function () {
+                let element = $(this);
+                if (!timeoutId) {
+                    timeoutId = setTimeout(function() {
+                        timeoutId = null;
+                        element.addClass('transition');
+                    }, 500);
+                }
             }, function() {
+                clearTimeout(timeoutId);
+                timeoutId = null;
                 $(this).removeClass('transition');
             });
+
+            item.click(function () {
+                if ($(this).hasClass('transition')) {
+                    $(this).removeClass('transition');
+                } else {
+                    $(this).addClass('transition');
+                }
+            });
+
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
         }, false);
 
     </script>

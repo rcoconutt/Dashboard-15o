@@ -27,7 +27,7 @@
                         <div class="md-form col-md-6">
                             <input type="text" class="form-control" name="anejamiento" id="anejamiento" v-model="destilado.ANEJAMIENTO" placeholder=""
                                    required/>
-                            <label for="name">Nombre del añejamiento: </label>
+                            <label for="anejamiento">Nombre del añejamiento: </label>
                         </div>
                     </div>
                     <div class="row">

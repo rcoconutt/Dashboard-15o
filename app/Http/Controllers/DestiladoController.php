@@ -121,15 +121,21 @@ class DestiladoController extends Controller
             }
 
             foreach ($anejamientos as $anejamiento) {
-                Destilado::create([
+                $destilado = Destilado::create([
                     'ID_GRUPO' => $grupo_id,
                     'DESTILADO' => $destilado,
-                    'IMAGEN' => file_get_contents($imagen),                    'ANEJAMIENTO' => $this->clearString($anejamiento),
+                    'ANEJAMIENTO' => $this->clearString($anejamiento),
                     'CARACTERISTICAS' => $this->clearString($request->get('caracteristicas')),
                     'FECHA_ALTA' => Carbon::now(),
                     'FECHA_BAJA' => null,
                     'ACTIVO' => 0,
                 ]);
+
+                if ($imagen != null) {
+                    $destilado->update([
+                        'IMAGEN' => file_get_contents($imagen)
+                    ]);
+                }
             }
 
             return redirect('/destilados')->with('message', "El destilado se creo correctamente");
@@ -187,6 +193,10 @@ class DestiladoController extends Controller
                     $errors = $validator->errors();
                     //return response()->json(['success' => false, 'message' => $errors->first()], 400);
                     return redirect()->back()->withErrors($errors);
+                } else {
+                    $destilado->update([
+                        'IMAGEN' => file_get_contents($imagen)
+                    ]);
                 }
             }
 
@@ -194,7 +204,6 @@ class DestiladoController extends Controller
                 'DESTILADO' => $this->clearString($request->get('destilado')),
                 'ANEJAMIENTO' => $this->clearString($request->get('anejamiento')),
                 'CARACTERISTICAS' => $this->clearString($request->get('caracteristicas')),
-                'IMAGEN' => file_get_contents($imagen)
             ]);
 
             return redirect('/destilados')->with('message', "El destilado se actualizó correctamente");

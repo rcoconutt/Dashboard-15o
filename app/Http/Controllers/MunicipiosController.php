@@ -80,7 +80,7 @@ class MunicipiosController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'El municipio se creo correctamente',
+                'message' => 'La zona se creo correctamente',
                 'municipio' => Municipio::create([
                     "ID_ESTADO" => $request->get('estado'),
                     "ID_ZONA" => 0,
@@ -179,7 +179,7 @@ class MunicipiosController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'El municipio se actualizó correctamente!',
+                'message' => 'La zona se actualizó correctamente!',
                 'municipio' => $municipio
             ], 201);
         } catch (\Exception $ex) {

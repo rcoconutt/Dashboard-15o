@@ -73,7 +73,11 @@
                     columns: [
                         {
                             data: 'ID_DESTILADO', render: function (data, type, row, meta) {
-                                return "<div class='form-check mb-2'><input class='form-check-input' name='destilado_id[]' type='checkbox' value='" + data + "' ></div>";
+                                return '<div class="form-check" style="margin-left: -20px;">\n' +
+                                    '<input type="checkbox" name="destilado_id[]" id="destilado_' + data + '" class="form-check-input" value="' + data + '">\n' +
+                                    '<label class="label-table grey-text"  for="destilado_' + data + '"></label>\n' +
+                                    '</div>'
+                                //return "<div class='form-check mb-2'><input class='form-check-input' name='destilado_id[]' type='checkbox' value='" + data + "' ></div>";
                             }
                         },
                         {data: 'DESTILADO', width: "20%"},

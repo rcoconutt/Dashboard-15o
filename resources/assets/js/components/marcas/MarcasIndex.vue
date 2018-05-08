@@ -72,7 +72,11 @@
                     columns: [
                         {
                             data: 'ID_MARCA', render: function (data, type, row, meta) {
-                                return "<div class='form-check mb-2'><input class='form-check-input' name='marca_id[]' type='checkbox' value='" + data + "' ></div>";
+                                return '<div class="form-check" style="margin-left: -20px;">\n' +
+                                    '<input type="checkbox" name="marca_id[]" id="marca_' + data + '" class="form-check-input" value="' + data + '">\n' +
+                                    '<label class="label-table grey-text"  for="marca_' + data + '"></label>\n' +
+                                    '</div>'
+                                //return "<div class='form-check mb-2'><input class='form-check-input' name='marca_id[]' type='checkbox' value='" + data + "' ></div>";
                             }
                         },
                         {data: 'destilado.DESTILADO', width: "20%"},

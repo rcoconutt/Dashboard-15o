@@ -71,7 +71,11 @@
                     columns: [
                         {
                             data: 'ID_CENTRO', render: function (data, type, row, meta) {
-                                return "<div class='form-check mb-2'><input class='form-check-input' name='centro_id[]' type='checkbox' value='" + data + "' ></div>";
+                                //return "<div class='form-check mb-2'><input class='form-check-input' name='centro_id[]' type='checkbox' value='" + data + "' ></div>";
+                                return '<div class="form-check" style="margin-left: -20px;">\n' +
+                                    '<input type="checkbox" name="centro_id[]" id="centro_' + data + '" class="form-check-input" value="' + data + '">\n' +
+                                    '<label class="label-table grey-text"  for="centro_' + data + '"></label>\n' +
+                                    '</div>'
                             }
                         },
                         {data: 'municipio.MUNICIPIO', width: "20%"},

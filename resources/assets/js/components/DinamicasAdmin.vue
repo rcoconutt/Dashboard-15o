@@ -76,7 +76,11 @@
                     columns: [
                         {
                             data: 'ID_DINAMICA', render: function (data, type, row, meta) {
-                                return "<div class='form-check mb-2'><input class='form-check-input' name='dinamica_id[]' type='checkbox' value='" + data + "' ></div>";
+                                //return "<div class='form-check mb-2'><input class='form-check-input' name='dinamica_id[]' type='checkbox' value='" + data + "' ></div>";
+                                return '<div class="form-check" style="margin-left: -20px;">\n' +
+                                    '<input type="checkbox" name="dinamica_id[]" id="dinamica_' + data + '" class="form-check-input" value="' + data + '">\n' +
+                                    '<label class="label-table grey-text"  for="dinamica_' + data + '"></label>\n' +
+                                    '</div>'
                             }
                         },
                         {data: 'DINAMICA', width: "20%"},

@@ -57,7 +57,11 @@
                     responsive: true,
                     columns: [
                         { data: 'ID_RECIBO', render:function (data, type, row, meta) {
-                                return "<div class='form-check mb-2'><input class='form-check-input' name='recibo_id[]' type='checkbox' value='" + data + "' ></div>";
+                                //return "<div class='form-check mb-2'><input class='form-check-input' name='recibo_id[]' type='checkbox' value='" + data + "' ></div>";
+                                return '<div class="form-check" style="margin-left: -20px;">\n' +
+                                    '<input type="checkbox" name="recibo_id[]" id="recibo_' + data + '" class="form-check-input" value="' + data + '">\n' +
+                                    '<label class="label-table grey-text"  for="recibo_' + data + '"></label>\n' +
+                                    '</div>'
                             }},
                         { data: 'usuario.NOMBRE' },
                         { data: 'FECHA' , render: function (data, type, row, meta) {

@@ -112325,7 +112325,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -112418,7 +112418,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 responsive: true,
                 columns: [{
                     data: 'ID_DINAMICA', render: function render(data, type, row, meta) {
-                        return "<div class='form-check mb-2'><input class='form-check-input' name='dinamica_id[]' type='checkbox' value='" + data + "' ></div>";
+                        //return "<div class='form-check mb-2'><input class='form-check-input' name='dinamica_id[]' type='checkbox' value='" + data + "' ></div>";
+                        return '<div class="form-check" style="margin-left: -20px;">\n' + '<input type="checkbox" name="dinamica_id[]" id="dinamica_' + data + '" class="form-check-input" value="' + data + '">\n' + '<label class="label-table grey-text"  for="dinamica_' + data + '"></label>\n' + '</div>';
                     }
                 }, { data: 'DINAMICA', width: "20%" }, { data: 'DESCRIPCION', width: "30%" }, { data: 'PREMIO', width: "20%" }, {
                     data: 'FECHA_FIN', render: function render(data, type, row, meta) {
@@ -112746,7 +112747,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -112838,7 +112839,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 scrollY: "300px",
                 responsive: true,
                 columns: [{ data: 'ID_DINAMICA', render: function render(data, type, row, meta) {
-                        return "<div class='form-check mb-2'><input class='form-check-input' name='dinamica_id[]' type='checkbox' value='" + data + "' ></div>";
+                        //return "<div class='form-check mb-2'><input class='form-check-input' name='dinamica_id[]' type='checkbox' value='" + data + "' ></div>";
+                        return '<div class="form-check" style="margin-left: -20px;">\n' + '<input type="checkbox" name="dinamica_id[]" id="dinamica_' + data + '" class="form-check-input" value="' + data + '">\n' + '<label class="label-table grey-text"  for="dinamica_' + data + '"></label>\n' + '</div>';
                     } }, { data: 'DINAMICA' }, { data: 'DESCRIPCION', width: "30%" }, { data: 'PREMIO' }, { data: 'FECHA_FIN', render: function render(data, type, row, meta) {
                         return __WEBPACK_IMPORTED_MODULE_0_moment___default()(data).format('DD-MM-YYYY');
                     } }, { data: 'ACTIVO', render: function render(data, type, row, meta) {
@@ -115567,7 +115569,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -115639,7 +115641,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 scrollY: "300px",
                 responsive: true,
                 columns: [{ data: 'ID_RECIBO', render: function render(data, type, row, meta) {
-                        return "<div class='form-check mb-2'><input class='form-check-input' name='recibo_id[]' type='checkbox' value='" + data + "' ></div>";
+                        //return "<div class='form-check mb-2'><input class='form-check-input' name='recibo_id[]' type='checkbox' value='" + data + "' ></div>";
+                        return '<div class="form-check" style="margin-left: -20px;">\n' + '<input type="checkbox" name="recibo_id[]" id="recibo_' + data + '" class="form-check-input" value="' + data + '">\n' + '<label class="label-table grey-text"  for="recibo_' + data + '"></label>\n' + '</div>';
                     } }, { data: 'usuario.NOMBRE' }, { data: 'FECHA', render: function render(data, type, row, meta) {
                         return __WEBPACK_IMPORTED_MODULE_0_moment___default()(data).format('DD-MM-YYYY');
                     } }, { data: 'status', render: function render(data, type, row, meta) {
@@ -115907,7 +115910,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -115993,7 +115996,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 responsive: true,
                 columns: [{
                     data: 'ID_MUNICIPIO', render: function render(data, type, row, meta) {
-                        return "<div class='form-check mb-2'><input class='form-check-input' name='municipio_id[]' type='checkbox' value='" + data + "' ></div>";
+                        //return "<div class='form-check mb-2'><input class='form-check-input' name='municipio_id[]' type='checkbox' value='" + data + "' ></div>";
+                        return '<div class="form-check" style="margin-left: -20px;">\n' + '<input type="checkbox" name="municipio_id[]" id="municipio_' + data + '" class="form-check-input" value="' + data + '">\n' + '<label class="label-table grey-text"  for="municipio_' + data + '"></label>\n' + '</div>';
                     }
                 }, { data: 'estado.ESTADO', width: "20%" }, { data: 'MUNICIPIO', width: "30%" }, { data: 'ABREVIATURA', width: "20%" }, {
                     data: 'ACTIVO', render: function render(data, type, row, meta) {
@@ -117329,7 +117333,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -117413,7 +117417,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 responsive: true,
                 columns: [{
                     data: 'ID_CENTRO', render: function render(data, type, row, meta) {
-                        return "<div class='form-check mb-2'><input class='form-check-input' name='centro_id[]' type='checkbox' value='" + data + "' ></div>";
+                        //return "<div class='form-check mb-2'><input class='form-check-input' name='centro_id[]' type='checkbox' value='" + data + "' ></div>";
+                        return '<div class="form-check" style="margin-left: -20px;">\n' + '<input type="checkbox" name="centro_id[]" id="centro_' + data + '" class="form-check-input" value="' + data + '">\n' + '<label class="label-table grey-text"  for="centro_' + data + '"></label>\n' + '</div>';
                     }
                 }, { data: 'municipio.MUNICIPIO', width: "20%" }, { data: 'CENTRO', width: "20%" }, {
                     data: 'ACTIVO', render: function render(data, type, row, meta) {
@@ -118552,7 +118557,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -118638,7 +118643,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 responsive: true,
                 columns: [{
                     data: 'ID_DESTILADO', render: function render(data, type, row, meta) {
-                        return "<div class='form-check mb-2'><input class='form-check-input' name='destilado_id[]' type='checkbox' value='" + data + "' ></div>";
+                        return '<div class="form-check" style="margin-left: -20px;">\n' + '<input type="checkbox" name="destilado_id[]" id="destilado_' + data + '" class="form-check-input" value="' + data + '">\n' + '<label class="label-table grey-text"  for="destilado_' + data + '"></label>\n' + '</div>';
+                        //return "<div class='form-check mb-2'><input class='form-check-input' name='destilado_id[]' type='checkbox' value='" + data + "' ></div>";
                     }
                 }, { data: 'DESTILADO', width: "20%" }, { data: 'ANEJAMIENTO', width: "20%" }, { data: 'CARACTERISTICAS' }, {
                     data: 'ACTIVO', render: function render(data, type, row, meta) {
@@ -119411,7 +119417,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -119496,7 +119502,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 responsive: true,
                 columns: [{
                     data: 'ID_MARCA', render: function render(data, type, row, meta) {
-                        return "<div class='form-check mb-2'><input class='form-check-input' name='marca_id[]' type='checkbox' value='" + data + "' ></div>";
+                        return '<div class="form-check" style="margin-left: -20px;">\n' + '<input type="checkbox" name="marca_id[]" id="marca_' + data + '" class="form-check-input" value="' + data + '">\n' + '<label class="label-table grey-text"  for="marca_' + data + '"></label>\n' + '</div>';
+                        //return "<div class='form-check mb-2'><input class='form-check-input' name='marca_id[]' type='checkbox' value='" + data + "' ></div>";
                     }
                 }, { data: 'destilado.DESTILADO', width: "20%" }, { data: 'MARCA', width: "30%" }, {
                     data: 'ACTIVO', render: function render(data, type, row, meta) {

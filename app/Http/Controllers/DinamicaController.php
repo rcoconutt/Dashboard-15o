@@ -199,14 +199,6 @@ class DinamicaController extends Controller
                 $this->email($user, $message, "Nueva dinámica creada");
             }
 
-            $centros = Centro::whereIn('ID_MUNICIPIO', $zonas)->get();
-            $clientes = Usuario::whereIn('ID_CENTRO', $venues)
-                ->orWhereIn('ID_CENTRO', $centros->pluck('ID_CENTRO'))->get();
-
-            foreach ($clientes as $cliente) {
-                $this->push($cliente, 'Te invitamos a participar en nuestra nueva dinámica ' . $name . ' y gana ' . $premio, 'Hay una nueva dinámica en tu zona');
-            }
-
             return response()->json([
                 'success' => true,
                 'message' => 'Dínamica creada correctamente',
@@ -225,8 +217,34 @@ class DinamicaController extends Controller
             $action = $request->get('actions');
             if ($action == 1 || $action == 2) {
                 // Aprobar o rechazar
-                Dinamica::whereIn('ID_DINAMICA', $request->get('dinamica_id'))->update(['ACTIVO' => $action]);
+                $dinamicas = Dinamica::with('zonas', 'centros')->whereIn('ID_DINAMICA', $request->get('dinamica_id'))->get();
+
                 if ($action == 1) {
+                    $zonas = [];
+                    $centros = [];
+                    foreach ($dinamicas as $dinamica) {
+                        foreach ($dinamica->zonas as $zona) {
+                            array_push($zonas, $zona->ID_MUNICIPIO);
+                        }
+
+                        foreach ($dinamica->centros as $centro) {
+                            array_push($centros, $centro->ID_CENTRO);
+                        }
+                    }
+
+                    $centros = Centro::whereIn('ID_MUNICIPIO', $zonas)->get();
+                    $clientes = Usuario::whereIn('ID_CENTRO', $centros->pluck('ID_CENTRO'))
+                        ->orWhereIn('ID_CENTRO', $centros->pluck('ID_CENTRO'))->get();
+
+                    foreach ($dinamicas as $dinamica) {
+                        foreach ($clientes as $cliente) {
+                            $this->push($cliente, 'Te invitamos a participar en nuestra nueva dinámica ' . $dinamica->DINAMICA . ' y gana ' . $dinamica->PREMIO, 'Hay una nueva dinámica en tu zona');
+                        }
+
+                        $dinamica->ACTIVO = $action;
+                        $dinamica->save();
+                    }
+
                     return redirect()->back()->with('message', 'Dinámicas aprobadas correctamente!');
                 } else {
                     return redirect()->back()->with('message', 'Dinámicas rechazadas correctamente!');

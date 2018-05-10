@@ -66,7 +66,7 @@
         },
         methods: {
             getDinamicas: function () {
-                $('#dinamicas').DataTable({
+                let table = $('#dinamicas').DataTable({
                     ajax: {
                         url: '/api/dinamicas',
                         dataSrc: 'dinamicas',
@@ -119,6 +119,10 @@
                         loading: "Cargando"
                     }
                 });
+
+                table.columns().iterator( 'column', function (ctx, idx) {
+                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                } );
             }
         },
         mounted() {

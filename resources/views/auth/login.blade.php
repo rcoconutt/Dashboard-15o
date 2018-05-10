@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+        <div class="col-md-6 offset-md-3">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="margin-left: 50px; margin-right: 50px">
 
                     <!--Header-->
                     <p class="h4 text-center mb-4"> Iniciar sesión</p>

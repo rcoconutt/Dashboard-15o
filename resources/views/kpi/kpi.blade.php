@@ -59,7 +59,7 @@
                             <div class="data">
                                 <img src="{{ asset('images/cup.png') }}" style="position: absolute">
                                 <div style="margin-left: 100px">
-                                    <p id="marca_o_centro"></p>
+                                    <p id="marca_o_centro">Ventas</p>
                                     <h3 id="data_centro" class="font-weight-bold dark-grey-text"></h3>
                                     <h4 id="data_centro_copas" class="font-weight-bold dark-grey-text"></h4>
                                 </div>
@@ -179,7 +179,7 @@
                     <img id="recibo_photo" width="480px" height="480px">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">data-dismiss="modal"</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -349,6 +349,13 @@
                 let vendedor_vendedor = $("#data_bartender");
                 let vendedor_copas = $("#data_bartender_copas");
 
+                let table = document.getElementById("recibos");
+                if (table !== null) {
+                    for (let i = table.rows.length - 1; i > 0; i--) {
+                        table.deleteRow(i);
+                    }
+                }
+
                 axios.post('/api/v1/kpi', {
                     marca_id: marca,
                     fecha_inicio: fecha_inicio,
@@ -361,12 +368,18 @@
                     vendedor_copas.html(usuario.total + " copas");
 
                     response.data.recibos.forEach(function (recibo) {
+                        let status = '';
+                        if (recibo.status === '0' || recibo.status === 0) { status = '<i class="fas fa-bookmark text-info"></i> Pendiente'; }
+                        if (recibo.status === '1' || recibo.status === 1) { status = '<i class="fas fa-check-circle text-success"></i> Aprobado'; }
+                        if (recibo.status === '2' || recibo.status === 2) { status = '<i class="fas fa-ban text-danger"></i> Rechazado'; }
+
                         $('#recibos tr:last').after('<tr>' +
-                            '<td style="text-align: center">'+ recibo.ID_RECIBO+ '</td>' +
-                            '<td style="text-align:center">' + recibo.usuario.NOMBRE + '</td>' +
-                            '<td style="text-align:center">' + recibo.centro.CENTRO + '</td>' +
-                            '<td style="text-align:center">' + recibo.FECHA + '</td>'+
-                            '<td style="text-align:center">' +
+                            '<td>'+ recibo.ID_RECIBO+ '</td>' +
+                            '<td>' + recibo.usuario.NOMBRE + '</td>' +
+                            '<td>' + recibo.centro.CENTRO + '</td>' +
+                            '<td>' + recibo.FECHA + '</td>'+
+                            '<td>' + status + '</td>' +
+                            '<td>' +
                             '<button type="button" class="btn btn-link btn-sm" onclick="openModal(\''+ recibo.RECIBO +'\', \''+ recibo.url +'\')">' +
                             'Ver' +
                             '</button></td>' +
